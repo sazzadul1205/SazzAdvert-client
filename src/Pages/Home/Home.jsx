@@ -1,15 +1,17 @@
-import FAQ from "./FAQ/FAQ";
-import FirstBanner from "./FirstBanner/FirstBanner";
-import GetInTouch from "./GetInTouch/GetInTouch";
-import SecondBanner from "./SecondBanner/SecondBanner";
+import Capabilities from "./Capabilities/Capabilities";
+import HomeFirstBanner from "./HomeFirstBanner/HomeFirstBanner";
+import Plaques from "./Plaques/Plaques";
+import ProjectArea from "./ProjectArea/ProjectArea";
+import WhatWeDo from "./WhatWeDo/WhatWeDo";
 
 const Home = () => {
   return (
-    <div >
-      <FirstBanner></FirstBanner>
-      <GetInTouch></GetInTouch>
-      <SecondBanner></SecondBanner>
-      <FAQ></FAQ>
+    <div>
+      <HomeFirstBanner></HomeFirstBanner>
+      <Plaques></Plaques>
+      <WhatWeDo></WhatWeDo>
+      <ProjectArea></ProjectArea>
+      <Capabilities></Capabilities>
     </div>
   );
 };

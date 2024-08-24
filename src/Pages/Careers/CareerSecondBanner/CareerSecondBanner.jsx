@@ -1,8 +1,8 @@
-import banner2 from "../../../assets/Home/banner02.png";
+import Banner2 from '../../../assets/Careers/banner02.png'
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.compat.css";
 
-const SecondBanner = () => {
+const CareerSecondBanner = () => {
   return (
     <div className="bg-[#FFE6E6]">
       <ScrollAnimation animateIn="fadeIn">
@@ -23,7 +23,7 @@ const SecondBanner = () => {
             </button>
           </div>
           <div className=" w-[612px] h-[623px]">
-            <img src={banner2} alt="" className=" w-full h-full rounded z-10" />
+            <img src={Banner2} alt="" className=" w-full h-full rounded z-10" />
           </div>
         </div>
       </ScrollAnimation>
@@ -31,4 +31,4 @@ const SecondBanner = () => {
   );
 };
 
-export default SecondBanner;
+export default CareerSecondBanner;

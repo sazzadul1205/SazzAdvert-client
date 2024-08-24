@@ -1,5 +1,5 @@
-import  { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -90,9 +90,11 @@ const Navbar = () => {
           <ul className="flex gap-5  px-1 space-x-5 font-semibold">{nav}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn text-white px-10 rounded-3xl hover:bg-[#ef4335] border-none">
-            Get Proposal {">"}
-          </a>
+          <Link to={"/Careers"}>
+            <button className="btn text-white px-10 rounded-3xl hover:bg-[#ef4335] border-none">
+              Get Proposal {">"}
+            </button>
+          </Link>
         </div>
       </div>
     </div>

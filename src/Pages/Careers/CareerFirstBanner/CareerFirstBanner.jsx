@@ -1,6 +1,6 @@
-import banner1 from "../../../assets/Home/banner01.png";
+import Banner1 from '../../../assets/Careers/banner01.png'
 
-const FirstBanner = () => {
+const CareerFirstBanner = () => {
   return (
     <div className="bg-[#FFE6E6]">
       <div className="flex justify-between max-w-[1200px] mx-auto h-[720px] pt-10 items-center gap-5 ">
@@ -22,8 +22,7 @@ const FirstBanner = () => {
         <div className="relative w-[522px] h-[365px]">
           <div className="absolute top-5 left-4 bg-red-500 rounded-xl w-full h-full z-0 "></div>
           <img
-            src={banner1}
-            alt=""
+            src={Banner1}
             className="relative w-full h-full rounded z-10"
           />
         </div>
@@ -32,4 +31,4 @@ const FirstBanner = () => {
   );
 };
 
-export default FirstBanner;
+export default CareerFirstBanner;
