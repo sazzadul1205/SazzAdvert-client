@@ -9,7 +9,7 @@ const Brands = () => {
   return (
     <div className="bg-white pt-5 ">
       <div className="max-w-[1200px] mx-auto">
-        <h1 className="text-center text-xl pb-12 text-black">Increase your brand’s revenue with Adli</h1>
+        <h1 className="text-center text-xl pb-12 text-black font-semibold">Increase your brand’s revenue with Adli</h1>
         <div className="grid grid-cols-6 pb-24 border-b">
           <img src={B1} alt="" />
           <img src={B2} alt="" />

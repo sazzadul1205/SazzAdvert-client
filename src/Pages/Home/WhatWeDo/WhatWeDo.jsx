@@ -1,7 +1,7 @@
-import do1 from "../../../assets/Home/do1.png";
-import do2 from "../../../assets/Home/do2.png";
-import do3 from "../../../assets/Home/do3.png";
-import do4 from "../../../assets/Home/do4.png";
+import do1 from "../../../assets/Home/WhatWeDo/do1.png";
+import do2 from "../../../assets/Home/WhatWeDo/do2.png";
+import do3 from "../../../assets/Home/WhatWeDo/do3.png";
+import do4 from "../../../assets/Home/WhatWeDo/do4.png";
 
 const whatWeDoData = [
   {
@@ -53,9 +53,9 @@ const WhatWeDo = () => {
         {/* Right Section */}
         <div className="w-full lg:w-[60%]">
           <p className="text-gray-700 leading-relaxed">
-            Transforming your {"brand's"} online presence and generating meaningful
-            results is our top priority at Adli. As a leading paid search ad
-            agency, we bring together a unique blend of creativity and
+            Transforming your {"brand's"} online presence and generating
+            meaningful results is our top priority at Adli. As a leading paid
+            search ad agency, we bring together a unique blend of creativity and
             data-driven insights to elevate your campaigns.
           </p>
 

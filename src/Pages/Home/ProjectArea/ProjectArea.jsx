@@ -1,6 +1,6 @@
 import PA1 from "../../../assets/Home/PA1.jpg";
-import pai1 from "../../../assets/Home/pai1.png";
-import pai2 from "../../../assets/Home/pai2.png";
+import pai1 from "../../../assets/Home/projAre/pai1.png";
+import pai2 from "../../../assets/Home/projAre/pai2.png";
 
 const ProjectArea = () => {
   return (

@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,32 +18,133 @@ const Navbar = () => {
     };
   }, []);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const nav = (
     <>
       <li>
-        <NavLink className="hover:text-[#ef4335] text-md" to="/">
-          Home
-        </NavLink>
+        <div className="dropdown dropdown-hover">
+          <NavLink className="hover:text-[#ef4335] text-md" to="/">
+            HOME
+          </NavLink>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-white font-semibold z-[1] w-72 p-2 shadow "
+          >
+            <li>
+              <NavLink className="hover:text-[#ef4335] text-md" to="/">
+                PAID SEARCH AD AGENCY
+              </NavLink>
+            </li>
+            <li>
+              <a href="#">SOCIAL MEDIA AD AGENCY</a>
+            </li>
+            <li>
+              <a href="#">TRADITIONAL/OFFLINE AD AGENCY</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li>
-        <NavLink className="hover:text-[#ef4335] text-md" to="/about">
-          Our Solutions
-        </NavLink>
+        <div className="dropdown dropdown-hover">
+          <div className="hover:text-[#ef4335]">OUR SOLUTIONS</div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow "
+          >
+            <li>
+              <NavLink className="hover:text-[#ef4335] text-md" to="/about">
+                OUR SERVICES
+              </NavLink>
+            </li>
+            <li>
+              <a href="#">SERVICE DETAILS</a>
+            </li>
+            <li>
+              <a href="#">OUR TEAM</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li>
-        <NavLink className="hover:text-[#ef4335] text-md" to="/blog">
-          Who we are
-        </NavLink>
+        <div className="dropdown dropdown-hover">
+          <NavLink className="hover:text-[#ef4335] text-md" to="/">
+            WHO WE ARE
+          </NavLink>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow "
+          >
+            <li>
+              <NavLink className="hover:text-[#ef4335] text-md" to="/">
+                ABOUT US
+              </NavLink>
+            </li>
+            <li>
+              <a href="#">CAREERS</a>
+            </li>
+            <li>
+              <a href="#">CAREER DETAILS</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li>
-        <NavLink className="hover:text-[#ef4335] text-md" to="/contact">
-          Our Work
-        </NavLink>
+        <div className="dropdown dropdown-hover">
+          <NavLink className="hover:text-[#ef4335] text-md" to="/">
+            OUR WORK
+          </NavLink>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow "
+          >
+            <li>
+              <NavLink className="hover:text-[#ef4335] text-md" to="/">
+                SUCCESS STORIES
+              </NavLink>
+            </li>
+            <li>
+              <a href="#">SUCCESS STORY DETAILS</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li>
-        <NavLink className="hover:text-[#ef4335] text-md" to="/pages">
-          Pages
-        </NavLink>
+        <div className="dropdown dropdown-hover">
+          <NavLink className="hover:text-[#ef4335] text-md" to="/">
+            PAGES
+          </NavLink>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow "
+          >
+            <li>
+              <NavLink className="hover:text-[#ef4335] text-md" to="/">
+                OUR BLOG
+              </NavLink>
+            </li>
+            <li>
+              <a href="#">BLOG DETAILS</a>
+            </li>
+            <li>
+              <a href="#">TAGS</a>
+            </li>
+            <li>
+              <a href="#">CATEGORIES</a>
+            </li>
+            <li>
+              <a href="#">AUTHOR</a>
+            </li>
+            <li>
+              <a href="#">PRIVACY POLICY</a>
+            </li>
+            <li>
+              <a href="#">AUTHOR</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li>
         <NavLink className="hover:text-[#ef4335] text-md" to="/contacts">
@@ -61,7 +163,13 @@ const Navbar = () => {
       <div className="navbar mx-auto max-w-[1200px]">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <button
+              aria-label="Toggle menu"
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost lg:hidden"
+              onClick={toggleMenu}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -76,21 +184,25 @@ const Navbar = () => {
                   d="M4 6h16M4 12h8m-8 6h16"
                 />
               </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52"
-            >
-              {nav}
-            </ul>
+            </button>
+            {isMenuOpen && (
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white font-semibold w-52"
+              >
+                {nav}
+              </ul>
+            )}
           </div>
-          <a className="text-3xl font-bold italic">SazzAdvert</a>
+          <Link to="/" className="text-3xl font-bold italic">
+            SazzAdvert
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="flex gap-5  px-1 space-x-5 font-semibold">{nav}</ul>
+          <ul className="flex gap-5 px-1 space-x-5 font-semibold">{nav}</ul>
         </div>
         <div className="navbar-end">
-          <Link to={"/Careers"}>
+          <Link to="/Careers">
             <button className="btn text-white px-10 rounded-3xl hover:bg-[#ef4335] border-none">
               Get Proposal {">"}
             </button>
