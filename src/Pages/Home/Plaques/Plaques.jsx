@@ -1,31 +1,29 @@
-import Award from "../../../assets/Home/award.png";
-import clutch from "../../../assets/Home/clutch.png";
+import Award from "../../../assets/Home/Plaque/award.png";
+import clutch from "../../../assets/Home/Plaque/clutch.png";
+import plaque1 from "../../../assets/Home/Plaque/Plaque1.jfif";
+import plaque2 from "../../../assets/Home/Plaque/Plaque2.jfif";
+import plaque3 from "../../../assets/Home/Plaque/Plaque3.jfif";
 
 const Plaques = () => {
   return (
     <div className="bg-white py-20 text-black p">
-      <div className="flex justify-evenly mx-auto  max-w-[1200px] pb-20 border-b">
+      <div className="flex justify-between mx-auto  max-w-[1200px] pb-20 border-b">
         {/* Avatars */}
         <div className="flex items-center space-x-4">
           <div className="flex -space-x-4 ">
             <div className="avatar border-none ">
               <div className="w-12 rounded-full">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                <img src={plaque1} className="border-white border-2"/>
               </div>
             </div>
             <div className="avatar border-none ">
               <div className="w-12 rounded-full">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                <img src={plaque2} className="border-white border-2"/>
               </div>
             </div>
             <div className="avatar border-none ">
               <div className="w-12 rounded-full">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-              </div>
-            </div>
-            <div className="avatar border-none ">
-              <div className="w-12 rounded-full">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                <img src={plaque3} className="border-white border-2"/>
               </div>
             </div>
           </div>
@@ -45,8 +43,8 @@ const Plaques = () => {
         {/* Review */}
         <div>
           <div className="flex">
-            <p className="mr-5">Review On</p>
-            <div className="rating rating-md">
+            <p className="mr-10">Review On</p>
+            <div className="rating ">
               <input
                 type="radio"
                 name="rating-7"
@@ -76,7 +74,7 @@ const Plaques = () => {
             </div>
           </div>
           <div className="flex">
-            <img className="mr-5" src={clutch} alt="" />
+            <img className="mr-10" src={clutch} alt="" />
             <p>1500+ Reviews</p>
           </div>
         </div>

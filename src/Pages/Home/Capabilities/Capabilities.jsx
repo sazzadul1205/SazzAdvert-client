@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import arrow from "../../../assets/Home/arrow.png";
-import ca1 from "../../../assets/Home/ca1.png";
-import ca2 from "../../../assets/Home/ca2.png";
-import ca3 from "../../../assets/Home/ca3.png";
-import ca4 from "../../../assets/Home/ca4.png";
+import arrow from "../../../assets/Home/Capabilities/arrow.png";
+import ca1 from "../../../assets/Home/Capabilities/ca1.png";
+import ca2 from "../../../assets/Home/Capabilities/ca2.png";
+import ca3 from "../../../assets/Home/Capabilities/ca3.png";
+import ca4 from "../../../assets/Home/Capabilities/ca4.png";
 
 const cardData = [
   {
@@ -40,7 +40,7 @@ const Capabilities = () => {
   return (
     <div className="bg-gradient-to-b from-[#FFE6E6] to-white text-black font-bold pb-20">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex justify-between items-center py-10">
+        <div className="flex justify-between items-center py-10 pb-20">
           {/* Left Section */}
           <div className="flex items-center">
             <div className="w-[500px]">
@@ -67,7 +67,7 @@ const Capabilities = () => {
           {cardData.map((card) => (
             <div
               key={card.id}
-              className="h-[400px] w-[300px] bg-white rounded-xl px-5 py-10"
+              className="h-[400px] w-[300px] bg-white rounded-xl px-5 py-10 transform transition-transform duration-300 hover:-translate-y-2"
             >
               <div className="bg-gray-200 rounded-full w-16 h-16 flex justify-center items-center mb-5">
                 <img src={card.image} alt={card.title} />

@@ -5,7 +5,7 @@ import pai2 from "../../../assets/Home/pai2.png";
 const ProjectArea = () => {
   return (
     <div className="bg-gradient-to-b from-white to-[#FFE6E6] py-12">
-      <div className="bg-black max-w-[1200px] mx-auto flex flex-col lg:flex-row h-[450px] rounded-lg overflow-hidden">
+      <div className="bg-black max-w-[1200px] mx-auto flex flex-col lg:flex-row h-[450px] rounded-3xl overflow-hidden">
         {/* Left Section */}
         <div className="p-10 flex flex-col justify-center space-y-10 lg:w-[35%]">
           <div className="flex items-center space-x-4">
@@ -15,7 +15,7 @@ const ProjectArea = () => {
               className="bg-slate-900 p-4 rounded-full"
             />
             <div className="text-white">
-              <h1 className="text-4xl font-bold">25+</h1>
+              <p className="text-4xl font-bold">25+</p>
               <p className="text-lg">Years driving growth</p>
             </div>
           </div>
@@ -26,7 +26,7 @@ const ProjectArea = () => {
               className="bg-slate-900 p-4 rounded-full"
             />
             <div className="text-white">
-              <h1 className="text-4xl font-bold">1450+</h1>
+              <p className="text-4xl font-bold">1450+</p>
               <p className="text-lg">Projects complete successfully</p>
             </div>
           </div>

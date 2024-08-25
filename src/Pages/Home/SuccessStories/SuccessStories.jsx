@@ -14,40 +14,45 @@ const SuccessStories = () => {
             {/* Story 1 */}
             <div className="relative ">
               <img src={sucess1} className="w-[305px] h-[285px] rounded-xl" />
-              <div className="absolute bottom-0 left-0 right-0 bg-black flex justify-between items-center rounded-xl mx-8 my-5 py-4 px-5">
+              <div className="absolute bottom-0 left-0 right-0 bg-black flex justify-between items-center rounded-xl mx-8 my-5 py-4 px-5 ">
                 <div>
                   <p className="text-2xl text-white pb-2">HiBootstrap</p>
                   <p className="text-gray-300 pb-2">Premium Themes</p>
                 </div>
-                <img src={icon} className="bg-slate-900 p-2 rounded-full" />
+                <img src={icon} className="bg-slate-900 p-2 rounded-full hover:bg-white" />
               </div>
             </div>
 
             {/* Story 2 */}
             <div className="relative ">
               <img src={sucess2} className="w-[305px] h-[285px] rounded-xl" />
-              <div className="absolute bottom-0 left-0 right-0 bg-black flex justify-between items-center rounded-xl mx-8 my-5 py-4 px-5">
+              <div className="absolute bottom-0 left-0 right-0 bg-black flex justify-between items-center rounded-xl mx-8 my-5 py-4 px-5 ">
                 <div>
                   <p className="text-2xl text-white pb-2">Bolster</p>
                   <p className="text-gray-300 pb-2">eCommerce</p>
                 </div>
-                <img src={icon} className="bg-slate-900 p-2 rounded-full" />
+                <img src={icon} className="bg-slate-900 p-2 rounded-full hover:bg-white" />
               </div>
             </div>
           </div>
 
           {/* Second Row */}
           <div className="relative">
-            <img src={sucess3} alt="Shoponix" className="w-[635px] h-[285px] rounded-xl" />
-            <div className="absolute bottom-0 left-0 right-0 bg-black flex justify-between items-center rounded-xl w-[540px]  mx-8 my-5 py-4 px-5">
+            <img
+              src={sucess3}
+              alt="Shoponix"
+              className="w-[635px] h-[285px] rounded-xl"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-black flex justify-between items-center rounded-xl w-[540px]  mx-8 my-5 py-4 px-5 ">
               <div>
                 <p className="text-2xl text-white pb-2">Shoponix</p>
                 <p className="text-gray-300">eCommerce</p>
               </div>
-              <img src={icon} className="bg-slate-900 p-2 rounded-full" />
+              <img src={icon} className="bg-slate-900 p-2 rounded-full hover:bg-white" />
             </div>
           </div>
         </div>
+        {/* Right */}
         <div className="w-[530px] ml-24 text-black mt-16">
           <img src={title} alt="" className="mb-16" />
           <p className="font-semibold">SUCCESS STORIES</p>
