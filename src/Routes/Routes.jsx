@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../Pages/Home/Home";
-import Careers from "../Pages/Careers/Careers"
+import Careers from "../Pages/Careers/Careers";
 import Services from "../Pages/Services/Services";
 import AboutUs from "../Pages/AboutUs/AboutUs";
-import SuccessStoriesPage from '../Pages/SuccessStoriesPage/SuccessStoriesPage'
+import SuccessStoriesPage from "../Pages/SuccessStoriesPage/SuccessStoriesPage";
+import BlogsPage from "../Pages/BlogsPage/BlogsPage";
 
 export const router = createBrowserRouter([
   {
@@ -21,16 +22,20 @@ export const router = createBrowserRouter([
       },
       {
         path: "/Services",
-        element: <Services></Services>
+        element: <Services></Services>,
       },
       {
         path: "/AboutUs",
-        element: <AboutUs></AboutUs>
+        element: <AboutUs></AboutUs>,
       },
       {
         path: "/SuccessStories",
-        element: <SuccessStoriesPage></SuccessStoriesPage>
-      }
+        element: <SuccessStoriesPage></SuccessStoriesPage>,
+      },
+      {
+        path: "/Blogs",
+        element: <BlogsPage></BlogsPage>,
+      },
     ],
   },
 ]);

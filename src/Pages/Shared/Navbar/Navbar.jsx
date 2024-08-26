@@ -154,7 +154,7 @@ const Navbar = () => {
                     ? "text-[#ef4335] bg-white font-normal"
                     : "hover:text-[#ef4335] font-normal "
                 }
-                to="/"
+                to="/Blogs"
               >
                 OUR BLOG
               </NavLink>
