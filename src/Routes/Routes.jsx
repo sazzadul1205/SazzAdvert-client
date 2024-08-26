@@ -4,7 +4,7 @@ import Home from "../Pages/Home/Home";
 import Careers from "../Pages/Careers/Careers"
 import Services from "../Pages/Services/Services";
 import AboutUs from "../Pages/AboutUs/AboutUs";
-import SuccessStories from "../Pages/SuccessStories/SuccessStories";
+import SuccessStoriesPage from '../Pages/SuccessStoriesPage/SuccessStoriesPage'
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/SuccessStories",
-        element: <SuccessStories></SuccessStories>
+        element: <SuccessStoriesPage></SuccessStoriesPage>
       }
     ],
   },
