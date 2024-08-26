@@ -151,8 +151,8 @@ const Navbar = () => {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? "text-[#ef4335] bg-white font-normal"
-                    : "hover:text-[#ef4335] font-normal "
+                    ? "text-[#ef4335] bg-white "
+                    : "hover:text-[#ef4335]  "
                 }
                 to="/Blogs"
               >
@@ -180,12 +180,12 @@ const Navbar = () => {
           </ul>
         </div>
       </li>
-        {/* Contacts */}
+      {/* Contacts */}
       <li>
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "text-[#ef4335] text-md bg-white"
+              ? "text-[#ef4335] text-md "
               : "hover:text-[#ef4335] text-md"
           }
           to="/contacts"
