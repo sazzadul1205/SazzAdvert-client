@@ -38,7 +38,7 @@ const cardData = [
 
 const Capabilities = () => {
   return (
-    <div className="bg-gradient-to-b from-[#FFE6E6] to-white text-black font-bold py-20 ">
+    <div className="bg-gradient-to-b from-[#FFE6E6] to-white text-black font-bold pb-20">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex justify-between items-center py-10 pb-20">
           {/* Left Section */}

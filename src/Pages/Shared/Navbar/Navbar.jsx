@@ -25,16 +25,24 @@ const Navbar = () => {
   const nav = (
     <>
       <li>
+        {/* Home link's */}
         <div className="dropdown dropdown-hover">
-          <NavLink className="hover:text-[#ef4335] text-md" to="/">
+          <p className={"hover:text-[#EF4335]"} to="/">
             HOME
-          </NavLink>
+          </p>
           <ul
             tabIndex={0}
-            className="dropdown-content menu bg-white font-semibold z-[1] w-72 p-2 shadow "
+            className="dropdown-content menu bg-white font-semibold z-[1] w-72 p-2 shadow"
           >
             <li>
-              <NavLink className="hover:text-[#ef4335] text-md" to="/">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] bg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/"
+              >
                 PAID SEARCH AD AGENCY
               </NavLink>
             </li>
@@ -48,14 +56,22 @@ const Navbar = () => {
         </div>
       </li>
       <li>
+        {/* Services link's */}
         <div className="dropdown dropdown-hover">
-          <div className="hover:text-[#ef4335]">OUR SOLUTIONS</div>
+          <p className="hover:text-[#ef4335]">OUR SOLUTIONS</p>
           <ul
             tabIndex={0}
-            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow "
+            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow"
           >
             <li>
-              <NavLink className="hover:text-[#ef4335] text-md" to="/about">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] bg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/Services"
+              >
                 OUR SERVICES
               </NavLink>
             </li>
@@ -69,16 +85,22 @@ const Navbar = () => {
         </div>
       </li>
       <li>
+        {/* About Us link's */}
         <div className="dropdown dropdown-hover">
-          <NavLink className="hover:text-[#ef4335] text-md" to="/">
-            WHO WE ARE
-          </NavLink>
+          <p className={"hover:text-[#EF4335]"}>WHO WE ARE</p>
           <ul
             tabIndex={0}
-            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow "
+            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow"
           >
             <li>
-              <NavLink className="hover:text-[#ef4335] text-md" to="/">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] bg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/AboutUs"
+              >
                 ABOUT US
               </NavLink>
             </li>
@@ -92,16 +114,22 @@ const Navbar = () => {
         </div>
       </li>
       <li>
+        {/* Work Link's */}
         <div className="dropdown dropdown-hover">
-          <NavLink className="hover:text-[#ef4335] text-md" to="/">
-            OUR WORK
-          </NavLink>
+          <p className={"hover:text-[#EF4335]"}>OUR WORK</p>
           <ul
             tabIndex={0}
-            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow "
+            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow"
           >
             <li>
-              <NavLink className="hover:text-[#ef4335] text-md" to="/">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] bg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/SuccessStories"
+              >
                 SUCCESS STORIES
               </NavLink>
             </li>
@@ -112,16 +140,22 @@ const Navbar = () => {
         </div>
       </li>
       <li>
+        {/* Pages link's */}
         <div className="dropdown dropdown-hover">
-          <NavLink className="hover:text-[#ef4335] text-md" to="/">
-            PAGES
-          </NavLink>
+          <p className={"hover:text-[#EF4335]"}>PAGES</p>
           <ul
             tabIndex={0}
-            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow "
+            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow"
           >
             <li>
-              <NavLink className="hover:text-[#ef4335] text-md" to="/">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] bg-white font-normal"
+                    : "hover:text-[#ef4335] font-normal "
+                }
+                to="/"
+              >
                 OUR BLOG
               </NavLink>
             </li>
@@ -146,8 +180,16 @@ const Navbar = () => {
           </ul>
         </div>
       </li>
+        {/* Contacts */}
       <li>
-        <NavLink className="hover:text-[#ef4335] text-md" to="/contacts">
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#ef4335] text-md bg-white"
+              : "hover:text-[#ef4335] text-md"
+          }
+          to="/contacts"
+        >
           Contacts
         </NavLink>
       </li>

@@ -4,7 +4,7 @@ import pai2 from "../../../assets/Home/projAre/pai2.png";
 
 const ProjectArea = () => {
   return (
-    <div className="bg-gradient-to-b from-white to-[#FFE6E6] py-12">
+    <div className="bg-gradient-to-b from-white to-[#FFE6E6] pt-12">
       <div className="bg-black max-w-[1200px] mx-auto flex flex-col lg:flex-row h-[450px] rounded-3xl overflow-hidden">
         {/* Left Section */}
         <div className="p-10 flex flex-col justify-center space-y-10 lg:w-[35%]">
