@@ -58,7 +58,7 @@ const Footer = () => {
                 SIGNUP NOW {">"}
               </button>
             </fieldset>
-            <div className="flex gap-2 text-2xl ml-10">
+            <div className="flex gap-2 text-3xl ml-10">
               <FaFacebook></FaFacebook>
               <FaLinkedin></FaLinkedin>
               <FaTwitter></FaTwitter>

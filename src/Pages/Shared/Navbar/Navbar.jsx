@@ -135,7 +135,16 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <a href="#">CAREER DETAILS</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] hover:bg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/CareerDetails"
+              >
+                CAREER DETAILS{" "}
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -161,7 +170,16 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <a href="#">SUCCESS STORY DETAILS</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] hover:bg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/SuccessStoryDetails"
+              >
+                SUCCESS STORY DETAILS
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -187,22 +205,76 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <a href="#">BLOG DETAILS</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] hover:Pbg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/BlogDetails"
+              >
+                BLOG DETAILS
+              </NavLink>
             </li>
             <li>
-              <a href="#">TAGS</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] hover:Pbg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/Tags"
+              >
+                TAGS
+              </NavLink>
             </li>
             <li>
-              <a href="#">CATEGORIES</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] hover:Pbg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/Categories"
+              >
+                CATEGORIES
+              </NavLink>
             </li>
             <li>
-              <a href="#">AUTHOR</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] hover:Pbg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/Author"
+              >
+                AUTHOR
+              </NavLink>
             </li>
             <li>
-              <a href="#">PRIVACY POLICY</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] hover:Pbg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/PrivacyPolicy"
+              >
+                PRIVACY POLICY{" "}
+              </NavLink>
             </li>
             <li>
-              <a href="#">AUTHOR</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] hover:Pbg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/TermsCondition"
+              >
+                TERMS & CONDITION
+              </NavLink>
             </li>
           </ul>
         </div>

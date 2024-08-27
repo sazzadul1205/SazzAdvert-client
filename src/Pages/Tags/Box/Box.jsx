@@ -1,13 +1,13 @@
 import Banner1 from "../../../assets/BlogsPage/Banner1.jpg";
 import Logo from "../../../assets/BlogsPage/Logo.png";
 
-const Banner = () => {
+const Box = () => {
   return (
-    <div className="bg-[#FFE6E6]  py-20 ">
+    <div className="bg-[#FFE6E6] py-5 ">
       <div className="max-w-[1200px] mx-auto">
         <div>
           {/* Banner */}
-          <div className="card bg-[#faf4f4] w-full shadow-xl text-black mt-20 ">
+          <div className="card bg-[#faf4f4] w-full shadow-xl text-black  ">
             <div className="flex justify-between py-16 px-10">
               <div>
                 <div className="flex  ">
@@ -45,4 +45,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default Box;

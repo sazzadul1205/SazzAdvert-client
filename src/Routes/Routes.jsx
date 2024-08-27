@@ -9,6 +9,14 @@ import BlogsPage from "../Pages/BlogsPage/BlogsPage";
 import Contact from "../Pages/Contact/Contact";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
 import OurTeam from "../Pages/OurTeam/OurTeam";
+import CareerDetails from "../Pages/CareerDetails/CareerDetails";
+import SuccessStoryDetails from "../Pages/SuccessStoryDetails/SuccessStoryDetails";
+import BlogDetails from "../Pages/BlogDetails/BlogDetails";
+import Tags from "../Pages/Tags/Tags";
+import Categories from "../Pages/Categories/Categories";
+import Author from "../Pages/Author/Author";
+import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
+import TermsConditions from "../Pages/TermsConditions/TermsConditions";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +58,38 @@ export const router = createBrowserRouter([
       {
         path: "/OurTeam",
         element: <OurTeam></OurTeam>,
+      },
+      {
+        path: "/CareerDetails",
+        element: <CareerDetails></CareerDetails>,
+      },
+      {
+        path: "/SuccessStoryDetails",
+        element: <SuccessStoryDetails></SuccessStoryDetails>,
+      },
+      {
+        path: "/BlogDetails",
+        element: <BlogDetails></BlogDetails>,
+      },
+      {
+        path: "/Tags",
+        element: <Tags></Tags>,
+      },
+      {
+        path: "/Categories",
+        element: <Categories></Categories>,
+      },
+      {
+        path: "/Author",
+        element: <Author></Author>,
+      },
+      {
+        path: "/PrivacyPolicy",
+        element: <PrivacyPolicy></PrivacyPolicy>,
+      },
+      {
+        path: "/TermsCondition",
+        element: <TermsConditions></TermsConditions>,
       },
     ],
   },
