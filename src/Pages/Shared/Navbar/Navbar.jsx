@@ -38,7 +38,7 @@ const Navbar = () => {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? "text-[#ef4335] bg-white "
+                    ? "text-[#ef4335] hover:bg-white "
                     : "hover:text-[#ef4335]  "
                 }
                 to="/"
@@ -67,7 +67,7 @@ const Navbar = () => {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? "text-[#ef4335] bg-white "
+                    ? "text-[#ef4335] hover:bg-white "
                     : "hover:text-[#ef4335]  "
                 }
                 to="/Services"
@@ -76,10 +76,28 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <a href="#">SERVICE DETAILS</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] hover:bg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/ServicesDetails"
+              >
+                SERVICE DETAILS
+              </NavLink>
             </li>
             <li>
-              <a href="#">OUR TEAM</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] hover:bg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/OurTeam"
+              >
+                OUR TEAM
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -105,7 +123,16 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <a href="#">CAREERS</a>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-[#ef4335] hover:bg-white "
+                    : "hover:text-[#ef4335]  "
+                }
+                to="/Careers"
+              >
+                CAREERS
+              </NavLink>
             </li>
             <li>
               <a href="#">CAREER DETAILS</a>
@@ -125,7 +152,7 @@ const Navbar = () => {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? "text-[#ef4335] bg-white "
+                    ? "text-[#ef4335] hover:bg-white "
                     : "hover:text-[#ef4335]  "
                 }
                 to="/SuccessStories"
@@ -151,7 +178,7 @@ const Navbar = () => {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? "text-[#ef4335] bg-white "
+                    ? "text-[#ef4335] hover:Pbg-white "
                     : "hover:text-[#ef4335]  "
                 }
                 to="/Blogs"
@@ -185,7 +212,7 @@ const Navbar = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "text-[#ef4335] text-md "
+              ? "text-[#ef4335] text-md hover:bg-wh"
               : "hover:text-[#ef4335] text-md"
           }
           to="/contacts"
