@@ -12,6 +12,10 @@ import "swiper/css/navigation";
 // Import required modules
 import { Navigation } from "swiper/modules";
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 // Example testimonials data from a database (replace with actual data fetching logic)
 const testimonialsData = [
   {
@@ -38,9 +42,16 @@ const testimonialsData = [
 ];
 
 const Testimonials = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
+
   return (
     <div className="bg-white pt-24 text-black pb-24">
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="flex ">
           <div className="w-[700px] mr-10">
             <p className="font-semibold">TESTIMONIALS</p>
@@ -63,7 +74,11 @@ const Testimonials = () => {
                     </p>
                     <div className="flex items-center">
                       <div className="w-12 h-12 rounded-full">
-                        <img src={testimonial.avatar} alt={testimonial.name} className="rounded-full"/>
+                        <img
+                          src={testimonial.avatar}
+                          alt={testimonial.name}
+                          className="rounded-full"
+                        />
                       </div>
                       <div className="ml-4">
                         <p className="font-semibold text-lg">

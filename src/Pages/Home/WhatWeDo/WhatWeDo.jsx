@@ -3,6 +3,10 @@ import do2 from "../../../assets/Home/WhatWeDo/do2.png";
 import do3 from "../../../assets/Home/WhatWeDo/do3.png";
 import do4 from "../../../assets/Home/WhatWeDo/do4.png";
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const whatWeDoData = [
   {
     id: 1,
@@ -35,9 +39,16 @@ const whatWeDoData = [
 ];
 
 const WhatWeDo = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
+
   return (
     <div className="bg-white text-black py-12">
-      <div className="max-w-[1200px] mx-auto flex gap-10">
+      <div className="max-w-[1200px] mx-auto flex gap-10" data-aos="fade-up">
         {/* Left Section */}
         <div className="w-full lg:w-[40%]">
           <p className="text-xl font-semibold text-gray-600">WHAT WE DO</p>

@@ -4,26 +4,40 @@ import plaque1 from "../../../assets/Home/Plaque/Plaque1.jfif";
 import plaque2 from "../../../assets/Home/Plaque/Plaque2.jfif";
 import plaque3 from "../../../assets/Home/Plaque/Plaque3.jfif";
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const Plaques = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
+
   return (
     <div className="bg-white py-20 text-black p">
-      <div className="flex justify-between mx-auto  max-w-[1200px] pb-20 border-b">
+      <div
+        className="flex justify-between mx-auto  max-w-[1200px] pb-20 border-b"
+        data-aos="fade-up"
+      >
         {/* Avatars */}
         <div className="flex items-center space-x-4">
           <div className="flex -space-x-4 ">
             <div className="avatar border-none ">
               <div className="w-12 rounded-full">
-                <img src={plaque1} className="border-white border-2"/>
+                <img src={plaque1} className="border-white border-2" />
               </div>
             </div>
             <div className="avatar border-none ">
               <div className="w-12 rounded-full">
-                <img src={plaque2} className="border-white border-2"/>
+                <img src={plaque2} className="border-white border-2" />
               </div>
             </div>
             <div className="avatar border-none ">
               <div className="w-12 rounded-full">
-                <img src={plaque3} className="border-white border-2"/>
+                <img src={plaque3} className="border-white border-2" />
               </div>
             </div>
           </div>

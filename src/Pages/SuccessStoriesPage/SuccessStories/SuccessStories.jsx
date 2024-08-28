@@ -6,6 +6,10 @@ import Success5 from "../../../assets/SuccessStories/SuccessStories/Success5.jpg
 import Success6 from "../../../assets/SuccessStories/SuccessStories/Success6.jpg";
 import icon from "../../../assets/SuccessStories/SuccessStories/icon.png";
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const StoryCard = ({ image, title, subtitle, large = false }) => (
   <div
     className={`relative ${
@@ -28,6 +32,13 @@ const StoryCard = ({ image, title, subtitle, large = false }) => (
 );
 
 const SuccessStoriesPage = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
+
   return (
     <div className="bg-gradient-to-b from-[#FFE6E6] to-white py-12">
       <div className="max-w-[1200px] mx-auto gap-8">
@@ -36,7 +47,7 @@ const SuccessStoriesPage = () => {
           <h1 className="font-bold ">Driving success through strategic paid search advertising!</h1>
         </div>
         {/* First Row */}
-        <div className="flex gap-8">
+        <div className="flex gap-8" data-aos="fade-up">
           {/* Left Column - Small Stories */}
           <div className="flex  gap-8">
             <StoryCard
@@ -56,7 +67,7 @@ const SuccessStoriesPage = () => {
         </div>
 
         {/* Second Row */}
-        <div className="pt-5 flex gap-8">
+        <div className="pt-5 flex gap-8" data-aos="fade-up">
           {/* Left Column - Big Story */}
           <StoryCard
             image={Success4}

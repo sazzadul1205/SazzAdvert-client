@@ -7,6 +7,10 @@ import Icon6 from "../../../assets/Services/Capabilities/Icon6.png";
 import Icon7 from "../../../assets/Services/Capabilities/Icon7.png";
 import Icon8 from "../../../assets/Services/Capabilities/Icon8.png";
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const cardData = [
   {
     id: 1,
@@ -65,10 +69,18 @@ const cardData = [
     image: Icon8,
   },
 ];
+
 const Capabilities = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
+
   return (
     <div className="bg-gradient-to-b to-white from-[#FFE6E6] py-12 text-black">
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="w-[645px] mx-auto text-center pb-20">
           <p className="font-semibold">CAPABILITIES</p>
           <h1 className="font-bold text-4xl">

@@ -5,6 +5,10 @@ import ca2 from "../../../assets/Home/Capabilities/ca2.png";
 import ca3 from "../../../assets/Home/Capabilities/ca3.png";
 import ca4 from "../../../assets/Home/Capabilities/ca4.png";
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const cardData = [
   {
     id: 1,
@@ -37,9 +41,15 @@ const cardData = [
 ];
 
 const Capabilities = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
   return (
     <div className="bg-gradient-to-b from-[#FFE6E6] to-white text-black font-bold py-20 ">
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="flex justify-between items-center py-10 pb-20">
           {/* Left Section */}
           <div className="flex items-center">

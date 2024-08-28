@@ -1,8 +1,12 @@
-import  { useState } from "react";
+import { useState } from "react";
 import icons from "../../../assets/Home/Blogs/icons.png";
 import blog1 from "../../../assets/Home/Blogs/blog1.jpg";
 import blog2 from "../../../assets/Home/Blogs/blog2.jpg";
 import blog3 from "../../../assets/Home/Blogs/blog3.jpg";
+
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // Simulating more data (total 20 entries)
 const blogData = Array(20)
@@ -32,11 +36,18 @@ const AllBlogs = () => {
     setCurrentPage(page);
   };
 
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
+
   return (
     <div className="bg-[#FFE6E6] py-20 text-black">
       <div className="max-w-[1200px] mx-auto">
         {/* All Cards */}
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-3 gap-5" data-aos="fade-up">
           {currentData.map((blog) => (
             <div
               key={blog.id}

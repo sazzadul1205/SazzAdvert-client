@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const processSteps = [
   {
     id: 1,
@@ -20,6 +24,13 @@ const processSteps = [
 ];
 
 const OurProcess = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
+
   return (
     <div className=" bg-[#FFE6E6] text-black py-12">
       <div className=" max-w-[1200px] mx-auto bg-white pb-20">
@@ -30,7 +41,7 @@ const OurProcess = () => {
           </h1>
         </div>
         <div className="pt-10 px-20">
-          <div className="grid grid-cols-3 gap-14">
+          <div className="grid grid-cols-3 gap-14" data-aos="fade-up">
             {processSteps.map((step) => (
               <div
                 key={step.id}

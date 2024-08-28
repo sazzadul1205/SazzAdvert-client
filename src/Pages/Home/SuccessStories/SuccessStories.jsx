@@ -4,10 +4,20 @@ import sucess3 from "../../../assets/Home/Sucess/Sucess3.jpg";
 import icon from "../../../assets/Home/Sucess/icon.png";
 import title from "../../../assets/Home/Sucess/title.png";
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const SuccessStories = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
   return (
     <div className="bg-gradient-to-b from-[#FFE6E6] to-white py-12">
-      <div className="flex max-w-[1200px] mx-auto ">
+      <div className="flex max-w-[1200px] mx-auto " data-aos="fade-up">
         <div className=" flex flex-col space-y-6 ">
           {/* First Row */}
           <div className="flex space-x-6">
@@ -19,7 +29,10 @@ const SuccessStories = () => {
                   <p className="text-2xl text-white pb-2">HiBootstrap</p>
                   <p className="text-gray-300 pb-2">Premium Themes</p>
                 </div>
-                <img src={icon} className="bg-slate-900 p-2 rounded-full hover:bg-white" />
+                <img
+                  src={icon}
+                  className="bg-slate-900 p-2 rounded-full hover:bg-white"
+                />
               </div>
             </div>
 
@@ -31,7 +44,10 @@ const SuccessStories = () => {
                   <p className="text-2xl text-white pb-2">Bolster</p>
                   <p className="text-gray-300 pb-2">eCommerce</p>
                 </div>
-                <img src={icon} className="bg-slate-900 p-2 rounded-full hover:bg-white" />
+                <img
+                  src={icon}
+                  className="bg-slate-900 p-2 rounded-full hover:bg-white"
+                />
               </div>
             </div>
           </div>
@@ -48,7 +64,10 @@ const SuccessStories = () => {
                 <p className="text-2xl text-white pb-2">Shoponix</p>
                 <p className="text-gray-300">eCommerce</p>
               </div>
-              <img src={icon} className="bg-slate-900 p-2 rounded-full hover:bg-white" />
+              <img
+                src={icon}
+                className="bg-slate-900 p-2 rounded-full hover:bg-white"
+              />
             </div>
           </div>
         </div>

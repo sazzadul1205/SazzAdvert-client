@@ -1,9 +1,23 @@
 import Banner2 from "../../../assets/Services/Banner2.png";
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const SecondBanner = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
+
   return (
     <div className="bg-[#f2f2f8] py-14 text-black">
-      <div className="flex justify-between max-w-[1200px] mx-auto h-[720px] pt-10 items-center gap-5 ">
+      <div
+        data-aos="fade-up"
+        className="flex justify-between max-w-[1200px] mx-auto h-[720px] pt-10 items-center gap-5 "
+      >
         <div className=" w-[612px] h-[623PXpx]">
           <img src={Banner2} alt="" className=" w-full h-full rounded z-10" />
         </div>

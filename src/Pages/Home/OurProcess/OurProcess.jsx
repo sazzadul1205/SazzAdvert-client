@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import oupPro from "../../../assets/Home/OupPro.png";
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const processSteps = [
   {
     id: 1,
@@ -23,9 +27,18 @@ const processSteps = [
 ];
 
 const OurProcess = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
   return (
     <div className="bg-white text-black pb-10">
-      <div className="max-w-[1200px] mx-auto justify-around ">
+      <div
+        className="max-w-[1200px] mx-auto justify-around "
+        data-aos="fade-up"
+      >
         {/* Top */}
         <div className="text-center w-[648px] mx-auto">
           <p className="font-semibold text-lg">OUR PROCESS</p>

@@ -3,6 +3,10 @@ import blog1 from "../../../assets/Home/Blogs/blog1.jpg";
 import blog2 from "../../../assets/Home/Blogs/blog2.jpg";
 import blog3 from "../../../assets/Home/Blogs/blog3.jpg";
 
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const blogData = [
   {
     id: 1,
@@ -28,9 +32,16 @@ const blogData = [
 ];
 
 const Blogs = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
+
   return (
     <div className="bg-white text-black pb-24">
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="w-[645px] mx-auto text-center pb-10">
           <p className="font-semibold text-lg">OUR BLOG</p>
           <h1 className="font-bold text-4xl">
