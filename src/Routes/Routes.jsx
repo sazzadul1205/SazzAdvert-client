@@ -17,6 +17,9 @@ import Categories from "../Pages/Categories/Categories";
 import Author from "../Pages/Author/Author";
 import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 import TermsConditions from "../Pages/TermsConditions/TermsConditions";
+import Login from "../Pages/Login/Login";
+import DashboardLayout from "../layouts/DashboardLayout";
+import AdminHome from "../Admin/Pages/Home/AdminHome";
 
 export const router = createBrowserRouter([
   {
@@ -90,6 +93,20 @@ export const router = createBrowserRouter([
       {
         path: "/TermsCondition",
         element: <TermsConditions></TermsConditions>,
+      },
+    ],
+  },
+  {
+    path: "/Login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/Dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        path: "AdminHome",
+        element: <AdminHome></AdminHome>,
       },
     ],
   },

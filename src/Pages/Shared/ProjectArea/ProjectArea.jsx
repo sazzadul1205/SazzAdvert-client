@@ -1,10 +1,8 @@
-import PA1 from "../../../assets/Home/PA1.jpg";
-import pai1 from "../../../assets/Home/projAre/pai1.png";
-import pai2 from "../../../assets/Home/projAre/pai2.png";
-
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const ProjectArea = () => {
   useEffect(() => {
@@ -13,6 +11,23 @@ const ProjectArea = () => {
       once: false, // Whether the animation should happen only once
     });
   }, []);
+
+  // API Fetch
+  const axiosPublic = useAxiosPublic();
+  const { data: projectAreaData, isLoading } = useQuery({
+    queryKey: ["ProjectAreaComponent"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/ProjectAreaComponent`);
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  const { leftSection, rightSectionImage } = projectAreaData[0]; // Assuming only one object in the array
+
   return (
     <div className="bg-gradient-to-b from-white to-[#FFE6E6] pt-12">
       <div
@@ -21,34 +36,25 @@ const ProjectArea = () => {
       >
         {/* Left Section */}
         <div className="p-10 flex flex-col justify-center space-y-10 lg:w-[35%]">
-          <div className="flex items-center space-x-4">
-            <img
-              src={pai1}
-              alt="Years driving growth"
-              className="bg-slate-900 p-4 rounded-full"
-            />
-            <div className="text-white">
-              <p className="text-4xl font-bold">25+</p>
-              <p className="text-lg">Years driving growth</p>
+          {leftSection.map((item, index) => (
+            <div key={index} className="flex items-center space-x-4">
+              <img
+                src={item.imageUrl}
+                alt={item.description}
+                className="bg-slate-900 p-4 rounded-full"
+              />
+              <div className="text-white">
+                <p className="text-4xl font-bold">{item.stat}</p>
+                <p className="text-lg">{item.description}</p>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <img
-              src={pai2}
-              alt="Projects complete successfully"
-              className="bg-slate-900 p-4 rounded-full"
-            />
-            <div className="text-white">
-              <p className="text-4xl font-bold">1450+</p>
-              <p className="text-lg">Projects complete successfully</p>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* Right Section */}
         <div className="lg:w-[65%]">
           <img
-            src={PA1}
+            src={rightSectionImage}
             alt="Project Area"
             className="w-full h-full object-cover"
           />

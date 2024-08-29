@@ -1,95 +1,89 @@
-import Award from "../../../assets/Home/Plaque/award.png";
-import clutch from "../../../assets/Home/Plaque/clutch.png";
-import plaque1 from "../../../assets/Home/Plaque/Plaque1.jfif";
-import plaque2 from "../../../assets/Home/Plaque/Plaque2.jfif";
-import plaque3 from "../../../assets/Home/Plaque/Plaque3.jfif";
-
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const Plaques = () => {
   useEffect(() => {
     AOS.init({
-      duration: 2000, // Adjust the animation duration (in ms)
-      once: false, // Whether the animation should happen only once
+      duration: 2000,
+      once: false,
     });
   }, []);
+
+  // API Fetch
+  const axiosPublic = useAxiosPublic();
+  const { data: plaquesData, isLoading } = useQuery({
+    queryKey: ["Plaques"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/Plaques`);
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  // Ensure that the data is properly loaded and structured
+  const Plaques = plaquesData && plaquesData[0];
 
   return (
     <div className="bg-white py-20 text-black p">
       <div
-        className="flex justify-between mx-auto  max-w-[1200px] pb-20 border-b"
+        className="flex justify-between mx-auto max-w-[1200px] pb-20 border-b"
         data-aos="fade-up"
       >
         {/* Avatars */}
         <div className="flex items-center space-x-4">
-          <div className="flex -space-x-4 ">
-            <div className="avatar border-none ">
-              <div className="w-12 rounded-full">
-                <img src={plaque1} className="border-white border-2" />
+          <div className="flex -space-x-4">
+            {Plaques.avatars.map((avatar, index) => (
+              <div key={index} className="avatar border-none">
+                <div className="w-12 rounded-full">
+                  <img
+                    src={avatar.src}
+                    alt={avatar.alt}
+                    className="border-white border-2"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="avatar border-none ">
-              <div className="w-12 rounded-full">
-                <img src={plaque2} className="border-white border-2" />
-              </div>
-            </div>
-            <div className="avatar border-none ">
-              <div className="w-12 rounded-full">
-                <img src={plaque3} className="border-white border-2" />
-              </div>
-            </div>
+            ))}
           </div>
           <p className="text-lg">Meet Our Expert {">"}</p>
         </div>
         {/* Awards */}
         <div className="flex items-center">
-          <img src={Award} alt="" />
-          <div className="ml-5 ">
-            <p className="font-semibold">Award Winning Agency</p>
+          <img src={Plaques.awards.src} alt="Award" />
+          <div className="ml-5">
+            <p className="font-semibold">{Plaques.awards.title}</p>
             <p>
-              <span className="font-bold mr-1 text-lg">3500+</span>Active
-              Clients
+              <span className="font-bold mr-1 text-lg">
+                {Plaques.awards.clients}
+              </span>
+              {Plaques.awards.description}
             </p>
           </div>
         </div>
         {/* Review */}
         <div>
           <div className="flex">
-            <p className="mr-10">Review On</p>
-            <div className="rating ">
-              <input
-                type="radio"
-                name="rating-7"
-                className="mask mask-star-2 bg-orange-400"
-              />
-              <input
-                type="radio"
-                name="rating-7"
-                className="mask mask-star-2 bg-orange-400"
-                defaultChecked
-              />
-              <input
-                type="radio"
-                name="rating-7"
-                className="mask mask-star-2 bg-orange-400"
-              />
-              <input
-                type="radio"
-                name="rating-7"
-                className="mask mask-star-2 bg-orange-400"
-              />
-              <input
-                type="radio"
-                name="rating-7"
-                className="mask mask-star-2 bg-orange-400"
-              />
+            <p className="mr-10">{Plaques.review.reviewOn}</p>
+            <div className="rating">
+              {Array.from({ length: Plaques.review.stars }).map((_, index) => (
+                <input
+                  key={index}
+                  type="radio"
+                  name="rating-7"
+                  className="mask mask-star-2 bg-orange-400"
+                  defaultChecked={index === 1}
+                />
+              ))}
             </div>
           </div>
           <div className="flex">
-            <img className="mr-10" src={clutch} alt="" />
-            <p>1500+ Reviews</p>
+            <img className="mr-10" src={Plaques.review.src} alt="Clutch" />
+            <p>{Plaques.review.reviews}</p>
           </div>
         </div>
       </div>

@@ -1,7 +1,6 @@
-import icons from "../../../assets/Home/Awards/aw1.png";
-import icon1 from "../../../assets/Home/Awards/icon1.png";
-import icon2 from "../../../assets/Home/Awards/icon2.png";
-import icon3 from "../../../assets/Home/Awards/icon3.png";
+
+
+
 const Awards = () => {
   return (
     <div className="bg-[#FFE6E6] py-14 text-black">
@@ -9,7 +8,7 @@ const Awards = () => {
         <div className="grid grid-cols-4 p-10">
           <div className="bg-[#FFEEEE] mx-auto items-center w-[280px] text-black">
             <img
-              src={icons}
+              src={"https://i.ibb.co/d4MW8SF/Awards-Badge.png"}
               alt=""
               className="w-[170px] h-[170px] mx-auto mt-10"
             />
@@ -17,7 +16,7 @@ const Awards = () => {
           </div>
           <div className="ml-10 mt-10 text-black">
             <img
-              src={icon1}
+              src={"https://i.ibb.co/jwVj7Tj/Awards-Icon1.png"}
               alt="Years driving growth"
               className="bg-[#FFEEEE] p-4 rounded-full"
             />
@@ -29,7 +28,7 @@ const Awards = () => {
           </div>
           <div className="ml-10 mt-10 text-black">
             <img
-              src={icon2}
+              src={"https://i.ibb.co/HPGx6Fc/Awards-Icon2.png"}
               alt="Years driving growth"
               className="bg-[#FFEEEE] p-4 rounded-full"
             />
@@ -41,7 +40,7 @@ const Awards = () => {
           </div>
           <div className="ml-10 mt-10 text-black">
             <img
-              src={icon3}
+              src={"https://i.ibb.co/vcqNYjM/Awards-Icon3.png"}
               alt="Years driving growth"
               className="bg-[#FFEEEE] p-4 rounded-full"
             />

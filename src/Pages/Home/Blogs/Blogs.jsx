@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+// JSON data within the same file
 const blogData = [
   {
     id: 1,
@@ -19,17 +20,23 @@ const blogData = [
     id: 2,
     postedBy: "Adli",
     title: "The Art of Writing Compelling Ad Copy for Paid Search",
-    categories: ["Category1", "Category2"],
+    categories: ["Google Search", "Free Advert"],
     imageUrl: blog2,
   },
   {
     id: 3,
     postedBy: "Adli",
     title: "Targeting Techniques: Reaching the Right Audience in Paid Search",
-    categories: ["Category1", "Category2"],
+    categories: ["Paid Advert", "Yahoo Advert"],
     imageUrl: blog3,
   },
 ];
+
+const titleData = {
+  title: "OUR BLOG",
+  page: "Blogs",
+  description: "Your path to paid search excellence starts here!",
+};
 
 const Blogs = () => {
   useEffect(() => {
@@ -43,20 +50,18 @@ const Blogs = () => {
     <div className="bg-white text-black pb-24">
       <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="w-[645px] mx-auto text-center pb-10">
-          <p className="font-semibold text-lg">OUR BLOG</p>
-          <h1 className="font-bold text-4xl">
-            Your path to paid search excellence starts here!
-          </h1>
+          <p className="font-semibold text-lg">{titleData.title}</p>
+          <h1 className="font-bold text-4xl">{titleData.description}</h1>
         </div>
         {/* All Cards */}
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {blogData.map((blog) => (
             <div
               key={blog.id}
-              className="card bg-[#faf4f4] w-96 shadow-xl transform transition-transform duration-300 hover:-translate-y-2"
+              className="bg-[#faf4f4] shadow-xl transform transition-transform duration-300 hover:-translate-y-2 rounded-xl"
             >
               <div className="flex px-12 pt-10">
-                <img src={icons} alt="" className="mr-4" />
+                <img src={icons} alt="Posted by icon" className="mr-4" />
                 <div>
                   <p>Posted by</p>
                   <p className="font-bold">{blog.postedBy}</p>
@@ -66,18 +71,16 @@ const Blogs = () => {
                 <img
                   src={blog.imageUrl}
                   alt={blog.title}
-                  className="rounded-xl w-[335px] h-[210px]"
+                  className="rounded-xl w-full h-[210px] object-cover"
                 />
               </figure>
-              <div className="card-body">
-                <h2 className="card-title text-[22px] font-semibold">
-                  {blog.title}
-                </h2>
-                <div className="card-actions pt-4">
+              <div className="px-10 pb-10">
+                <h2 className="text-[22px] font-semibold pt-5">{blog.title}</h2>
+                <div className="pt-4 flex flex-wrap gap-2">
                   {blog.categories.map((category, index) => (
                     <button
                       key={index}
-                      className="bg-[#FFEEEE] p-4 rounded-full"
+                      className="bg-[#FFEEEE] p-2 rounded-full text-sm"
                     >
                       {category}
                     </button>

@@ -1,11 +1,4 @@
-import Icon1 from "../../../assets/Services/Capabilities/Icon1.png";
-import Icon2 from "../../../assets/Services/Capabilities/Icon2.png";
-import Icon3 from "../../../assets/Services/Capabilities/Icon3.png";
-import Icon4 from "../../../assets/Services/Capabilities/Icon4.png";
-import Icon5 from "../../../assets/Services/Capabilities/Icon5.png";
-import Icon6 from "../../../assets/Services/Capabilities/Icon6.png";
-import Icon7 from "../../../assets/Services/Capabilities/Icon7.png";
-import Icon8 from "../../../assets/Services/Capabilities/Icon8.png";
+
 
 import { useEffect } from "react";
 import AOS from "aos";
@@ -17,56 +10,56 @@ const cardData = [
     title: "Google Ads",
     description:
       "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: Icon1,
+    image: "https://i.ibb.co/7nyhbbv/Capabilites-Icon1.png",
   },
   {
     id: 2,
     title: "Microsoft Ads",
     description:
       "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: Icon2,
+    image: "https://i.ibb.co/Z6N3vRh/Capabilites-Icon2.png",
   },
   {
     id: 3,
     title: "Social Media Ads",
     description:
       "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: Icon3,
+    image: "https://i.ibb.co/cw79thd/Capabilites-Icon3.png",
   },
   {
     id: 4,
     title: "Shopping Campaign",
     description:
       "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: Icon4,
+    image: "https://i.ibb.co/BKnzvfd/Capabilites-Icon4.png",
   },
   {
     id: 5,
     title: "Marketing Automation",
     description:
       "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: Icon5,
+    image: "https://i.ibb.co/mcJTFfb/Capabilites-Icon5.png",
   },
   {
     id: 6,
     title: "Display Advertising",
     description:
       "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: Icon6,
+    image: "https://i.ibb.co/0cVgTq6/Capabilites-Icon6.png",
   },
   {
     id: 7,
     title: "Paid Social Media",
     description:
       "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: Icon7,
+    image: "https://i.ibb.co/jfQGq95/Capabilites-Icon7.png",
   },
   {
     id: 8,
     title: "Native Advertising",
     description:
       "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: Icon8,
+    image: "https://i.ibb.co/3STcbR3/Capabilites-Icon8.png",
   },
 ];
 

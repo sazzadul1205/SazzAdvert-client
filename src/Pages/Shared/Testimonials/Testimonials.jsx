@@ -16,7 +16,7 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-// Example testimonials data from a database (replace with actual data fetching logic)
+// JSON data within the same file
 const testimonialsData = [
   {
     id: 1,
@@ -30,7 +30,7 @@ const testimonialsData = [
   },
   {
     id: 2,
-    category: "Theme Quality",
+    category: "Customer Support",
     testimonial:
       "“The customer support provided by Adli is top-notch. They are always available to help us with any queries or issues.”",
     name: "Jane Doe",
@@ -38,26 +38,51 @@ const testimonialsData = [
     avatar:
       "https://img.daisyui.com/images/stock/photo-1502980426475-8d4e86a19d5a.webp",
   },
+  {
+    id: 3,
+    category: "Performance",
+    testimonial:
+      "“Adli’s performance-driven strategies have significantly boosted our online presence and revenue.”",
+    name: "John Smith",
+    position: "Marketing Head at Shoponix",
+    avatar:
+      "https://img.daisyui.com/images/stock/photo-1418479631014-8cbf89db3431.webp",
+  },
+  {
+    id: 4,
+    category: "Reliability",
+    testimonial:
+      "“The team at Adli is reliable and always delivers on their promises. Our experience with them has been nothing but positive.”",
+    name: "Emily White",
+    position: "Founder at Flexio",
+    avatar:
+      "https://img.daisyui.com/images/stock/photo-1517841905240-472988babdf9.webp",
+  },
   // Add more testimonials as needed
 ];
+
+const titleData = {
+  title: "TESTIMONIALS",
+  page: "Testimonials",
+  description: "We help to achieve customers' business goals",
+};
 
 const Testimonials = () => {
   useEffect(() => {
     AOS.init({
-      duration: 2000, // Adjust the animation duration (in ms)
-      once: false, // Whether the animation should happen only once
+      duration: 2000,
+      once: false,
     });
   }, []);
 
   return (
     <div className="bg-white pt-24 text-black pb-24">
       <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
-        <div className="flex ">
+        <div className="flex">
           <div className="w-[700px] mr-10">
-            <p className="font-semibold">TESTIMONIALS</p>
-            <h1 className="font-bold text-4xl">
-              We help to achieve customers business goals
-            </h1>
+            <p className="font-semibold">{titleData.title}</p>
+            <h1 className="font-bold text-4xl">{titleData.description}</h1>
+            {/* Sliders */}
             <div className="mt-10">
               <Swiper
                 navigation={true}
@@ -92,22 +117,23 @@ const Testimonials = () => {
               </Swiper>
             </div>
           </div>
-          <div className="bg-[#faf4f4] flex-1 rounded-xl  ">
-            <div className="py-28 px-20 ">
+          {/* Reviews */}
+          <div className="bg-[#faf4f4] flex-1 rounded-xl">
+            <div className="py-28 px-20">
               <div className="flex gap-14 pb-12 border-b">
                 <div>
                   <p className="font-semibold">Review On</p>
-                  <img src={Test1} alt="" />
+                  <img src={Test1} alt="Review 1" />
                 </div>
                 <div>
-                  <img src={Test2} alt="" />
-                  <div> 7584+ Reviews</div>{" "}
+                  <img src={Test2} alt="Review 2" />
+                  <div> 7584+ Reviews</div>
                 </div>
               </div>
               <div className="flex gap-14 pt-12">
                 <div>
                   <p className="font-semibold">Review On</p>
-                  <img src={Test3} alt="" />
+                  <img src={Test3} alt="Review 3" />
                 </div>
                 <div>
                   <div className="rating">
@@ -138,7 +164,7 @@ const Testimonials = () => {
                       className="mask mask-star-2 bg-orange-400"
                     />
                   </div>
-                  <div> 7584+ Reviews</div>{" "}
+                  <div> 7584+ Reviews</div>
                 </div>
               </div>
             </div>

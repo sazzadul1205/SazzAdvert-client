@@ -1,30 +1,9 @@
 import { Link } from "react-router-dom";
-import oupPro from "../../../assets/Home/OupPro.png";
-
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-const processSteps = [
-  {
-    id: 1,
-    title: "Campaign Strategy",
-    description:
-      "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive strategy.",
-  },
-  {
-    id: 2,
-    title: "Full Management",
-    description:
-      "We take full management of your campaigns to ensure all aspects are optimized for success, aligning with your business goals.",
-  },
-  {
-    id: 3,
-    title: "Transparency",
-    description:
-      "We maintain full transparency with our clients, providing detailed reports and insights into the performance of your campaigns.",
-  },
-];
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const OurProcess = () => {
   useEffect(() => {
@@ -33,30 +12,66 @@ const OurProcess = () => {
       once: false, // Whether the animation should happen only once
     });
   }, []);
+
+  // API fetch
+  const axiosPublic = useAxiosPublic();
+
+  const {
+    data: OurProcessSteps,
+    isLoading: stepsLoading,
+    error: stepsError,
+  } = useQuery({
+    queryKey: ["OurProcessSteps"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/OurProcess`);
+      return res.data;
+    },
+  });
+
+  // API fetch for Title Data
+  const {
+    data: OurProcessTitleData,
+    isLoading: titleDataLoading,
+    error: titleDataError,
+  } = useQuery({
+    queryKey: ["OurProcessTitleData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/TitleDatas?page=OurProcess`);
+      return res.data;
+    },
+  });
+
+  // Handle loading and error states
+  if (stepsLoading || titleDataLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (stepsError || titleDataError) {
+    return <div>Error loading data</div>;
+  }
+
+  const { title, description, img } = OurProcessTitleData[0]; // Destructure the first item in TitleData
+
   return (
     <div className="bg-white text-black pb-10">
-      <div
-        className="max-w-[1200px] mx-auto justify-around "
-        data-aos="fade-up"
-      >
-        {/* Top */}
-        <div className="text-center w-[648px] mx-auto">
-          <p className="font-semibold text-lg">OUR PROCESS</p>
-          <h1 className="font-bold text-4xl">
-            Your path to paid search excellence starts here!
-          </h1>
+      <div className="max-w-[1200px] mx-auto justify-around" data-aos="fade-up">
+        {/* Top Section */}
+        <div className="text-center w-[648px] mx-auto mb-10">
+          <p className="font-semibold text-lg">{title}</p>
+          <h1 className="font-bold text-4xl">{description}</h1>
         </div>
-        {/* Bottom */}
+
+        {/* Bottom Section */}
         <div className="flex justify-between mt-10 gap-10">
-          {/* Left */}
+          {/* Left Side */}
           <div className="space-y-10">
-            {processSteps.map((step) => (
+            {OurProcessSteps.map((step) => (
               <div
-                key={step.id}
+                key={step.num} 
                 className="flex items-start hover:text-red-500 text-gray-200"
               >
                 <p className="text-[75px] mr-4 mt-2 font-bold pt-12">
-                  {step.id}
+                  {step.num}
                 </p>
                 <div className="w-[445px]">
                   <h1 className="text-2xl font-semibold text-black">
@@ -67,10 +82,11 @@ const OurProcess = () => {
               </div>
             ))}
           </div>
-          {/* Right */}
+
+          {/* Right Side */}
           <div className="relative">
-            <img src={oupPro} alt="Process" className="w-[700px] h-[405px]" />
-            <Link to={"/Careers"}>
+            <img src={img} alt="Process" className="w-[700px] h-[405px]" />
+            <Link to="/Careers">
               <button className="absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-black text-white px-10 py-4 rounded-3xl hover:bg-[#d93c31] border-none">
                 Get Proposal {">"}
               </button>

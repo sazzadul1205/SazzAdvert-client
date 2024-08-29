@@ -1,11 +1,8 @@
-import icons from "../../../assets/Home/Awards/aw1.png";
-import icon1 from "../../../assets/Home/Awards/icon1.png";
-import icon2 from "../../../assets/Home/Awards/icon2.png";
-import icon3 from "../../../assets/Home/Awards/icon3.png";
-
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const Awards = () => {
   useEffect(() => {
@@ -15,6 +12,24 @@ const Awards = () => {
     });
   }, []);
 
+  // API fetch
+  const axiosPublic = useAxiosPublic();
+
+  const {
+    data: AwardHome,
+    isLoading: stepsLoading,
+    error: stepsError,
+  } = useQuery({
+    queryKey: ["AwardsHome"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/AwardsComponent`);
+      return res.data[0]; // Assuming the first item contains the needed data
+    },
+  });
+
+  if (stepsLoading) return <div>Loading...</div>;
+  if (stepsError) return <div>Error: {stepsError.message}</div>;
+
   return (
     <div className="bg-gradient-to-b from-white to-[#FFE6E6] py-12">
       <div
@@ -22,50 +37,31 @@ const Awards = () => {
         className="bg-[#faf4f4] max-w-[1200px] mx-auto flex flex-col lg:flex-row h-[390px] rounded-lg overflow-hidden"
       >
         <div className="grid grid-cols-4 p-10">
+          {/* Left side with the award image */}
           <div className="bg-[#FFEEEE] mx-auto items-center w-[280px] text-black">
             <img
-              src={icons}
-              alt=""
+              src={AwardHome.left.awardImg}
+              alt={AwardHome.left.awardAlt}
               className="w-[170px] h-[170px] mx-auto mt-10"
             />
-            <h1 className="text-lg text-center">Award Winning Agency</h1>
+            <h1 className="text-lg text-center">{AwardHome.left.title}</h1>
           </div>
-          <div className="ml-10 mt-10 text-black">
-            <img
-              src={icon1}
-              alt="Years driving growth"
-              className="bg-[#FFEEEE] p-4 rounded-full"
-            />
-            <div>
-              <h1 className="font-bold text-4xl mb-2">215%</h1>
-              <p className="font-semibold text-lg mb-5">Average ROI</p>
-              <p>Customers Achieved</p>
+
+          {/* Right side with the awards data */}
+          {AwardHome.right.map((award, index) => (
+            <div key={index} className="ml-10 mt-10 text-black">
+              <img
+                src={award.icon}
+                alt={award.title}
+                className="bg-[#FFEEEE] p-4 rounded-full"
+              />
+              <div>
+                <h1 className="font-bold text-4xl mb-2">{award.value}</h1>
+                <p className="font-semibold text-lg mb-5">{award.title}</p>
+                <p>{award.description}</p>
+              </div>
             </div>
-          </div>
-          <div className="ml-10 mt-10 text-black">
-            <img
-              src={icon2}
-              alt="Years driving growth"
-              className="bg-[#FFEEEE] p-4 rounded-full"
-            />
-            <div>
-              <h1 className="font-bold text-4xl mb-2">200,000s</h1>
-              <p className="font-semibold text-lg mb-5">Ads</p>
-              <p>Already Created</p>
-            </div>
-          </div>
-          <div className="ml-10 mt-10 text-black">
-            <img
-              src={icon3}
-              alt="Years driving growth"
-              className="bg-[#FFEEEE] p-4 rounded-full"
-            />
-            <div>
-              <h1 className="font-bold text-4xl mb-2">$10</h1>
-              <p className="font-semibold text-lg mb-5">Million</p>
-              <p>Managed Monthly</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
