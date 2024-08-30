@@ -1,42 +1,8 @@
-import icons from "../../../assets/Home/Blogs/icons.png";
-import blog1 from "../../../assets/Home/Blogs/blog1.jpg";
-import blog2 from "../../../assets/Home/Blogs/blog2.jpg";
-import blog3 from "../../../assets/Home/Blogs/blog3.jpg";
-
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-// JSON data within the same file
-const blogData = [
-  {
-    id: 1,
-    postedBy: "Adli",
-    title: "Demystifying Paid Search Ads: A Beginners Guide",
-    categories: ["Paid Advert", "Google Search"],
-    imageUrl: blog1,
-  },
-  {
-    id: 2,
-    postedBy: "Adli",
-    title: "The Art of Writing Compelling Ad Copy for Paid Search",
-    categories: ["Google Search", "Free Advert"],
-    imageUrl: blog2,
-  },
-  {
-    id: 3,
-    postedBy: "Adli",
-    title: "Targeting Techniques: Reaching the Right Audience in Paid Search",
-    categories: ["Paid Advert", "Yahoo Advert"],
-    imageUrl: blog3,
-  },
-];
-
-const titleData = {
-  title: "OUR BLOG",
-  page: "Blogs",
-  description: "Your path to paid search excellence starts here!",
-};
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const Blogs = () => {
   useEffect(() => {
@@ -45,6 +11,44 @@ const Blogs = () => {
       once: false, // Whether the animation should happen only once
     });
   }, []);
+
+  // API fetch for Blogs Data
+  const axiosPublic = useAxiosPublic();
+  const {
+    data: blogData = [], // Default to an empty array to avoid errors before data is fetched
+    isLoading: blogsLoading,
+    error: blogsError,
+  } = useQuery({
+    queryKey: ["blogData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/Blogs`);
+      return res.data;
+    },
+  });
+
+  // API fetch for Title Data
+  const {
+    data: BlogsTitleData = [], // Default to an empty array to avoid errors before data is fetched
+    isLoading: titleDataLoading,
+    error: titleDataError,
+  } = useQuery({
+    queryKey: ["BlogsTitleData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/TitleDatas?page=Blogs`);
+      return res.data;
+    },
+  });
+
+  // Extract the first item from the BlogsTitleData array
+  const titleData = BlogsTitleData[0] || {};
+
+  if (blogsLoading || titleDataLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (blogsError || titleDataError) {
+    return <div>Error loading data</div>;
+  }
 
   return (
     <div className="bg-white text-black pb-24">
@@ -57,11 +61,15 @@ const Blogs = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {blogData.map((blog) => (
             <div
-              key={blog.id}
+              key={blog._id}
               className="bg-[#faf4f4] shadow-xl transform transition-transform duration-300 hover:-translate-y-2 rounded-xl"
             >
               <div className="flex px-12 pt-10">
-                <img src={icons} alt="Posted by icon" className="mr-4" />
+                <img
+                  src="https://i.imgur.com/K7JSBpc.png"
+                  alt="Posted by icon"
+                  className="mr-4"
+                />
                 <div>
                   <p>Posted by</p>
                   <p className="font-bold">{blog.postedBy}</p>

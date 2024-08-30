@@ -3,6 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const Plaques = () => {
   useEffect(() => {
@@ -23,7 +24,7 @@ const Plaques = () => {
   });
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader></Loader>;
   }
 
   // Ensure that the data is properly loaded and structured

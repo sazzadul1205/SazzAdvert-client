@@ -1,5 +1,4 @@
 import { useState } from "react";
-import icons from "../../../assets/Home/Blogs/icons.png";
 import blog1 from "../../../assets/Home/Blogs/blog1.jpg";
 import blog2 from "../../../assets/Home/Blogs/blog2.jpg";
 import blog3 from "../../../assets/Home/Blogs/blog3.jpg";
@@ -54,7 +53,7 @@ const AllBlogs = () => {
               className="card bg-[#faf4f4] w-96 shadow-xl transform transition-transform duration-300 hover:-translate-y-2"
             >
               <div className="flex px-12 pt-10">
-                <img src={icons} alt="" className="mr-4" />
+                <img src={'https://i.imgur.com/K7JSBpc.png'} alt="" className="mr-4" />
                 <div>
                   <p>Posted by</p>
                   <p className="font-bold">{blog.postedBy}</p>

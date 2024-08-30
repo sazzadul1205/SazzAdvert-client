@@ -1,6 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const HomeFirstBanner = () => {
   const axiosPublic = useAxiosPublic();
@@ -15,7 +16,7 @@ const HomeFirstBanner = () => {
   console.log(BannerHome);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader></Loader>;
   }
 
   // Check if BannerHome is an array or object

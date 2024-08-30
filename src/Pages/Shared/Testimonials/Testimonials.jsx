@@ -15,57 +15,8 @@ import { Navigation } from "swiper/modules";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-// JSON data within the same file
-const testimonialsData = [
-  {
-    id: 1,
-    category: "Theme Quality",
-    testimonial:
-      "“We have been partnering with Adli for our paid search advertising needs, and they have consistently exceeded our expectations.”",
-    name: "Alex Dew",
-    position: "CTO at HiBootstrap",
-    avatar:
-      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
-  },
-  {
-    id: 2,
-    category: "Customer Support",
-    testimonial:
-      "“The customer support provided by Adli is top-notch. They are always available to help us with any queries or issues.”",
-    name: "Jane Doe",
-    position: "CEO at Bolster",
-    avatar:
-      "https://img.daisyui.com/images/stock/photo-1502980426475-8d4e86a19d5a.webp",
-  },
-  {
-    id: 3,
-    category: "Performance",
-    testimonial:
-      "“Adli’s performance-driven strategies have significantly boosted our online presence and revenue.”",
-    name: "John Smith",
-    position: "Marketing Head at Shoponix",
-    avatar:
-      "https://img.daisyui.com/images/stock/photo-1418479631014-8cbf89db3431.webp",
-  },
-  {
-    id: 4,
-    category: "Reliability",
-    testimonial:
-      "“The team at Adli is reliable and always delivers on their promises. Our experience with them has been nothing but positive.”",
-    name: "Emily White",
-    position: "Founder at Flexio",
-    avatar:
-      "https://img.daisyui.com/images/stock/photo-1517841905240-472988babdf9.webp",
-  },
-  // Add more testimonials as needed
-];
-
-const titleData = {
-  title: "TESTIMONIALS",
-  page: "Testimonials",
-  description: "We help to achieve customers' business goals",
-};
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const Testimonials = () => {
   useEffect(() => {
@@ -75,13 +26,51 @@ const Testimonials = () => {
     });
   }, []);
 
+  // API fetch
+  const axiosPublic = useAxiosPublic();
+
+  const {
+    data: TestimonialsSlides,
+    isLoading: stepsLoading,
+    error: stepsError,
+  } = useQuery({
+    queryKey: ["TestimonialsSlides"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/TestimonialSlides`);
+      return res.data;
+    },
+  });
+
+  // API fetch for Title Data
+  const {
+    data: TestimonialsTitleData,
+    isLoading: titleDataLoading,
+    error: titleDataError,
+  } = useQuery({
+    queryKey: ["TestimonialsTitleData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/TitleDatas?page=Testimonials`);
+      return res.data;
+    },
+  });
+
+  if (stepsLoading || titleDataLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (stepsError || titleDataError) {
+    return <div>Error loading data</div>;
+  }
+
   return (
     <div className="bg-white pt-24 text-black pb-24">
       <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="flex">
           <div className="w-[700px] mr-10">
-            <p className="font-semibold">{titleData.title}</p>
-            <h1 className="font-bold text-4xl">{titleData.description}</h1>
+            <p className="font-semibold">{TestimonialsTitleData.title}</p>
+            <h1 className="font-bold text-4xl">
+              {TestimonialsTitleData.description}
+            </h1>
             {/* Sliders */}
             <div className="mt-10">
               <Swiper
@@ -89,9 +78,9 @@ const Testimonials = () => {
                 modules={[Navigation]}
                 className="max-w-[800px]"
               >
-                {testimonialsData.map((testimonial) => (
-                  <SwiperSlide key={testimonial.id} className="px-10">
-                    <p className="bg-[#faf4f4] p-2 w-40 text-lg font-semibold rounded-full text-center pt-3 h-[55px] mb-5">
+                {TestimonialsSlides.map((testimonial) => (
+                  <SwiperSlide key={testimonial.id} className="px-20">
+                    <p className="bg-[#faf4f4] p-2 w-52 text-lg font-semibold rounded-full text-center pt-3 h-[55px] mb-5">
                       {testimonial.category}
                     </p>
                     <p className="mb-10 text-lg font-semibold">

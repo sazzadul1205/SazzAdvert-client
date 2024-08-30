@@ -336,7 +336,17 @@ const Navbar = () => {
             )}
           </div>
           <Link to="/" className="text-3xl font-bold italic">
-            SazzAdvert
+            <p
+              className="text-center text-4xl font-bold py-5"
+              style={{
+                background:
+                  "linear-gradient(to right, #3512CF 0%, #CF0775 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              SazzAdvert
+            </p>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">

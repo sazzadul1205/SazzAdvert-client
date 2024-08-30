@@ -1,45 +1,9 @@
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import SuccessStories1 from "../../../assets/Home/Sucess/SuccessStories1.jpg";
-import SuccessStories2 from "../../../assets/Home/Sucess/SuccessStories2.jpg";
-import SuccessStories3 from "../../../assets/Home/Sucess/SuccessStories3.jpg";
-import icon from "../../../assets/Home/Sucess/SuccessStoriesForward.png";
-import title from "../../../assets/Home/Sucess/SuccessStoriesTitle.png";
 import { NavLink } from "react-router-dom";
-
-const successStoriesData = [
-  {
-    id: 1,
-    image: SuccessStories1,
-    icon: icon,
-    title: "HiBootstrap",
-    description: "Premium Themes",
-  },
-  {
-    id: 2,
-    image: SuccessStories2,
-    icon: icon,
-    title: "Bolster",
-    description: "eCommerce",
-  },
-  {
-    id: 3,
-    image: SuccessStories3,
-    icon: icon,
-    title: "Shoponix",
-    description: "eCommerce",
-  },
-];
-
-const TitleData = [
-  {
-    title: "SUCCESS STORIES",
-    page: "SuccessStories",
-    description: "Driving success through strategic paid search advertising!",
-    img: title,
-  },
-];
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const SuccessStories = () => {
   useEffect(() => {
@@ -49,13 +13,55 @@ const SuccessStories = () => {
     });
   }, []);
 
+  // API fetch for Success Stories
+  const axiosPublic = useAxiosPublic();
+  const {
+    data: fetchedSuccessStories,
+    isLoading: storiesLoading,
+    error: storiesError,
+  } = useQuery({
+    queryKey: ["successStoriesData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/SuccessStories`);
+      return res.data;
+    },
+  });
+
+  // API fetch for Title Data
+  const {
+    data: fetchedTitleData,
+    isLoading: titleDataLoading,
+    error: titleDataError,
+  } = useQuery({
+    queryKey: ["SuccessStoriesTitleData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/TitleDatas?page=SuccessStories`);
+      return res.data;
+    },
+  });
+
+  // Handle loading and error states
+  if (storiesLoading || titleDataLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (storiesError || titleDataError) {
+    return <div>Error loading data.</div>;
+  }
+
+  // Ensure that fetchedTitleData is not empty
+  const titleData =
+    fetchedTitleData && fetchedTitleData.length > 0
+      ? fetchedTitleData[0]
+      : null;
+
   return (
     <div className="bg-gradient-to-b from-[#FFE6E6] to-white py-12">
       <div className="flex max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="flex flex-col space-y-6">
           {/* First Row */}
           <div className="flex space-x-6">
-            {successStoriesData.slice(0, 2).map((story) => (
+            {fetchedSuccessStories.slice(0, 2).map((story) => (
               <div key={story.id} className="relative">
                 <img
                   src={story.image}
@@ -68,7 +74,7 @@ const SuccessStories = () => {
                     <p className="text-gray-300 pb-2">{story.description}</p>
                   </div>
                   <img
-                    src={icon}
+                    src={story.icon}
                     alt="icon"
                     className="bg-slate-900 p-2 rounded-full hover:bg-white"
                   />
@@ -79,7 +85,7 @@ const SuccessStories = () => {
 
           {/* Second Row */}
           <div className="relative">
-            {successStoriesData.slice(2).map((story) => (
+            {fetchedSuccessStories.slice(2).map((story) => (
               <div key={story.id}>
                 <img
                   src={story.image}
@@ -92,7 +98,7 @@ const SuccessStories = () => {
                     <p className="text-gray-300">{story.description}</p>
                   </div>
                   <img
-                    src={icon}
+                    src={story.icon}
                     alt="icon"
                     className="bg-slate-900 p-2 rounded-full hover:bg-white"
                   />
@@ -104,12 +110,10 @@ const SuccessStories = () => {
 
         {/* Right Section */}
         <div className="w-[530px] ml-24 text-black mt-16">
-          <img src={TitleData[0].img} alt="Title" className="mb-16" />
-          <p className="font-semibold">{TitleData[0].title}</p>
-          <h1 className="font-bold text-4xl pb-16">
-            {TitleData[0].description}
-          </h1>
-          <NavLink to={`/${TitleData[0].page}`}>
+          <img src={titleData.img} alt="Title" className="mb-16" />
+          <p className="font-semibold">{titleData.title}</p>
+          <h1 className="font-bold text-4xl pb-16">{titleData.description}</h1>
+          <NavLink to={`/${titleData.page}`}>
             <button className="font-medium hover:text-red-500">
               VIEW MORE <span className="text-red-500">{">"}</span>
             </button>

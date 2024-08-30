@@ -1,28 +1,210 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import AdminHomeBanner from "./AdminHomeBanner/AdminHomeBanner";
+
+// Function to generate a random color
+const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
 
 const AdminHome = () => {
   return (
     <div className="bg-white py-4 text-black min-h-screen px-5">
-      <h1 className="text-center font-bold">Home Page</h1>
+      <h1 className="text-center font-bold text-2xl border-b pb-2">
+        Home Page
+      </h1>
       <Tabs>
-        <TabList >
-          <Tab>Banner</Tab>
-          <Tab>Awards</Tab>
-          <Tab>What We Do</Tab>
-          <Tab>Project Area</Tab>
-          <Tab>Capabilities</Tab>
-          <Tab>Our Process</Tab>
-          <Tab>Award</Tab>
-          <Tab>Success Stories</Tab>
-          <Tab>Brands</Tab>
-          <Tab>Testimonials</Tab>
-          <Tab>Audit</Tab>
-          <Tab>Blogs</Tab>
+        <TabList>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              borderBottom: "1px solid #ccc",
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400, // Slightly bigger text
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px' // Add padding for better appearance
+            }}
+          >
+            Banner
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400,
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px'
+            }}
+          >
+            Awards
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400,
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px'
+            }}
+          >
+            What We Do
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400,
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px'
+            }}
+          >
+            Project Area
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400,
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px'
+            }}
+          >
+            Capabilities
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400,
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px'
+            }}
+          >
+            Our Process
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400,
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px'
+            }}
+          >
+            Award
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400,
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px'
+            }}
+          >
+            Success Stories
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400,
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px'
+            }}
+          >
+            Brands
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400,
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px'
+            }}
+          >
+            Testimonials
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400,
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px'
+            }}
+          >
+            Audit
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400,
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: '2px',
+              marginTop: '2px'
+            }}
+          >
+            Blogs
+          </Tab>
         </TabList>
 
-        <TabPanel className={'pt-5'}>
-          <h2 className="text-center font-bold text-xl"> Banner</h2>
+        <TabPanel className="pt-2">
+          <AdminHomeBanner />
         </TabPanel>
         <TabPanel>
           <h2>Any content 2</h2>
