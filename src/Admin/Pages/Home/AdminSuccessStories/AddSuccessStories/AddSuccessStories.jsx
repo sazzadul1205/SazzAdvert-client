@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../../../Hooks/useAxiosPublic";
 
-const AddCapabilities = ({ onClose, onSuccess }) => {
+const AddSuccessStories = ({ onClose, onSuccess }) => {
   const axiosPublic = useAxiosPublic();
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      const response = await axiosPublic.post(`/Capabilities`, data);
+      const response = await axiosPublic.post(`/SuccessStories`, data);
 
       if (response.data.insertedId) {
         Swal.fire(
@@ -30,6 +30,7 @@ const AddCapabilities = ({ onClose, onSuccess }) => {
       );
     }
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="py-4">
@@ -53,7 +54,7 @@ const AddCapabilities = ({ onClose, onSuccess }) => {
           <input
             type="url"
             className="input input-bordered bg-white"
-            {...register("imageUrl", { required: true })}
+            {...register("image", { required: true })}
           />
         </div>
       </div>
@@ -76,9 +77,9 @@ const AddCapabilities = ({ onClose, onSuccess }) => {
   );
 };
 
-export default AddCapabilities;
+export default AddSuccessStories;
 
-AddCapabilities.propTypes = {
+AddSuccessStories.propTypes = {
   onSuccess: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };
