@@ -4,6 +4,7 @@ import "aos/dist/aos.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { NavLink } from "react-router-dom";
+import Loader from "../../../Components/Loader";
 
 const WhatWeDo = () => {
   useEffect(() => {
@@ -33,7 +34,7 @@ const WhatWeDo = () => {
   });
 
   if (whatWeDoLoading || titleDataLoading) {
-    return <p>Loading...</p>;
+    return <Loader></Loader>;
   }
 
   if (whatWeDoError || titleDataError) {
@@ -62,7 +63,7 @@ const WhatWeDo = () => {
         {/* Right Section */}
         <div className="w-full lg:w-[60%]">
           <p className="text-gray-700 leading-relaxed">
-            {titleData?.content || "Transforming your brand's online presence and generating meaningful results is our top priority at Adli. As a leading paid search ad agency, we bring together a unique blend of creativity and data-driven insights to elevate your campaigns."}
+            {titleData.content || "Transforming your brand's online presence and generating meaningful results is our top priority at Adli. As a leading paid search ad agency, we bring together a unique blend of creativity and data-driven insights to elevate your campaigns."}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">

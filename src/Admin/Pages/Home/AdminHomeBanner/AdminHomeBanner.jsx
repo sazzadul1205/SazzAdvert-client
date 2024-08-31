@@ -94,7 +94,7 @@ const AdminHomeBanner = () => {
 
   return (
     <div>
-      <div className="flex justify-between pb-8 border-b border-red-500">
+      <div className="flex justify-between pb-5 border-b border-red-500">
         <p className="font-bold text-2xl">Banner</p>
         <button
           className="px-5 py-2 flex items-center bg-yellow-500 hover:bg-yellow-400 rounded-xl text-white hover:text-black text-lg"

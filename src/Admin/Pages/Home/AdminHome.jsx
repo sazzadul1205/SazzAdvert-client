@@ -1,6 +1,8 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import AdminHomeBanner from "./AdminHomeBanner/AdminHomeBanner";
+import AdminPlaque from "./AdminPlaque/AdminPlaque";
+import AdminWhatWeDo from "./AdminWhatWeDo/AdminWhatWeDo";
 
 // Function to generate a random color
 const getRandomColor = () => {
@@ -46,10 +48,11 @@ const AdminHome = () => {
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
               marginLeft: '2px',
-              marginTop: '2px'
+              marginTop: '2px',
+            
             }}
           >
-            Awards
+            Plaque
           </Tab>
           <Tab
             style={{
@@ -207,8 +210,12 @@ const AdminHome = () => {
           <AdminHomeBanner />
         </TabPanel>
         <TabPanel>
-          <h2>Any content 2</h2>
+          <AdminPlaque></AdminPlaque>
         </TabPanel>
+        <TabPanel>
+          <AdminWhatWeDo></AdminWhatWeDo>
+        </TabPanel>
+
       </Tabs>
     </div>
   );
