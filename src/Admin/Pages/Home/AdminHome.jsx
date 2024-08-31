@@ -8,6 +8,7 @@ import AdminCapabilities from "./AdminCapabilities/AdminCapabilities";
 import AdminOurProcess from "./AdminOurProcess/AdminOurProcess";
 import AdminAwards from "./AdminAwards/AdminAwards";
 import AdminSuccessStories from "./AdminSuccessStories/AdminSuccessStories";
+import AdminBrands from "./AdminBrands/AdminBrands";
 
 // Function to generate a random color
 const getRandomColor = () => {
@@ -232,6 +233,9 @@ const AdminHome = () => {
         </TabPanel>
         <TabPanel>
           <AdminSuccessStories></AdminSuccessStories>
+        </TabPanel>
+        <TabPanel>
+          <AdminBrands></AdminBrands>
         </TabPanel>
       </Tabs>
     </div>
