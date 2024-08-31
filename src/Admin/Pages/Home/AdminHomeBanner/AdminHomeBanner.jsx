@@ -97,29 +97,25 @@ const AdminHomeBanner = () => {
       <div className="flex justify-between pb-5 border-b border-red-500">
         <p className="font-bold text-2xl">Banner</p>
         <button
-          className="px-5 py-2 flex items-center bg-yellow-500 hover:bg-yellow-400 rounded-xl text-white hover:text-black text-lg"
+          className="px-10 py-1 flex items-center bg-yellow-500 hover:bg-yellow-400 rounded-lg text-white hover:text-black text-lg"
           onClick={() => handleEditClick(BannerHome[0])}
         >
           <FaEdit className="mr-5" />
           <p>Edit</p>
         </button>
       </div>
-      <div className="bg-gradient-to-b from-[#FFE6E6] to-white">
+      <div className="bg-blue-100 rounded-xl mt-2">
         {BannerHome.map((banner) => (
           <div key={banner._id}>
             <div className="hero max-w-[1200px] mx-auto text-black">
-              <div className="hero-content text-center pt-10">
+              <div className="hero-content text-center ">
                 <div>
-                  <h1 className="text-[70px] font-bold w-[700px] mx-auto">
+                  <h1 className="text-[40px] font-bold w-[700px] mx-auto">
                     {banner.title}
                   </h1>
-                  <p className="text-[20px] pb-5 w-[700px] mx-auto">
+                  <p className="text-lg pb-5 w-[700px] mx-auto">
                     {banner.description}
                   </p>
-
-                  <button className="btn text-white px-10 rounded-3xl border-none hover:bg-[#ef4335]">
-                    LETS TALK {">"}
-                  </button>
                 </div>
               </div>
             </div>
@@ -127,7 +123,7 @@ const AdminHomeBanner = () => {
               <img
                 src={banner.imageUrl}
                 alt="Banner"
-                className="w-full h-auto max-w-[1080px] mx-auto pb-10"
+                className="w-full h-auto max-w-[800px] mx-auto pb-10"
               />
             </div>
           </div>
@@ -136,16 +132,6 @@ const AdminHomeBanner = () => {
       {/* Update Modal */}
       <dialog id="Modal_AdminHome" className="modal">
         <div className="modal-box bg-white">
-          <div className="modal-action">
-            <form method="dialog">
-              <button
-                className="text-3xl font-bold mr-5 text-red-500"
-                onClick={onCloseModal}
-              >
-                x
-              </button>
-            </form>
-          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <h3 className="font-bold text-lg text-center">Edit Banner</h3>
             <div className="py-4">

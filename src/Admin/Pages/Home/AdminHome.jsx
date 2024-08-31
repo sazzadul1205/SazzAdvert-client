@@ -3,6 +3,10 @@ import "react-tabs/style/react-tabs.css";
 import AdminHomeBanner from "./AdminHomeBanner/AdminHomeBanner";
 import AdminPlaque from "./AdminPlaque/AdminPlaque";
 import AdminWhatWeDo from "./AdminWhatWeDo/AdminWhatWeDo";
+import AdminProjectArea from "./AdminProjectArea/AdminProjectArea";
+import AdminCapabilities from "./AdminCapabilities/AdminCapabilities";
+import AdminOurProcess from "./AdminOurProcess/AdminOurProcess";
+import AdminAwards from "./AdminAwards/AdminAwards";
 
 // Function to generate a random color
 const getRandomColor = () => {
@@ -32,8 +36,8 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px' // Add padding for better appearance
+              marginLeft: "2px",
+              marginTop: "2px", // Add padding for better appearance
             }}
           >
             Banner
@@ -47,9 +51,8 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px',
-            
+              marginLeft: "2px",
+              marginTop: "2px",
             }}
           >
             Plaque
@@ -63,8 +66,8 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px'
+              marginLeft: "2px",
+              marginTop: "2px",
             }}
           >
             What We Do
@@ -78,8 +81,8 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px'
+              marginLeft: "2px",
+              marginTop: "2px",
             }}
           >
             Project Area
@@ -93,8 +96,8 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px'
+              marginLeft: "2px",
+              marginTop: "2px",
             }}
           >
             Capabilities
@@ -108,8 +111,8 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px'
+              marginLeft: "2px",
+              marginTop: "2px",
             }}
           >
             Our Process
@@ -123,8 +126,8 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px'
+              marginLeft: "2px",
+              marginTop: "2px",
             }}
           >
             Award
@@ -138,8 +141,8 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px'
+              marginLeft: "2px",
+              marginTop: "2px",
             }}
           >
             Success Stories
@@ -153,8 +156,8 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px'
+              marginLeft: "2px",
+              marginTop: "2px",
             }}
           >
             Brands
@@ -168,8 +171,8 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px'
+              marginLeft: "2px",
+              marginTop: "2px",
             }}
           >
             Testimonials
@@ -183,8 +186,8 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px'
+              marginLeft: "2px",
+              marginTop: "2px",
             }}
           >
             Audit
@@ -198,16 +201,15 @@ const AdminHome = () => {
               padding: "10px 15px",
               borderTopLeftRadius: "0.5rem", // 8px
               borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: '2px',
-              marginTop: '2px'
+              marginLeft: "2px",
+              marginTop: "2px",
             }}
           >
             Blogs
           </Tab>
         </TabList>
-
         <TabPanel className="pt-2">
-          <AdminHomeBanner />
+          <AdminHomeBanner></AdminHomeBanner>
         </TabPanel>
         <TabPanel>
           <AdminPlaque></AdminPlaque>
@@ -215,7 +217,18 @@ const AdminHome = () => {
         <TabPanel>
           <AdminWhatWeDo></AdminWhatWeDo>
         </TabPanel>
-
+        <TabPanel>
+          <AdminProjectArea></AdminProjectArea>
+        </TabPanel>
+        <TabPanel>
+          <AdminCapabilities></AdminCapabilities>
+        </TabPanel>
+        <TabPanel>
+          <AdminOurProcess></AdminOurProcess>
+        </TabPanel>
+        <TabPanel>
+          <AdminAwards></AdminAwards>
+        </TabPanel>
       </Tabs>
     </div>
   );

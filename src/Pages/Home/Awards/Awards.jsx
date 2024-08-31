@@ -3,6 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const Awards = () => {
   useEffect(() => {
@@ -22,12 +23,12 @@ const Awards = () => {
   } = useQuery({
     queryKey: ["AwardsHome"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/AwardsComponent`);
-      return res.data[0]; // Assuming the first item contains the needed data
+      const res = await axiosPublic.get(`/AwardsComponent?Number=1`);
+      return res.data[0]; 
     },
   });
 
-  if (stepsLoading) return <div>Loading...</div>;
+  if (stepsLoading) return <Loader></Loader>;
   if (stepsError) return <div>Error: {stepsError.message}</div>;
 
   return (

@@ -68,7 +68,7 @@ const WhatWeDo = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             {/* Dynamically Render Content */}
-            {whatWeDo?.map((item) => (
+            {whatWeDo.slice(0, 4).map((item) => (
               <div key={item.id} className="items-start gap-4">
                 <div className="bg-gray-200 rounded-full w-16 h-16 flex justify-center items-center ">
                   <img src={item.imageUrl} alt={item.title} />

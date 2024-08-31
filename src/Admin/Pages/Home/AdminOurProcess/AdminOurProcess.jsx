@@ -5,27 +5,13 @@ import Loader from "../../../../Components/Loader";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useState } from "react";
-import UpdateWhatWeDoContent from "./UpdateWhatWeDoContent/UpdateWhatWeDoContent";
-import AddWhatWeDoContent from "./AddWhatWeDoContent/AddWhatWeDoContent";
+import UpdateOurProcessContent from "./UpdateOurProcessContent/UpdateOurProcessContent";
+import AddOurProcess from "./AddOurProcess/AddOurProcess";
 
-const AdminWhatWeDo = () => {
+const AdminOurProcess = () => {
   const axiosPublic = useAxiosPublic();
   const { register, handleSubmit, reset } = useForm();
   const [selectedTitle, setSelectedTitle] = useState(null);
-
-  // Fetching What We Do data
-  const {
-    data: whatWeDo,
-    isLoading: whatWeDoLoading,
-    error: whatWeDoError,
-    refetch: whatDoWeDoRefetch,
-  } = useQuery({
-    queryKey: ["whatWeDo"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/whatWeDo`);
-      return res.data;
-    },
-  });
 
   // Fetching Title Data
   const {
@@ -36,7 +22,21 @@ const AdminWhatWeDo = () => {
   } = useQuery({
     queryKey: ["titleData"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/TitleDatas?page=WhatWeDo`);
+      const res = await axiosPublic.get(`/TitleDatas?page=OurProcess`);
+      return res.data;
+    },
+  });
+
+  // Fetching Our Process Cards Data
+  const {
+    data: OurProcessCards,
+    isLoading: cardsLoading,
+    error: cardsError,
+    refetch: OurProcessRefetch,
+  } = useQuery({
+    queryKey: ["OurProcessCards"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/OurProcess`);
       return res.data;
     },
   });
@@ -46,7 +46,7 @@ const AdminWhatWeDo = () => {
     const updatedTitle = {
       title: data.title,
       description: data.description,
-      content: data.content,
+      img: data.img,
     };
 
     try {
@@ -73,16 +73,16 @@ const AdminWhatWeDo = () => {
   };
 
   // Loading state
-  if (whatWeDoLoading || titleDataLoading) {
+  if (titleDataLoading || cardsLoading) {
     return <Loader />;
   }
 
   // Error state
-  if (whatWeDoError || titleDataError) {
+  if (titleDataError || cardsError) {
     return <p>Error loading data.</p>;
   }
 
-  // Assuming titleData is an array, we need to extract the first item
+  // Extracting the first item of titleData array
   const title = titleData?.[0];
 
   // Handle edit button click
@@ -91,13 +91,13 @@ const AdminWhatWeDo = () => {
     reset({
       title: titleData.title,
       description: titleData.description,
-      content: titleData.content,
+      img: titleData.img,
     });
     document.getElementById("Modal_Title_Update").showModal();
   };
 
   const reloadContents = () => {
-    whatDoWeDoRefetch();
+    OurProcessRefetch();
   };
 
   const onCloseModal = () => {
@@ -115,8 +115,8 @@ const AdminWhatWeDo = () => {
       );
 
       if (result.isConfirmed) {
-        await axiosPublic.delete(`/whatWeDo/${itemId}`);
-        whatDoWeDoRefetch();
+        await axiosPublic.delete(`/OurProcess/${itemId}`);
+        OurProcessRefetch();
         showSuccessAlert(
           "Item Deleted!",
           "The item has been deleted successfully."
@@ -135,7 +135,7 @@ const AdminWhatWeDo = () => {
     <div>
       {/* Header Section */}
       <div className="flex justify-between pb-5 border-b border-red-500">
-        <p className="font-bold text-2xl">What We Do</p>
+        <p className="font-bold text-2xl">Our Process</p>
       </div>
 
       {/* Content Section */}
@@ -159,20 +159,14 @@ const AdminWhatWeDo = () => {
             <h1 className="text-4xl font-bold leading-tight mt-4">
               {title?.description}
             </h1>
-            <p className="text-gray-700 leading-relaxed mt-4">
-              {title?.content}
-            </p>
-            <span className="mt-6 inline-block text-black font-semibold hover:text-red-400 cursor-pointer">
-              KNOW MORE ABOUT US{" "}
-              <span className="text-red-500 text-xl">{">"}</span>
-            </span>
+            <img src={title?.img} alt="Title image" />
           </div>
         </div>
 
-        {/* Content Section */}
-        <div className="bg-green-50 rounded-xl p-2">
+        {/* Our Process Section */}
+        <div className="bg-gray-100 rounded-xl">
           <div className="border-b p-2 border-black flex justify-between">
-            <p className="text-lg font-bold"> What We Do Content</p>
+            <p className="text-lg font-bold">Our Process</p>
             <button
               type="button"
               className="text-white py-2 px-6 rounded-lg bg-green-500 hover:bg-green-400 hover:text-black"
@@ -183,75 +177,79 @@ const AdminWhatWeDo = () => {
               + Add New Content
             </button>
           </div>
-          <div className="w-[500px] gap-8 mt-8 mx-auto">
-            {/* Dynamically Render Content */}
-            {whatWeDo.map((item) => (
-              <div
-                key={item._id}
-                className="items-start gap-4 p-5 shadow-xl rounded-2xl "
-              >
-                <div className="bg-gray-200 rounded-full w-16 h-16 flex justify-center items-center ">
-                  <img src={item.imageUrl} alt={item.title} />
-                </div>
-                <div>
-                  <h2 className="py-2 font-bold text-xl pt-8">{item.title}</h2>
-                  <p className="text-gray-600">{item.description}</p>
-                </div>
-                {/* Buttons */}
-                <div className="flex pt-5 justify-between">
-                  <div>
-                    <button
-                      type="button"
-                      className="bg-yellow-500 text-white py-2 px-6 rounded-lg hover:bg-yellow-400"
-                      onClick={() =>
-                        document
-                          .getElementById(
-                            `WhatDoWeDo_Content_Modal_${item._id}`
-                          )
-                          .showModal()
-                      }
-                    >
-                      Edit
-                    </button>
-                    {/* update Content modal */}
-                    <dialog
-                      id={`WhatDoWeDo_Content_Modal_${item._id}`}
-                      className="modal"
-                    >
-                      <div className="modal-box bg-white">
-                        <div>
-                          <h3 className="font-bold text-lg text-center text-black">
-                            Update Content
-                          </h3>
-                        </div>
-                        <UpdateWhatWeDoContent
-                          key={item._id}
-                          whatWeDo={item} // Pass the entire whatWeDo object
-                          onSuccess={reloadContents}
-                          onClose={() =>
+          <table className="table w-full rounded-xl ">
+            {/* Table Header */}
+            <thead>
+              <tr className="text-black">
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {OurProcessCards.map((card) => (
+                <tr key={card._id} className="py-5 px-4">
+                  <td className="py-2 px-4 font-bold">{card.title}</td>
+                  <td className="py-5 px-4 text-base font-normal">
+                    {card.description}
+                  </td>
+                  <td className="py-2 px-4">
+                    {/* Buttons */}
+                    <div className="pt-5">
+                      <div>
+                        <button
+                          type="button"
+                          className="bg-yellow-500 text-white py-2 px-6 rounded-lg hover:bg-yellow-400 w-24 mb-2"
+                          onClick={() =>
                             document
                               .getElementById(
-                                `WhatDoWeDo_Content_Modal_${item._id}`
+                                `WhatDoWeDo_Content_Modal_${card._id}`
                               )
-                              .close()
+                              .showModal()
                           }
-                        />
+                        >
+                          Edit
+                        </button>
+                        {/* Update Content modal */}
+                        <dialog
+                          id={`WhatDoWeDo_Content_Modal_${card._id}`}
+                          className="modal"
+                        >
+                          <div className="modal-box bg-white">
+                            <div>
+                              <h3 className="font-bold text-lg text-center text-black">
+                                Update Content
+                              </h3>
+                            </div>
+                            <UpdateOurProcessContent
+                              key={card._id}
+                              OurProcess={card}
+                              onSuccess={reloadContents}
+                              onClose={() =>
+                                document
+                                  .getElementById(
+                                    `WhatDoWeDo_Content_Modal_${card._id}`
+                                  )
+                                  .close()
+                              }
+                            />
+                          </div>
+                        </dialog>
                       </div>
-                    </dialog>
-                  </div>
-                  <button
-                    type="button"
-                    className="text-white py-2 px-6 rounded-lg bg-red-500 hover:bg-red-400"
-                    onClick={() => handleDelete(item._id, item.title)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+                      <button
+                        type="button"
+                        className="text-white py-2 px-6 rounded-lg bg-red-500 hover:bg-red-400 w-24"
+                        onClick={() => handleDelete(card._id, card.title)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        
       </div>
 
       {/* Modals */}
@@ -259,7 +257,7 @@ const AdminWhatWeDo = () => {
       <dialog id="Modal_Title_Update" className="modal">
         <div className="modal-box bg-white">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h3 className="font-bold text-lg text-center">Edit Title </h3>
+            <h3 className="font-bold text-lg text-center">Edit Title</h3>
             <div className="py-4">
               <div className="form-control">
                 <label className="label">Title</label>
@@ -277,10 +275,11 @@ const AdminWhatWeDo = () => {
                 />
               </div>
               <div className="form-control">
-                <label className="label">Content</label>
-                <textarea
-                  className="textarea textarea-bordered bg-white"
-                  {...register("content", { required: true })}
+                <label className="label">Image</label>
+                <input
+                  type="url"
+                  className="input input-bordered bg-white"
+                  {...register("img", { required: true })}
                 />
               </div>
             </div>
@@ -296,7 +295,7 @@ const AdminWhatWeDo = () => {
                 className="bg-red-500 text-white py-4 px-10 rounded-xl hover:bg-red-400"
                 onClick={onCloseModal}
               >
-                Close
+                Cancel
               </button>
             </div>
           </form>
@@ -305,11 +304,11 @@ const AdminWhatWeDo = () => {
 
       {/* Add New Content Modal */}
       <dialog id="Add_New_Modal" className="modal">
-        <div className="modal-box bg-white">
+      <div className="modal-box bg-white">
           <div>
             <h3 className="font-bold text-lg text-center">Add New Content</h3>
           </div>
-          <AddWhatWeDoContent
+          <AddOurProcess
             onSuccess={reloadContents}
             onClose={() => document.getElementById("Add_New_Modal").close()}
           />
@@ -319,15 +318,14 @@ const AdminWhatWeDo = () => {
   );
 };
 
-export default AdminWhatWeDo;
-
+// Helper functions for showing alerts
 const showSuccessAlert = (title, text) => {
   Swal.fire({
     icon: "success",
     title,
     text,
-    showConfirmButton: false,
-    timer: 2000,
+    confirmButtonText: "OK",
+    confirmButtonColor: "#3085d6",
   });
 };
 
@@ -336,18 +334,21 @@ const showErrorAlert = (title, text) => {
     icon: "error",
     title,
     text,
-    showConfirmButton: true,
+    confirmButtonText: "OK",
+    confirmButtonColor: "#d33",
   });
 };
 
-const showConfirmationAlert = (title, text, confirmButtonText) => {
-  return Swal.fire({
-    title: title,
-    text: text,
+const showConfirmationAlert = async (title, text, confirmButtonText) => {
+  return await Swal.fire({
+    title,
+    text,
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: confirmButtonText || "Yes, proceed!",
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText,
   });
 };
+
+export default AdminOurProcess;

@@ -76,25 +76,6 @@ const AdminPlaque = () => {
     }
   };
 
-  const showSuccessAlert = (title, text) => {
-    Swal.fire({
-      title,
-      text,
-      icon: "success",
-      timer: 2000,
-      timerProgressBar: true,
-      showConfirmButton: false,
-    });
-  };
-
-  const showErrorAlert = (title, text) => {
-    Swal.fire({
-      icon: "error",
-      title,
-      text,
-    });
-  };
-
   const handleEditClick = (Plaque) => {
     setSelectedPlaque(Plaque);
     reset({
@@ -124,7 +105,7 @@ const AdminPlaque = () => {
       <div className="flex justify-between pb-5 border-b border-red-500">
         <p className="font-bold text-2xl">Plaque</p>
         <button
-          className="px-5 py-2 flex items-center bg-yellow-500 hover:bg-yellow-400 rounded-xl text-white hover:text-black text-lg"
+          className="px-10 py-1 flex items-center bg-yellow-500 hover:bg-yellow-400 rounded-lg text-white hover:text-black text-lg"
           onClick={() => handleEditClick(Plaque)}
         >
           <FaEdit className="mr-5" />
@@ -132,8 +113,8 @@ const AdminPlaque = () => {
         </button>
       </div>
 
-      <div className="bg-white py-20 text-black">
-        <div className="flex justify-between mx-auto max-w-[1200px] pb-20 border-b">
+      <div className="bg-white pt-5 text-black">
+        <div className="flex justify-between mx-auto max-w-[1200px]  bg-purple-100 py-10 px-5 rounded-xl">
           {/* Avatars */}
           <div className="flex items-center space-x-4">
             <div className="flex -space-x-4">
@@ -195,16 +176,6 @@ const AdminPlaque = () => {
       {/* Update Modal */}
       <dialog id="Modal_AdminHome" className="modal">
         <div className="modal-box bg-white">
-          <div className="modal-action">
-            <form method="dialog">
-              <button
-                className="text-3xl font-bold mr-5 text-red-500"
-                onClick={onCloseModal}
-              >
-                x
-              </button>
-            </form>
-          </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <h3 className="font-bold text-lg text-center">Edit Plaque</h3>
             <div className="py-4">
@@ -348,3 +319,22 @@ const AdminPlaque = () => {
 };
 
 export default AdminPlaque;
+
+const showSuccessAlert = (title, text) => {
+  Swal.fire({
+    title,
+    text,
+    icon: "success",
+    timer: 2000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+  });
+};
+
+const showErrorAlert = (title, text) => {
+  Swal.fire({
+    icon: "error",
+    title,
+    text,
+  });
+};

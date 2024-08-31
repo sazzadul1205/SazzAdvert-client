@@ -4,6 +4,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const OurProcess = () => {
   useEffect(() => {
@@ -43,7 +44,7 @@ const OurProcess = () => {
 
   // Handle loading and error states
   if (stepsLoading || titleDataLoading) {
-    return <div>Loading...</div>;
+    return <Loader></Loader>;
   }
 
   if (stepsError || titleDataError) {

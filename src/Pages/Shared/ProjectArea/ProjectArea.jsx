@@ -3,12 +3,13 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const ProjectArea = () => {
   useEffect(() => {
     AOS.init({
-      duration: 2000, // Adjust the animation duration (in ms)
-      once: false, // Whether the animation should happen only once
+      duration: 2000, 
+      once: false, 
     });
   }, []);
 
@@ -23,10 +24,10 @@ const ProjectArea = () => {
   });
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader></Loader>;
   }
 
-  const { leftSection, rightSectionImage } = projectAreaData[0]; // Assuming only one object in the array
+  const { leftSection, rightSectionImage } = projectAreaData[0];
 
   return (
     <div className="bg-gradient-to-b from-white to-[#FFE6E6] pt-12">

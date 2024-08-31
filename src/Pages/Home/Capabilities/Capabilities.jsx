@@ -5,6 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const Capabilities = () => {
   useEffect(() => {
@@ -43,7 +44,7 @@ const Capabilities = () => {
 
   // Loading and Error Handling
   if (cardsLoading || titleDataLoading) {
-    return <p>Loading...</p>;
+    return <Loader></Loader>;
   }
 
   if (cardsError || titleDataError) {
