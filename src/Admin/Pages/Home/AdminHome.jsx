@@ -10,6 +10,7 @@ import AdminAwards from "./AdminAwards/AdminAwards";
 import AdminSuccessStories from "./AdminSuccessStories/AdminSuccessStories";
 import AdminBrands from "./AdminBrands/AdminBrands";
 import AdminTestimonials from "./AdminTestimonials/AdminTestimonials";
+import AdminBlogs from "./AdminBlogs/AdminBlogs";
 
 // Function to generate a random color
 const getRandomColor = () => {
@@ -193,21 +194,6 @@ const AdminHome = () => {
               marginTop: "2px",
             }}
           >
-            Audit
-          </Tab>
-          <Tab
-            style={{
-              background: getRandomColor(),
-              color: "white",
-              fontSize: "1.1rem",
-              fontWeight: 400,
-              padding: "10px 15px",
-              borderTopLeftRadius: "0.5rem", // 8px
-              borderTopRightRadius: "0.5rem", // 8px
-              marginLeft: "2px",
-              marginTop: "2px",
-            }}
-          >
             Blogs
           </Tab>
         </TabList>
@@ -240,6 +226,9 @@ const AdminHome = () => {
         </TabPanel>
         <TabPanel>
           <AdminTestimonials></AdminTestimonials>
+        </TabPanel>
+        <TabPanel>
+          <AdminBlogs></AdminBlogs>
         </TabPanel>
       </Tabs>
     </div>
