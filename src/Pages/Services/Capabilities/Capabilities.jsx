@@ -1,67 +1,9 @@
-
-
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-const cardData = [
-  {
-    id: 1,
-    title: "Google Ads",
-    description:
-      "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: "https://i.ibb.co/7nyhbbv/Capabilites-Icon1.png",
-  },
-  {
-    id: 2,
-    title: "Microsoft Ads",
-    description:
-      "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: "https://i.ibb.co/Z6N3vRh/Capabilites-Icon2.png",
-  },
-  {
-    id: 3,
-    title: "Social Media Ads",
-    description:
-      "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: "https://i.ibb.co/cw79thd/Capabilites-Icon3.png",
-  },
-  {
-    id: 4,
-    title: "Shopping Campaign",
-    description:
-      "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: "https://i.ibb.co/BKnzvfd/Capabilites-Icon4.png",
-  },
-  {
-    id: 5,
-    title: "Marketing Automation",
-    description:
-      "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: "https://i.ibb.co/mcJTFfb/Capabilites-Icon5.png",
-  },
-  {
-    id: 6,
-    title: "Display Advertising",
-    description:
-      "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: "https://i.ibb.co/0cVgTq6/Capabilites-Icon6.png",
-  },
-  {
-    id: 7,
-    title: "Paid Social Media",
-    description:
-      "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: "https://i.ibb.co/jfQGq95/Capabilites-Icon7.png",
-  },
-  {
-    id: 8,
-    title: "Native Advertising",
-    description:
-      "Work closely with clients to understand their business goals, target audience, and budget. Develop a comprehensive...",
-    image: "https://i.ibb.co/3STcbR3/Capabilites-Icon8.png",
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const Capabilities = () => {
   useEffect(() => {
@@ -71,19 +13,53 @@ const Capabilities = () => {
     });
   }, []);
 
+  // API Fetch
+  const axiosPublic = useAxiosPublic();
+
+  const {
+    data: Capabilities,
+    isLoading: CapabilitiesLoading,
+    error: CapabilitiesError,
+  } = useQuery({
+    queryKey: ["Capabilities"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/Capabilities`);
+      return res.data;
+    },
+  });
+
+  const {
+    data: CapabilitiesTitle,
+    isLoading: CapabilitiesTitleLoading,
+    error: CapabilitiesTitleError,
+  } = useQuery({
+    queryKey: ["CapabilitiesTitle"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/TitleDatas?page=Capabilities`);
+      return res.data[0];
+    },
+  });
+
+  if (CapabilitiesLoading || CapabilitiesTitleLoading) {
+    return <Loader></Loader>;
+  }
+
+  if (CapabilitiesError || CapabilitiesTitleError) {
+    return <p>Error loading data.</p>;
+  }
+
   return (
     <div className="bg-gradient-to-b to-white from-[#FFE6E6] py-12 text-black">
       <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="w-[645px] mx-auto text-center pb-20">
-          <p className="font-semibold">CAPABILITIES</p>
+          <p className="font-semibold">{CapabilitiesTitle.title}</p>
           <h1 className="font-bold text-4xl">
-            Drive traffic, generate leads, achieve success with our paid search
-            services!
+            {CapabilitiesTitle.description}
           </h1>
         </div>
         {/* Cards */}
         <div className="grid grid-cols-4 gap-10">
-          {cardData.map((card) => (
+          {Capabilities.slice(0, 8).map((card) => (
             <div
               key={card.id}
               className="h-[390px] w-[300px] bg-white rounded-xl p-10 transform transition-transform duration-300 hover:-translate-y-2 sha"

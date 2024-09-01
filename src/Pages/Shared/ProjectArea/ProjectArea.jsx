@@ -8,26 +8,32 @@ import Loader from "../../../Components/Loader";
 const ProjectArea = () => {
   useEffect(() => {
     AOS.init({
-      duration: 2000, 
-      once: false, 
+      duration: 2000,
+      once: true, // Ensure animation runs only once
     });
   }, []);
 
   // API Fetch
   const axiosPublic = useAxiosPublic();
-  const { data: projectAreaData, isLoading } = useQuery({
+  const {
+    data: projectAreaData,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["ProjectAreaComponent"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/ProjectAreaComponent`);
-      return res.data;
+      return res.data[0]; 
     },
   });
 
   if (isLoading) {
-    return <Loader></Loader>;
+    return <Loader />;
   }
 
-  const { leftSection, rightSectionImage } = projectAreaData[0];
+  if (error) {
+    return <div>Error loading data. Please try again later.</div>;
+  }
 
   return (
     <div className="bg-gradient-to-b from-white to-[#FFE6E6] pt-12">
@@ -37,7 +43,7 @@ const ProjectArea = () => {
       >
         {/* Left Section */}
         <div className="p-10 flex flex-col justify-center space-y-10 lg:w-[35%]">
-          {leftSection.map((item, index) => (
+          {projectAreaData.leftSection?.map((item, index) => (
             <div key={index} className="flex items-center space-x-4">
               <img
                 src={item.imageUrl}
@@ -55,7 +61,7 @@ const ProjectArea = () => {
         {/* Right Section */}
         <div className="lg:w-[65%]">
           <img
-            src={rightSectionImage}
+            src={projectAreaData.rightSectionImage ?? ""}
             alt="Project Area"
             className="w-full h-full object-cover"
           />

@@ -1,4 +1,3 @@
-import Banner1 from "../../../assets/Careers/banner01.png";
 
 const Banner = () => {
   return (
@@ -21,7 +20,7 @@ const Banner = () => {
         </div>
         <div className="relative w-[522px] h-[365px]">
           <div className="absolute top-5 left-4 bg-red-500 rounded-xl w-full h-full z-0 "></div>
-          <img src={Banner1} className="relative w-full h-full rounded z-10" />
+          <img src={'https://i.imgur.com/F6DaZt7.png'} className="relative w-full h-full rounded z-10" />
         </div>
       </div>
     </div>

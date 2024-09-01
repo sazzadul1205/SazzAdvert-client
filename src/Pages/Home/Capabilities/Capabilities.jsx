@@ -1,5 +1,4 @@
 import { Link, NavLink } from "react-router-dom";
-import arrow from "../../../assets/Home/Capabilities/arrow.png";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -65,7 +64,11 @@ const Capabilities = () => {
                 {CapabilitiesTitleData[0]?.description}
               </h1>
             </div>
-            <img src={arrow} alt="Arrow" className="w-[246px] h-16 ml-2" />
+            <img
+              src={"https://i.imgur.com/5amFT95.png"}
+              alt={"https://i.imgur.com/5amFT95.png"}
+              className="w-[246px] h-16 ml-2"
+            />
           </div>
 
           {/* Right Section */}

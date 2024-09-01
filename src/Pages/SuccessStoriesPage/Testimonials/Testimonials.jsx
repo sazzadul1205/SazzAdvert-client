@@ -1,46 +1,72 @@
-import Test1 from "../../../assets/SuccessStories/Testimonials/Test1.png";
-import Test2 from "../../../assets/SuccessStories/Testimonials/Test2.png";
-import icon from "../../../assets/SuccessStories/Testimonials/icon.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-
-// Dummy data for testimonials
-const testimonialsData = [
-  {
-    id: 1,
-    image: Test1,
-    content:
-      "Their expertise and dedication have truly transformed our brand's online presence. From the initial consultation to the execution of our campaigns, they displayed an exceptional level of professionalism and creativity. They took the time to understand our brand's unique voice and target audience, resulting in campaigns that resonated deeply with our customers.",
-    name: "Anne Mari",
-    position: "CTO at HiBootstrap",
-  },
-  {
-    id: 2,
-    image: Test2,
-    content:
-      "Their expertise and dedication have truly transformed our brand's online presence. From the initial consultation to the execution of our campaigns, they displayed an exceptional level of professionalism and creativity. They took the time to understand our brand's unique voice and target audience, resulting in campaigns that resonated deeply with our customers.",
-    name: "Jasika Maya",
-    position: "CTO at HiBootstrap",
-  },
-];
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const Testimonials = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+      once: false,
+    });
+  }, []);
+
+  // API fetch
+  const axiosPublic = useAxiosPublic();
+
+  const {
+    data: BigTestimonials,
+    isLoading: BigTestimonialsLoading,
+    error: BigTestimonialsError,
+  } = useQuery({
+    queryKey: ["BigTestimonials"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/BigTestimonials`);
+      return res.data;
+    },
+  });
+
+  // API fetch for Title Data
+  const {
+    data: TestimonialsTitleData,
+    isLoading: titleDataLoading,
+    error: titleDataError,
+  } = useQuery({
+    queryKey: ["TestimonialsTitleData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/TitleDatas?page=Testimonials`);
+      return res.data[0];
+    },
+  });
+
+  if (BigTestimonialsLoading || titleDataLoading) {
+    return <Loader />;
+  }
+
+  if (BigTestimonialsError || titleDataError) {
+    return <div>Error loading data</div>;
+  }
+
   return (
     <div className="bg-white pt-24 pb-24 text-black">
       <div className="max-w-[1200px] mx-auto">
         <div className="text-center w-[600px] mx-auto">
-          <p className="font-semibold">TESTIMONIALS</p>
+          <p className="font-semibold">{TestimonialsTitleData.title}</p>
           <h1 className="font-bold text-4xl">
-            We help to achieve customers business goals
+            {TestimonialsTitleData.description}
           </h1>
         </div>
 
         <div className="mt-10">
           <Swiper navigation={true} modules={[Navigation]}>
-            {testimonialsData.map((testimonial) => (
-              <SwiperSlide key={testimonial.id} className="px-10">
+            {BigTestimonials.map((testimonial, index) => (
+              <SwiperSlide key={index} className="px-10">
                 <div className="flex items-center">
                   <div className="relative">
                     <img
@@ -49,8 +75,8 @@ const Testimonials = () => {
                       className="mr-12"
                     />
                     <img
-                      src={icon}
-                      alt="icon"
+                      src={"https://i.ibb.co/7zjPQ0m/Icon.png"}
+                      alt="Icon"
                       className="absolute top-5 right-14 p-2"
                     />
                   </div>

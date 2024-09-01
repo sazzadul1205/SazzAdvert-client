@@ -1,57 +1,72 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { CiLocationOn } from "react-icons/ci";
-import { FaBriefcase } from "react-icons/fa";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import { FaBriefcase, FaRegCalendarAlt } from "react-icons/fa";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import Loader from "../../../Components/Loader";
+import { useQuery } from "@tanstack/react-query";
 
 const GetInTouch = () => {
-  const jobListings = [
-    {
-      title: "Online Marketing Manager",
-      location: "Texas",
-      type: "Full-Time",
-      date: "July 29, 2024",
-    },
-    {
-      title: "Social Media Content Manager",
-      location: "New York",
-      type: "Contract",
-      date: "August 5, 2024",
-    },
-    {
-      title: "Software Engineer, Identity Platform (React/Java)",
-      location: "California",
-      type: "Remote",
-      date: "September 10, 2024",
-    },
-    {
-      title: "WordPress Developer",
-      location: "California",
-      type: "Remote",
-      date: "September 10, 2024",
-    },
-    {
-      title: "SEO / Internet Marketer",
-      location: "California",
-      type: "Remote",
-      date: "September 10, 2024",
-    },
-  ];
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+      once: false,
+    });
+  }, []);
+
+  const axiosPublic = useAxiosPublic();
+
+  // Fetch title data
+  const {
+    data: titleData,
+      isLoading: titleLoading,
+      error: titleError,
+    } = useQuery({
+      queryKey: ["titleData"],
+      queryFn: async () => {
+        const res = await axiosPublic.get(`/TitleDatas?page=GetInTouch`);
+        return res.data[0]; 
+      },
+    });
+
+    // Fetch job listings
+    const {
+      data: jobListings,
+      isLoading: jobLoading,
+      error: jobError,
+    } = useQuery({
+      queryKey: ["GetInTouch"],
+      queryFn: async () => {
+        const res = await axiosPublic.get(`/GetInTouch`);
+        return res.data; 
+      },
+    });
+
+    if (titleLoading || jobLoading) {
+      return <Loader />;
+    }
+
+    if (titleError || jobError) {
+      return <div>Error loading data.</div>; 
+    }
 
   return (
-    <div className="  bg-gradient-to-b from-[#FFE6E6] to-white">
-      <div className="max-w-[1200px] mx-auto">
+    <div className="bg-gradient-to-b from-[#FFE6E6] to-white">
+      <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="text-center justify-center mx-auto text-black pb-10">
-          <p className="text-[17px] font-semibold">GET IN TOUCH</p>
+          <p className="text-[17px] font-semibold">{titleData?.title}</p>
           <h1 className="text-[36px] w-full max-w-[648px] font-semibold mx-auto">
-            Your Gateway to Excellence: Contact Us and Unlock a World of
-            Possibilities
+            {titleData?.description}
           </h1>
         </div>
 
-        {/* Grids */}
-        <div className="pb-20 space-y-5">
-          {jobListings.map((job, index) => (
+        {/* Get In Touch */}
+        <div className="pb-20 space-y-5" data-aos="fade-up">
+          {jobListings?.map((job, index) => (
             <div
               key={index}
+              data-aos="fade-up"
               className="bg-white text-black flex justify-between items-center px-10 py-10 rounded-xl shadow-md"
             >
               <div>

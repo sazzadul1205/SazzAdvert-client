@@ -36,7 +36,7 @@ const SuccessStories = () => {
     queryKey: ["SuccessStoriesTitleData"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/TitleDatas?page=SuccessStories`);
-      return res.data;
+      return res.data[0];
     },
   });
 
@@ -49,11 +49,6 @@ const SuccessStories = () => {
     return <div>Error loading data.</div>;
   }
 
-  // Ensure that fetchedTitleData is not empty
-  const titleData =
-    fetchedTitleData && fetchedTitleData.length > 0
-      ? fetchedTitleData[0]
-      : null;
 
   return (
     <div className="bg-gradient-to-b from-[#FFE6E6] to-white py-12">
@@ -110,10 +105,10 @@ const SuccessStories = () => {
 
         {/* Right Section */}
         <div className="w-[530px] ml-24 text-black mt-16">
-          <img src={titleData.img} alt="Title" className="mb-16" />
-          <p className="font-semibold">{titleData.title}</p>
-          <h1 className="font-bold text-4xl pb-16">{titleData.description}</h1>
-          <NavLink to={`/${titleData.page}`}>
+          <img src={fetchedTitleData.img} alt="Title" className="mb-16" />
+          <p className="font-semibold">{fetchedTitleData.title}</p>
+          <h1 className="font-bold text-4xl pb-16">{fetchedTitleData.description}</h1>
+          <NavLink to={`/Careers`}>
             <button className="font-medium hover:text-red-500">
               VIEW MORE <span className="text-red-500">{">"}</span>
             </button>

@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import Loader from "../../../../Components/Loader";
 
-const AdminHomeBanner = () => {
+const AdminFirstBanner = () => {
   const axiosPublic = useAxiosPublic();
   const { register, handleSubmit, reset } = useForm();
 
@@ -91,7 +91,6 @@ const AdminHomeBanner = () => {
     document.getElementById("Modal_AdminHome").close();
     setSelectedBanner(null);
   };
-
   return (
     <div>
       {/* Header Section */}
@@ -105,7 +104,7 @@ const AdminHomeBanner = () => {
           <p>Edit</p>
         </button>
       </div>
-      
+
       {/* Content Section */}
       <div className="bg-blue-100 rounded-xl mt-2">
         {BannerHome.map((banner) => (
@@ -184,4 +183,4 @@ const AdminHomeBanner = () => {
   );
 };
 
-export default AdminHomeBanner;
+export default AdminFirstBanner;

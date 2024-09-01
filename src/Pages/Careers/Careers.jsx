@@ -4,6 +4,7 @@ import CareerSecondBanner from "../Careers/CareerSecondBanner/CareerSecondBanner
 import FAQ from '../Careers/FAQ/FAQ'
 
 const Careers = () => {
+
   return (
     <div>
       <CareerFirstBanner></CareerFirstBanner>

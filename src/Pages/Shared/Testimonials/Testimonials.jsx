@@ -1,6 +1,7 @@
-import Test3 from "../../../assets/Home/Testimonials/Test3.png";
-import Test2 from "../../../assets/Home/Testimonials/Test2.png";
-import Test1 from "../../../assets/Home/Testimonials/Test1.png";
+
+import Test1 from '../../../assets/Home/Testimonials/TestimonialContent1.png'
+import Test2 from '../../../assets/Home/Testimonials/TestimonialContent2.png'
+import Test3 from '../../../assets/Home/Testimonials/TestimonialContent3.png'
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,6 +18,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const Testimonials = () => {
   useEffect(() => {
@@ -50,12 +52,12 @@ const Testimonials = () => {
     queryKey: ["TestimonialsTitleData"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/TitleDatas?page=Testimonials`);
-      return res.data;
+      return res.data[0];
     },
   });
 
   if (stepsLoading || titleDataLoading) {
-    return <div>Loading...</div>;
+    return <Loader></Loader>;
   }
 
   if (stepsError || titleDataError) {
@@ -107,7 +109,7 @@ const Testimonials = () => {
             </div>
           </div>
           {/* Reviews */}
-          <div className="bg-[#faf4f4] flex-1 rounded-xl">
+          <div className="bg-[#faf4f4] w-[500px] rounded-xl">
             <div className="py-28 px-20">
               <div className="flex gap-14 pb-12 border-b">
                 <div>

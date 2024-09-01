@@ -20,6 +20,7 @@ import TermsConditions from "../Pages/TermsConditions/TermsConditions";
 import Login from "../Pages/Login/Login";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AdminHome from "../Admin/Pages/Home/AdminHome";
+import AdminCareers from "../Admin/Pages/Careers/AdminCareers";
 
 export const router = createBrowserRouter([
   {
@@ -107,6 +108,10 @@ export const router = createBrowserRouter([
       {
         path: "AdminHome",
         element: <AdminHome></AdminHome>,
+      },
+      {
+        path: "AdminCareers",
+        element: <AdminCareers></AdminCareers>,
       },
     ],
   },
