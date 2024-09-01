@@ -1,5 +1,5 @@
+import FAQ from "../Careers/FAQ/FAQ";
 import Banner from "./Banner/Banner";
-import FAQ from "./FAQ/FAQ";
 import GetInTouch from "./GetInTouch/GetInTouch";
 
 const Contact = () => {

@@ -1,59 +1,80 @@
-import { useState } from "react";
-import blog1 from "../../../assets/Home/Blogs/blog1.jpg";
-import blog2 from "../../../assets/Home/Blogs/blog2.jpg";
-import blog3 from "../../../assets/Home/Blogs/blog3.jpg";
-
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-// Simulating more data (total 20 entries)
-const blogData = Array(20)
-  .fill(null)
-  .map((_, index) => ({
-    id: index + 1,
-    postedBy: "Adli",
-    title: `Blog Title ${index + 1}`,
-    categories: ["Category1", "Category2"],
-    imageUrl: [blog1, blog2, blog3][index % 3],
-  }));
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const AllBlogs = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9;
-
-  // Calculate the total number of pages
-  const totalPages = Math.ceil(blogData.length / itemsPerPage);
-
-  // Slice the data to show only the current page items
-  const currentData = blogData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
   useEffect(() => {
     AOS.init({
-      duration: 2000, // Adjust the animation duration (in ms)
-      once: false, // Whether the animation should happen only once
+      duration: 2000, 
+      once: false, 
     });
   }, []);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const blogsPerPage = 9; 
+
+  // API fetch for Blogs Data
+  const axiosPublic = useAxiosPublic();
+  const {
+    data: blogsData = [],
+    isLoading: blogsLoading,
+    error: blogsError,
+  } = useQuery({
+    queryKey: ["Blogs", currentPage],
+    queryFn: async () => {
+      const res = await axiosPublic.get(
+        `/Blogs?page=${currentPage}&size=${blogsPerPage}`
+      );
+      return res.data;
+    },
+  });
+
+  const { data: totalBlogsCount = [], isLoading: isLoadingProductsCount } =
+    useQuery({
+      queryKey: ["BlogsCount"],
+      queryFn: async () => {
+        const res = await axiosPublic.get(`/BlogsCount`);
+        return res.data || 0;
+      },
+    });
+
+  // Calculate the number of pages and ensure it's at least 1
+  const numberOfPages = Math.ceil(totalBlogsCount.count / blogsPerPage);
+  const pages = Array.from(
+    { length: Math.max(0, numberOfPages) },
+    (_, index) => index
+  );
+  console.log(numberOfPages);
+
+  if (blogsLoading || isLoadingProductsCount) {
+    return <Loader></Loader>;
+  }
+
+  if (blogsError) {
+    return <div>Error loading data</div>;
+  }
+  console.log(blogsData);
+  console.log(totalBlogsCount);
+
   return (
-    <div className="bg-[#FFE6E6] py-20 text-black">
-      <div className="max-w-[1200px] mx-auto">
+    <div className="bg-[#FFE6E6] pt-10 text-black">
+      <div className="max-w-[1200px] mx-auto pb-5">
         {/* All Cards */}
         <div className="grid grid-cols-3 gap-5" data-aos="fade-up">
-          {currentData.map((blog) => (
+          {blogsData.map((blog) => (
             <div
               key={blog.id}
-              className="card bg-[#faf4f4] w-96 shadow-xl transform transition-transform duration-300 hover:-translate-y-2"
+              className="card bg-[#faf4f4] w-96 py-3 shadow-xl transform transition-transform duration-300 hover:-translate-y-4"
             >
               <div className="flex px-12 pt-10">
-                <img src={'https://i.imgur.com/K7JSBpc.png'} alt="" className="mr-4" />
+                <img
+                  src={"https://i.imgur.com/K7JSBpc.png"}
+                  alt={"https://i.imgur.com/K7JSBpc.png"}
+                  className="mr-4 w-8 h-8"
+                />
                 <div>
                   <p>Posted by</p>
                   <p className="font-bold">{blog.postedBy}</p>
@@ -74,7 +95,7 @@ const AllBlogs = () => {
                   {blog.categories.map((category, index) => (
                     <button
                       key={index}
-                      className="bg-[#FFEEEE] hover:bg-red-500 p-4 rounded-full"
+                      className="bg-[#FFEEEE] hover:bg-red-500 hover:text-white p-4 rounded-full"
                     >
                       {category}
                     </button>
@@ -84,22 +105,37 @@ const AllBlogs = () => {
             </div>
           ))}
         </div>
-
-        {/* Pagination Controls */}
-        <div className="flex justify-center mt-8">
-          {Array.from({ length: totalPages }, (_, index) => (
+        {/* Page changing */}
+        <div
+          className="join my-5 flex justify-end"
+        >
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            className="join-item btn bg-red-500 hover:bg-red-700 text-white border-none text-lg"
+            disabled={currentPage === 1}
+          >
+            «
+          </button>
+          {pages.map((page) => (
             <button
-              key={index + 1}
-              onClick={() => handlePageChange(index + 1)}
-              className={`mx-1 px-4 py-2 rounded-full ${
-                currentPage === index + 1
-                  ? "bg-red-500 text-white"
-                  : "bg-gray-300"
+              onClick={() => setCurrentPage(page + 1)}
+              key={page}
+              className={`join-item btn bg-blue-200 text-white border-none text-lg ${
+                currentPage === page + 1 && "bg-red-500 border border-black"
               }`}
             >
-              {index + 1}
+              {page + 1}
             </button>
           ))}
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, numberOfPages))
+            }
+            className="join-item btn bg-red-500 hover:bg-blue-700 text-white border-none text-lg"
+            disabled={currentPage === numberOfPages}
+          >
+            »
+          </button>
         </div>
       </div>
     </div>

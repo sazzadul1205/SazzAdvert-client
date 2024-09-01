@@ -4,6 +4,7 @@ import "aos/dist/aos.css";
 import { NavLink } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const SuccessStories = () => {
   useEffect(() => {
@@ -42,7 +43,7 @@ const SuccessStories = () => {
 
   // Handle loading and error states
   if (storiesLoading || titleDataLoading) {
-    return <div>Loading...</div>;
+    return <Loader></Loader>;
   }
 
   if (storiesError || titleDataError) {

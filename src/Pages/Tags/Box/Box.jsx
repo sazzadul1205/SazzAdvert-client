@@ -1,4 +1,3 @@
-import Banner1 from "../../../assets/BlogsPage/Banner1.jpg";
 import Logo from "../../../assets/BlogsPage/Logo.png";
 
 const Box = () => {
@@ -35,7 +34,7 @@ const Box = () => {
                 </p>
               </div>
               <div className="">
-                <img src={Banner1} className="rounded-xl w-[600px] h-[300px]" />
+                <img src={'https://i.imgur.com/a47YsMX.jpg'} className="rounded-xl w-[600px] h-[300px]" />
               </div>
             </div>
           </div>

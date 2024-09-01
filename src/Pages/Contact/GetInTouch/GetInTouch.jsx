@@ -1,68 +1,98 @@
-import icon1 from "../../../assets/Contacts/icon1.png";
-import icon2 from "../../../assets/Contacts/icon2.png";
-import icon3 from "../../../assets/Contacts/icon3.png";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const GetInTouch = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Adjust the animation duration (in ms)
+      once: false, // Whether the animation should happen only once
+    });
+  }, []);
+
+  // API fetch for Success Stories
+  const axiosPublic = useAxiosPublic();
+  const {
+    data: GetInTouchContact,
+    isLoading: GetInTouchContactLoading,
+    error: GetInTouchContactError,
+  } = useQuery({
+    queryKey: ["GetInTouchContact"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/GetInTouchContact`);
+      return res.data;
+    },
+  });
+
+  // API fetch for Title Data
+  const {
+    data: GetInTouchData,
+    isLoading: GetInTouchLoading,
+    error: GetInTouchError,
+  } = useQuery({
+    queryKey: ["GetInTouchTitleData"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/TitleDatas?page=GetInTouch`);
+      return res.data[0];
+    },
+  });
+
+  // Handle loading and error states
+  if (GetInTouchContactLoading || GetInTouchLoading) {
+    return <Loader></Loader>;
+  }
+
+  if (GetInTouchContactError || GetInTouchError) {
+    return <div>Error loading data.</div>;
+  }
+
   return (
-    <div className=" bg-gradient-to-b from-[#FFE6E6] to-white py-14 text-black">
-      <div className=" max-w-[1200px] mx-auto">
+    <div className="bg-gradient-to-b from-[#FFE6E6] to-white py-14 text-black">
+      <div className="max-w-[1200px] mx-auto">
+        {/* Titles */}
         <div className="w-[648px] text-center mx-auto pb-10">
-          <p>GET IN TOUCH</p>
-          <h1 className="font-bold text-3xl ">
-            Your Gateway to Excellence: Contact Us and Unlock a World of
-            Possibilities
-          </h1>
+          <p className="text-[17px] font-semibold">{GetInTouchData.title}</p>
+          <h1 className="font-bold text-3xl ">{GetInTouchData.description}</h1>
         </div>
+
+        {/* InTouch content */}
         <div className="flex bg-white border border-black rounded-xl">
+          
           {/* Left side */}
           <div className="bg-black px-20 py-16 rounded-2xl">
-            {/* Box-1 */}
-            <div className="border border-gray-700 text-white p-5 rounded-2xl mb-5">
-              <h1>Office Address</h1>
-              <div className="flex items-center">
-                <div className="bg-[#4c4c4c] rounded-full w-16 h-16 flex justify-center items-center ">
-                  <img src={icon2} />
-                </div>
-                <p className="ml-5 w-[270px] items-center">
-                  2750 Quadra Street Victoria Road, New York, USA
-                </p>
-              </div>
-            </div>
-            {/* Box-1 */}
-            <div className="border border-gray-700 text-white p-5 rounded-2xl mb-5">
-              <h1>Phone Number</h1>
-              <div className="flex items-center">
-                <div className="bg-[#4c4c4c] rounded-full w-16 h-16 flex justify-center items-center ">
-                  <img src={icon1} />
-                </div>
-                <div className="ml-5 w-[270px] items-center">
-                  <p> (+123) 456-7898 </p>
-                  <p> (+123) 456-7898 </p>
+            {GetInTouchContact.map((item, index) => (
+              <div
+                key={index}
+                className="border border-gray-700 text-white p-8 rounded-2xl mb-5"
+              >
+                <p className="text-[22px] mb-5 font-bold">{item.title}</p>
+                <div className="flex items-center">
+                  <div className="bg-[#4c4c4c] rounded-full w-16 h-16 flex justify-center items-center">
+                    <img src={item.icon} alt={item.title} />
+                  </div>
+                  <div className="ml-5 w-[270px] ">
+                    {item.details.map((detail, i) => (
+                      <p key={i} className="pt-2">
+                        {detail}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-            {/* Box-1 */}
-            <div className="border border-gray-700 text-white p-5 rounded-2xl">
-              <h1>Email Us</h1>
-              <div className="flex items-center">
-                <div className="bg-[#4c4c4c] rounded-full w-16 h-16 flex justify-center items-center ">
-                  <img src={icon3} />
-                </div>
-                <div className="ml-5 w-[270px] items-center">
-                  <p>support@adli.com</p>
-                  <p> info@adli.com </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
+
           {/* Right side */}
-          <div className="px-14 py-20">
+          <div className="px-14 py-16">
             <div className="pb-4">
               <label className="font-semibold"> Your Name</label>
               <input
                 type="text"
                 placeholder="Enter Your Name"
-                className="input input-bordered w-[500px] rounded-full  bg-[#f2f2f8] mt-2"
+                className="input input-bordered w-[500px] rounded-full bg-[#f2f2f8] mt-2"
               />
             </div>
             <div className="pb-4">
@@ -70,7 +100,7 @@ const GetInTouch = () => {
               <input
                 type="text"
                 placeholder="Enter your email address"
-                className="input input-bordered w-[500px] rounded-full  bg-[#f2f2f8] mt-2"
+                className="input input-bordered w-[500px] rounded-full bg-[#f2f2f8] mt-2"
               />
             </div>
             <div className="pb-4">
@@ -78,7 +108,7 @@ const GetInTouch = () => {
               <input
                 type="text"
                 placeholder="Enter your phone number"
-                className="input input-bordered w-[500px] rounded-full  bg-[#f2f2f8] mt-2"
+                className="input input-bordered w-[500px] rounded-full bg-[#f2f2f8] mt-2"
               />
             </div>
             <div className="pb-4">
@@ -86,17 +116,17 @@ const GetInTouch = () => {
               <input
                 type="text"
                 placeholder="Enter your subject"
-                className="input input-bordered w-[500px] rounded-full  bg-[#f2f2f8] mt-2"
+                className="input input-bordered w-[500px] rounded-full bg-[#f2f2f8] mt-2"
               />
             </div>
-            <label className="font-semibold "> Your Message</label>
+            <label className="font-semibold"> Your Message</label>
 
             <textarea
-              className="textarea textarea-bordered mt-4  bg-[#f2f2f8] w-[500px] h-[100px] rounded-XL"
+              className="textarea textarea-bordered mt-4 bg-[#f2f2f8] w-[500px] h-[100px] rounded-XL"
               placeholder="Bio"
             ></textarea>
 
-            <button className="btn text-white px-10 rounded-3xl hover:bg-[#ef4335] border-none mt-2">
+            <button className="btn text-white px-10 rounded-3xl hover:bg-[#ef4335] border-none mt-5">
               SUBMIT NOW {">"}
             </button>
           </div>
