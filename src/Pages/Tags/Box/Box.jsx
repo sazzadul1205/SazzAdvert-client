@@ -1,4 +1,3 @@
-import Logo from "../../../assets/BlogsPage/Logo.png";
 
 const Box = () => {
   return (
@@ -10,7 +9,11 @@ const Box = () => {
             <div className="flex justify-between py-16 px-10">
               <div>
                 <div className="flex  ">
-                  <img src={Logo} className="ml-5 w-8 h-8" />
+                  <img
+                    src={"https://i.imgur.com/K7JSBpc.png"}
+                    alt={"https://i.imgur.com/K7JSBpc.png"}
+                    className="ml-5 w-8 h-8"
+                  />
                   <div className="ml-5">
                     <p>Posted by</p>
                     <p className="font-bold">Adli</p>
@@ -34,7 +37,10 @@ const Box = () => {
                 </p>
               </div>
               <div className="">
-                <img src={'https://i.imgur.com/a47YsMX.jpg'} className="rounded-xl w-[600px] h-[300px]" />
+                <img
+                  src={"https://i.imgur.com/a47YsMX.jpg"}
+                  className="rounded-xl w-[600px] h-[300px]"
+                />
               </div>
             </div>
           </div>
