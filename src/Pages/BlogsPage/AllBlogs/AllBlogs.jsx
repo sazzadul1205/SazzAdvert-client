@@ -8,13 +8,13 @@ import Loader from "../../../Components/Loader";
 const AllBlogs = () => {
   useEffect(() => {
     AOS.init({
-      duration: 2000, 
-      once: false, 
+      duration: 2000,
+      once: false,
     });
   }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const blogsPerPage = 9; 
+  const blogsPerPage = 9;
 
   // API fetch for Blogs Data
   const axiosPublic = useAxiosPublic();
@@ -106,12 +106,10 @@ const AllBlogs = () => {
           ))}
         </div>
         {/* Page changing */}
-        <div
-          className="join my-5 flex justify-end"
-        >
+        <div className="join my-5 flex justify-center ">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            className="join-item btn bg-red-500 hover:bg-red-700 text-white border-none text-lg"
+            className="join-item btn bg-pink-500 hover:bg-pink-700 text-white border-none text-lg"
             disabled={currentPage === 1}
           >
             «
@@ -120,8 +118,8 @@ const AllBlogs = () => {
             <button
               onClick={() => setCurrentPage(page + 1)}
               key={page}
-              className={`join-item btn bg-blue-200 text-white border-none text-lg ${
-                currentPage === page + 1 && "bg-red-500 border border-black"
+              className={`join-item btn bg-pink-200-200 text-white border-none text-lg ${
+                currentPage === page + 1 && "bg-pink-500 border border-black"
               }`}
             >
               {page + 1}
@@ -131,7 +129,7 @@ const AllBlogs = () => {
             onClick={() =>
               setCurrentPage((prev) => Math.min(prev + 1, numberOfPages))
             }
-            className="join-item btn bg-red-500 hover:bg-blue-700 text-white border-none text-lg"
+            className="join-item btn bg-pink-500 hover:bg-pink-700 text-white border-none text-lg"
             disabled={currentPage === numberOfPages}
           >
             »
