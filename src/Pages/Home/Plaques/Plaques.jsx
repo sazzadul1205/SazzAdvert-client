@@ -31,9 +31,9 @@ const Plaques = () => {
   const Plaques = plaquesData && plaquesData[0];
 
   return (
-    <div className="bg-white py-20 text-black p">
+    <div className="bg-white pt-20 text-black p">
       <div
-        className="flex justify-between mx-auto max-w-[1200px] pb-20 border-b"
+        className="flex justify-between mx-auto max-w-[1200px] px-16 py-16 border-b rounded-2xl bg-[#FAF4F4]"
         data-aos="fade-up"
       >
         {/* Avatars */}

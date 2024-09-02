@@ -13,13 +13,6 @@ const Awards = () => {
     });
   }, []);
 
-  useEffect(() => {
-    AOS.init({
-      duration: 2000, // Adjust the animation duration (in ms)
-      once: false, // Whether the animation should happen only once
-    });
-  }, []);
-
   // API fetch
   const axiosPublic = useAxiosPublic();
 
@@ -40,7 +33,10 @@ const Awards = () => {
 
   return (
     <div className="bg-gradient-to-b from-[#FFE6E6] to-white py-12">
-      <div className="bg-[#EF4335] max-w-[1200px] mx-auto flex flex-col lg:flex-row h-[390px] rounded-lg overflow-hidden">
+      <div
+        className="bg-[#EF4335] max-w-[1200px] mx-auto flex flex-col lg:flex-row h-[390px] rounded-lg overflow-hidden"
+        data-aos="fade-up"
+      >
         <div className="grid grid-cols-4 p-10" data-aos="fade-up">
           <div className="bg-[#FFEEEE] mx-auto items-center w-[280px] text-black rounded-2xl">
             <img

@@ -1,11 +1,9 @@
-import AwardsImg from "../../../assets/ServiceDetails/Awards/AwardsImg.png";
-import icon1 from "../../../assets/ServiceDetails/Awards/icon1.png";
-import icon2 from "../../../assets/ServiceDetails/Awards/icon2.png";
-import icon3 from "../../../assets/ServiceDetails/Awards/icon3.png";
-
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
 const Awards = () => {
   useEffect(() => {
@@ -14,51 +12,52 @@ const Awards = () => {
       once: false, // Whether the animation should happen only once
     });
   }, []);
+
+  // API fetch
+  const axiosPublic = useAxiosPublic();
+
+  const {
+    data: AwardServiceDetails,
+    isLoading: stepsLoading,
+    error: stepsError,
+  } = useQuery({
+    queryKey: ["AwardsHome"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/AwardsComponent?Number=2`);
+      return res.data[0];
+    },
+  });
+
+  if (stepsLoading) return <Loader></Loader>;
+  if (stepsError) return <div>Error: {stepsError.message}</div>;
+
   return (
-    <div className=" bg-[#FFE6E6]  py-12">
+    <div className="bg-gradient-to-b from-white to-[#FFE6E6] py-12">
       <div className="bg-[#EF4335] max-w-[1200px] mx-auto flex flex-col lg:flex-row h-[390px] rounded-lg overflow-hidden">
-        <div className="grid grid-cols-4 p-10" data-aso="fade-uup">
+        <div className="grid grid-cols-4 p-10" data-aos="fade-up">
           <div className="bg-[#FFEEEE] mx-auto items-center w-[280px] text-black rounded-2xl">
             <img
-              src={AwardsImg}
-              alt=""
+              src={AwardServiceDetails.left.awardImg}
+              alt={AwardServiceDetails.left.awardAlt}
               className="w-[170px] h-[170px] mx-auto mt-10"
             />
-            <h1 className="text-lg text-center">Award Winning Agency</h1>
+            <h1 className="text-lg text-center">
+              {AwardServiceDetails.left.title}
+            </h1>
           </div>
-          <div className="ml-10 mt-10 text-[#FFEEEE] ">
-            <img
-              src={icon1}
-              alt="Years driving growth"
-              className="bg-[#FFEEEE] p-4 rounded-full"
-            />
-            <div>
-              <h1 className="font-bold text-4xl mb-2">350+</h1>
-              <p className=" text-lg ">Happy Clients</p>
+          {AwardServiceDetails.right.map((item, index) => (
+            <div key={index} className="ml-10 mt-10 text-[#FFEEEE]">
+              <img
+                src={item.icon}
+                alt={item.title}
+                className="bg-[#FFEEEE] p-4 rounded-full"
+              />
+              <div>
+                <h1 className="font-bold text-4xl mb-2">{item.value}</h1>
+                <p className="text-lg">{item.title}</p>
+              </div>
             </div>
-          </div>
-          <div className="ml-10 mt-10 text-[#FFEEEE]">
-            <img
-              src={icon2}
-              alt="Years driving growth"
-              className="bg-[#FFEEEE] p-4 rounded-full"
-            />
-            <div>
-              <h1 className="font-bold text-4xl mb-2">3.5 billion</h1>
-              <p className="text-lg">Social Impressions</p>
-            </div>
-          </div>
-          <div className="ml-10 mt-10 text-[#FFEEEE]">
-            <img
-              src={icon3}
-              alt="Years driving growth"
-              className="bg-[#FFEEEE] p-4 rounded-full"
-            />
-            <div>
-              <h1 className="font-bold text-4xl mb-2">5* Rated</h1>
-              <p className="text-lg">Across the Board</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

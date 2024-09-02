@@ -55,7 +55,7 @@ const Testimonials = () => {
 
   return (
     <div className="bg-white pt-24 pb-24 text-black">
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="text-center w-[600px] mx-auto">
           <p className="font-semibold">{TestimonialsTitleData.title}</p>
           <h1 className="font-bold text-4xl">

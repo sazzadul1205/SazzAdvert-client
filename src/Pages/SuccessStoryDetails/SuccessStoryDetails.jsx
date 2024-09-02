@@ -1,8 +1,9 @@
 import Plaques from "../Home/Plaques/Plaques";
+import Testimonials from "../SuccessStoriesPage/Testimonials/Testimonials";
 import Awards from "./Awards/Awards";
 import Banner from "./Banner/Banner";
 import HiBootstrap from "./HiBootstrap/HiBootstrap";
-import Testimonials from "./Testimonials/Testimonials";
+
 
 const SuccessStoryDetails = () => {
   return (
