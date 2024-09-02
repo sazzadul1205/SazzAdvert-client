@@ -1,129 +1,269 @@
-import img1 from "../../../assets/BlogDetails/img1.jpg";
-import block1 from "../../../assets/BlogDetails/block1.jpg";
-import block2 from "../../../assets/BlogDetails/block2.jpg";
-import block3 from "../../../assets/BlogDetails/block3.jpg";
+import { useState, useEffect } from "react";
+import {
+  FaFacebook,
+  FaLinkedin,
+  FaTwitter,
+  FaInstagram,
+  FaYoutube,
+  FaArrowLeft,
+  FaArrowRight,
+  FaTags,
+} from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Components/Loader";
 
-import { FaTags } from "react-icons/fa";
-
-import { FaFacebook } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
-
-import { FaArrowLeft } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
+// Mapping of icon names to actual components
+const iconMap = {
+  FaFacebook: FaFacebook,
+  FaLinkedin: FaLinkedin,
+  FaTwitter: FaTwitter,
+  FaInstagram: FaInstagram,
+  FaYoutube: FaYoutube,
+};
 
 const BlogContent = () => {
+  const [currentBlogNumber, setCurrentBlogNumber] = useState(1);
+  const axiosPublic = useAxiosPublic();
+  const { register, handleSubmit } = useForm();
+
+  // Scroll to top whenever currentBlogNumber changes
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // You can use 'auto' for instant scroll
+    });
+  }, [currentBlogNumber]);
+
+  // Comment Post
+  const onSubmit = async (data) => {
+    try {
+      const response = await axiosPublic.post(`/Comments`, data);
+
+      if (response.data.insertedId) {
+        Swal.fire(
+          "Comment Added!",
+          "The new Comment has been added.",
+          "success"
+        );
+      }
+    } catch (error) {
+      console.error("Error Posting Comment:", error);
+      Swal.fire(
+        "Error",
+        "An error occurred while Posting the comment.",
+        "error"
+      );
+    }
+  };
+
+  // Fetching Blog Details data
+  const {
+    data: BlogsDetailsData,
+    isLoading: BlogsDetailsLoading,
+    error: BlogsDetailsError,
+  } = useQuery({
+    queryKey: ["BlogsDetails"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/BlogsDetails`);
+      return res.data;
+    },
+  });
+
+  // Loading state
+  if (BlogsDetailsLoading) {
+    return <Loader />;
+  }
+
+  // Error state
+  if (BlogsDetailsError) {
+    return <p>Error loading data.</p>;
+  }
+
+  // Ensure BlogsDetailsData is defined and has items
+  const blogDetails = BlogsDetailsData || [];
+  const currentBlog = blogDetails.find(
+    (blog) => blog.BlogNumber === currentBlogNumber
+  );
+
+  const handleNext = () => {
+    setCurrentBlogNumber((prev) => {
+      if (prev < blogDetails.length) {
+        return prev + 1;
+      }
+      return prev;
+    });
+  };
+
+  const handlePrevious = () => {
+    setCurrentBlogNumber((prev) => {
+      if (prev > 1) {
+        return prev - 1;
+      }
+      return prev;
+    });
+  };
+
   return (
-    <div className="">
-      <img src={img1} alt="" className="rounded-2xl" />
-      <p className="mt-3 text-sm">January 21, 2024</p>
-      <h1 className="font-bold">
-        Demystifying Paid Search Ads: A Beginner's Guide
-      </h1>
-      <p className="leading-relaxed">
-        Welcome to the world of Paid Search Ads! If you're new to digital
-        advertising and wondering how to effectively harness the power of search
-        engines to drive targeted traffic and reach potential customers, you're
-        in the right place. In this beginner's guide, we'll take you on a
-        journey through the ins and outs of paid search ads, unraveling the
-        complexities and providing you with essential tips to kickstart your
-        successful advertising campaigns.
-      </p>
-      <p className="pt-3 leading-relaxed">
-        In this chapter, we'll the groundwork by explaining paid search ads are
-        and how they function. You'll gain insights into popular advertising
-        platforms like Google Ads and Bing Ads, and we'll explore the numerous
-        benefits these ads offer
-      </p>
-      <div className="flex gap-5 mt-5">
-        <img src={block1} alt="" className="w-1/3  rounded-xl" />
-        <div className="w-2/3 block ">
-          <img
-            src={block2}
-            alt=""
-            className="h-[200px] w-[500px] mb-5 rounded-xl"
-          />
-          <img src={block3} alt="" className="h-[200px] w-[500px] rounded-xl" />
+    <div className="text-black">
+      {/* Banner Image */}
+      <div>
+        <img
+          src={currentBlog?.bannerImage || "/default-banner.jpg"}
+          alt="Blog Banner"
+          className="rounded-2xl w-full"
+        />
+
+        {/* Date */}
+        <p className="mt-4 text-sm">
+          {currentBlog?.postedDate || "No Date Available"}
+        </p>
+
+        {/* Title */}
+        <p className="font-bold text-3xl py-5">
+          {currentBlog?.title || "No Title Available"}
+        </p>
+
+        {/* Content Blocks */}
+        <div className="pt-3 leading-relaxed">
+          <p className="pt-3 leading-relaxed">
+            {currentBlog?.content1 || "No Content Available"}
+          </p>
+          <p className="pt-3 leading-relaxed">{currentBlog?.content2 || ""}</p>
+        </div>
+
+        {/* Content Images */}
+        <div className="flex gap-5 mt-5">
+          {currentBlog?.contentImages?.[0] && (
+            <img
+              src={currentBlog.contentImages[0]}
+              alt="Content Image 1"
+              className="w-1/3 rounded-xl"
+            />
+          )}
+          <div className="w-2/3">
+            {currentBlog?.contentImages?.[1] && (
+              <img
+                src={currentBlog.contentImages[1]}
+                alt="Content Image 2"
+                className="h-[200px] w-[500px] mb-5 rounded-xl"
+              />
+            )}
+            {currentBlog?.contentImages?.[2] && (
+              <img
+                src={currentBlog.contentImages[2]}
+                alt="Content Image 3"
+                className="h-[200px] w-[500px] rounded-xl"
+              />
+            )}
+          </div>
+        </div>
+
+        {/* More Content Blocks */}
+        <div className="leading-relaxed">
+          <p className="mt-5 leading-relaxed">{currentBlog?.content3 || ""}</p>
+          <p className="mt-5 leading-relaxed">{currentBlog?.content4 || ""}</p>
+        </div>
+
+        {/* Bottom Part */}
+        <div className="flex justify-between mt-16 pb-10 border-b">
+          <div className="flex text-2xl">
+            <FaTags className="mt-1" />
+            <p className="font-semibold ml-2 text-lg">
+              {currentBlog?.tags || "No Tags"}
+            </p>
+          </div>
+
+          <div className="flex gap-2 text-3xl">
+            <p className="text-xl">Share</p>
+            {currentBlog?.socialMedia?.map((item, index) => {
+              const IconComponent = iconMap[item.icon];
+              return (
+                <NavLink to={item.link || "#"} key={index} className="ml-2">
+                  {IconComponent && <IconComponent />}
+                </NavLink>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Navigation Arrows */}
+        <div className="flex justify-between mt-5">
+          <button
+            className={`flex gap-2 font-semibold text-lg items-center hover:text-red-500 ${
+              currentBlogNumber === 1 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={handlePrevious}
+            disabled={currentBlogNumber === 1}
+          >
+            <FaArrowLeft />
+            <p>Previous Post</p>
+          </button>
+          <button
+            className={`flex gap-2 font-semibold text-lg items-center hover:text-red-500 ${
+              currentBlogNumber === blogDetails.length
+                ? "opacity-50 cursor-not-allowed"
+                : ""
+            }`}
+            onClick={handleNext}
+            disabled={currentBlogNumber === blogDetails.length}
+          >
+            <p>Next Post</p>
+            <FaArrowRight />
+          </button>
         </div>
       </div>
-      <p className="mt-3 leading-relaxed">
-        Unravel the components that make up a successful search ad in this
-        chapter. From captivating headlines to compelling descriptions and
-        strategically placed URLs, we'll delve into the art of crafting ad copy
-        that engages and resonates with your target audience. With a focus on
-        relevant keywords and match types, you'll learn how to optimize your ads
-        for maximum impact and relevancy.
-      </p>
-      <p className="mt-3 leading-relaxed">
-        Ready to create your first paid search ad campaign? This chapter will
-        guide you through the process step-by-step. You'll learn how to define
-        your advertising goals, structure campaigns and ad groups effectively,
-        and set appropriate budgets and bidding strategies. Armed with this
-        knowledge, you'll be ready to launch your campaign with confidence.
-      </p>
-      <div className="justify-between flex mt-16 pb-10 border-b">
-        <div className="flex text-2xl ">
-          <FaTags className="mt-1 item-center"></FaTags>
-          <p className="font-semibold ml-2 text-lg item-center">Paid Advert</p>
-        </div>
-        <div className="flex gap-2 text-3xl ml-10">
-          <p className="text-xl">Share</p>
-          <FaFacebook></FaFacebook>
-          <FaLinkedin></FaLinkedin>
-          <FaTwitter></FaTwitter>
-          <FaInstagram></FaInstagram>
-          <FaYoutube></FaYoutube>
-        </div>
-      </div>
-      <div className="justify-between flex mt-5">
-        <div className="flex gap-2 font-semibold">
-          <FaArrowLeft />
-          <p>Previews Post</p>
-        </div>
-        <div className="flex gap-2 font-semibold">
-          <p>Next Post</p>
-          <FaArrowRight />
-        </div>
-      </div>
-      <div className="bg-white border border-black mt-20 px-20 py-12">
+
+      {/* Comment Section */}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white border border-black mt-20 px-20 py-12 rounded-2xl"
+      >
         <h1 className="font-bold text-2xl">Post A Comment</h1>
         <textarea
-          className="textarea textarea-bordered bg-[#F2F2F8] w-full h-36 rounded-2xl border"
-          placeholder="Bio"
+          className="textarea textarea-bordered bg-[#F2F2F8] w-full h-36 rounded-2xl border mt-4"
+          placeholder="Comments"
+          {...register("Comment", { required: "Comment is required" })}
         ></textarea>
         <div className="flex gap-10 mt-5 text-black">
           <input
             type="text"
             placeholder="Your Name"
             className="input input-bordered w-full max-w-xs bg-[#F2F2F8] rounded-2xl"
+            {...register("Name", { required: "Name is required" })}
           />
           <input
             type="text"
             placeholder="Your Email"
             className="input input-bordered w-full max-w-xs bg-[#F2F2F8] rounded-2xl"
+            {...register("Email", { required: "Email is required" })}
           />
           <input
-            type="text"
+            type="url"
             placeholder="Website"
             className="input input-bordered w-full max-w-xs bg-[#F2F2F8] rounded-2xl"
+            {...register("Website", { required: "Website is required" })}
           />
         </div>
         <div className="form-control mt-5">
           <label className="flex items-center cursor-pointer">
             <input type="checkbox" className="checkbox mr-2" />
             <span className="mb-0">
-              {" "}
               Save my name, email, and website in this browser for the next time
-              I comment.{" "}
+              I comment.
             </span>
           </label>
         </div>
-        <button className="btn text-white px-10 rounded-3xl hover:bg-[#ef4335] border-none mt-5">
+        <button
+          type="submit"
+          className="btn text-white px-10 rounded-3xl hover:bg-[#ef4335] border-none mt-5"
+        >
           SUBMIT NOW {">"}
         </button>
-      </div>
+      </form>
     </div>
   );
 };
