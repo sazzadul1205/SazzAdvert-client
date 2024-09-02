@@ -12,13 +12,9 @@ const Banner = () => {
     },
   });
 
-  console.log(BannerOurExperts);
-
   if (isLoading) {
     return <Loader></Loader>;
   }
-
-  console.log(BannerOurExperts);
 
   return (
     <div className="bg-[#FFE6E6] py-14 text-black">

@@ -8,8 +8,8 @@ import Loader from "../../../Components/Loader";
 const OurTeamContent = () => {
   useEffect(() => {
     AOS.init({
-      duration: 2000, // Adjust the animation duration (in ms)
-      once: false, // Whether the animation should happen only once
+      duration: 2000,
+      once: false,
     });
   }, []);
 
@@ -59,7 +59,11 @@ const OurTeamContent = () => {
         </div>
         <div className="grid grid-cols-3 gap-28 pb-16 border-b border-gray-300">
           {OurTeam.map((member, index) => (
-            <div key={index} className="relative w-[500px] h-[350px] mb-20">
+            <div
+              key={index}
+              className="relative w-[500px] h-[350px] mb-20"
+              data-aos="fade-up"
+            >
               <div className="absolute top-10 left-16 bg-[#f5f4f4] rounded-xl w-[350px] h-[400px] z-0"></div>
               <div className="relative flex">
                 <img

@@ -8,8 +8,8 @@ import Loader from "../../../Components/Loader";
 const Awards = () => {
   useEffect(() => {
     AOS.init({
-      duration: 2000, // Adjust the animation duration (in ms)
-      once: false, // Whether the animation should happen only once
+      duration: 2000,  
+      once: false, 
     });
   }, []);
 
