@@ -11,13 +11,13 @@ const AdminFirstBanner = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const {
-    data: BannerHome = [],
+    data: BannerCareers1 = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["BannerHome"],
+    queryKey: ["BannerCareers1"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/Banners?page=Home`);
+      const res = await axiosPublic.get(`/Banners?page=Careers1`);
       return res.data;
     },
   });
@@ -31,6 +31,7 @@ const AdminFirstBanner = () => {
   const onSubmit = async (data) => {
     const updatedBanner = {
       title: data.title,
+      heading: data.heading,
       description: data.description,
       image: data.imageUrl,
     };
@@ -81,6 +82,7 @@ const AdminFirstBanner = () => {
     setSelectedBanner(banner);
     reset({
       title: banner.title,
+      heading: banner.heading,
       description: banner.description,
       imageUrl: banner.imageUrl,
     });
@@ -98,7 +100,7 @@ const AdminFirstBanner = () => {
         <p className="font-bold text-2xl">Banner</p>
         <button
           className="px-10 py-1 flex items-center bg-yellow-500 hover:bg-yellow-400 rounded-lg text-white hover:text-black text-lg"
-          onClick={() => handleEditClick(BannerHome[0])}
+          onClick={() => handleEditClick(BannerCareers1[0])}
         >
           <FaEdit className="mr-5" />
           <p>Edit</p>
@@ -107,14 +109,17 @@ const AdminFirstBanner = () => {
 
       {/* Content Section */}
       <div className="bg-blue-100 rounded-xl mt-2">
-        {BannerHome.map((banner) => (
+        {BannerCareers1.map((banner) => (
           <div key={banner._id}>
             <div className="hero max-w-[1200px] mx-auto text-black">
               <div className="hero-content text-center ">
                 <div>
-                  <h1 className="text-[40px] font-bold w-[700px] mx-auto">
+                  <h1 className="text-lg font-bold w-[700px] mx-auto">
                     {banner.title}
                   </h1>
+                  <p className="text-3xl font-bold pb-5  mx-auto">
+                    {banner.heading}
+                  </p>
                   <p className="text-lg pb-5 w-[700px] mx-auto">
                     {banner.description}
                   </p>
@@ -125,12 +130,13 @@ const AdminFirstBanner = () => {
               <img
                 src={banner.imageUrl}
                 alt="Banner"
-                className="w-full h-auto max-w-[800px] mx-auto pb-10"
+                className="w-1/2 h-auto max-w-[800px] mx-auto pb-10"
               />
             </div>
           </div>
         ))}
       </div>
+      
       {/* Update Modal */}
       <dialog id="Modal_AdminHome" className="modal">
         <div className="modal-box bg-white">
@@ -146,9 +152,16 @@ const AdminFirstBanner = () => {
                 />
               </div>
               <div className="form-control">
+                <label className="label">Heading</label>
+                <textarea
+                  className="textarea textarea-bordered bg-white h-20"
+                  {...register("heading", { required: true })}
+                />
+              </div>
+              <div className="form-control">
                 <label className="label">Description</label>
                 <textarea
-                  className="textarea textarea-bordered bg-white"
+                  className="textarea textarea-bordered bg-white h-32"
                   {...register("description", { required: true })}
                 />
               </div>
