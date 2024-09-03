@@ -22,6 +22,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import AdminHome from "../Admin/Pages/Home/AdminHome";
 import AdminCareers from "../Admin/Pages/Careers/AdminCareers";
 import AdminServices from "../Admin/Pages/Services/AdminServices";
+import AdminServicesDetails from "../Admin/Pages/ServicesDetails/AdminServicesDetails";
 
 export const router = createBrowserRouter([
   {
@@ -117,6 +118,10 @@ export const router = createBrowserRouter([
       {
         path: "AdminServices",
         element: <AdminServices></AdminServices>,
+      },
+      {
+        path: "AdminServicesDetails",
+        element: <AdminServicesDetails></AdminServicesDetails>,
       },
     ],
   },

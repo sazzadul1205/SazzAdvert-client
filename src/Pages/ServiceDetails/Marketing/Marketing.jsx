@@ -42,7 +42,16 @@ const Marketing = () => {
     },
   });
 
-  if (MarketChaptersLoading || MarketSidebarLoading) {
+  // Fetch banner data
+  const { data: BannerMarket, isLoading } = useQuery({
+    queryKey: ["BannerMarket"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/Banners?page=Market`);
+      return res.data[0]; // Assuming you only need the first object
+    },
+  });
+
+  if (MarketChaptersLoading || MarketSidebarLoading || isLoading) {
     return <Loader />;
   }
 
@@ -53,7 +62,13 @@ const Marketing = () => {
   return (
     <div className="bg-[#FFE6E6]">
       <div className="max-w-[1200px] mx-auto text-black">
-        <img src={'https://i.imgur.com/UxtvpEC.jpg'} alt="Marketing" />
+        {/* Render banner image if available */}
+        {BannerMarket && (
+          <img
+            src={BannerMarket.imageUrl.replace(/['"]/g, "")} // Remove single quotes from the URL
+            alt="Marketing Banner"
+          />
+        )}
         <div className="flex pt-10 justify-between">
           {/* Main Content */}
           <div className="w-[850px] mr-32">
