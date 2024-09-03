@@ -164,10 +164,6 @@ const AdminCapabilities = () => {
             <p className="text-gray-700 leading-relaxed mt-4">
               {title?.content}
             </p>
-            <span className="mt-6 inline-block text-black font-semibold hover:text-red-400 cursor-pointer">
-              KNOW MORE ABOUT US{" "}
-              <span className="text-red-500 text-xl">{">"}</span>
-            </span>
           </div>
         </div>
 
@@ -365,5 +361,3 @@ const showConfirmationAlert = (title, text, confirmButtonText) => {
     confirmButtonText: confirmButtonText || "Yes, proceed!",
   });
 };
-
-

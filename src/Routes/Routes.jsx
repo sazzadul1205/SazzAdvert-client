@@ -21,6 +21,7 @@ import Login from "../Pages/Login/Login";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AdminHome from "../Admin/Pages/Home/AdminHome";
 import AdminCareers from "../Admin/Pages/Careers/AdminCareers";
+import AdminServices from "../Admin/Pages/Services/AdminServices";
 
 export const router = createBrowserRouter([
   {
@@ -112,6 +113,10 @@ export const router = createBrowserRouter([
       {
         path: "AdminCareers",
         element: <AdminCareers></AdminCareers>,
+      },
+      {
+        path: "AdminServices",
+        element: <AdminServices></AdminServices>,
       },
     ],
   },
