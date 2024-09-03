@@ -2,11 +2,11 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import AdminBrands from "../Home/AdminBrands/AdminBrands";
 import AdminTestimonials from "../Home/AdminTestimonials/AdminTestimonials";
-import Banner from "./Banner/Banner";
-import AdminMarketing from "./AdminMarketing/AdminMarketing";
-import AdminAwards from "./AdminAwards/AdminAwards";
+import AdminFirstBanner from "./AdminFirstBanner/AdminFirstBanner";
+import AdminProjectArea from "../Home/AdminProjectArea/AdminProjectArea";
+import AdminCapabilities from "../Home/AdminCapabilities/AdminCapabilities";
 
-const AdminServicesDetails = () => {
+const AdminAboutUs = () => {
   // Function to generate a random color
   const getRandomColor = () => {
     const letters = "0123456789ABCDEF";
@@ -16,11 +16,11 @@ const AdminServicesDetails = () => {
     }
     return color;
   };
-  
+
   return (
     <div className="bg-white py-4 text-black min-h-screen px-5">
       <h1 className="text-center font-bold text-2xl border-b pb-2">
-        Service Details Page
+        About Us Page
       </h1>
       <Tabs>
         <TabList>
@@ -38,7 +38,7 @@ const AdminServicesDetails = () => {
               marginTop: "2px", // Add padding for better appearance
             }}
           >
-            Banner
+            First Banner
           </Tab>
           <Tab
             style={{
@@ -54,7 +54,7 @@ const AdminServicesDetails = () => {
               marginTop: "2px", // Add padding for better appearance
             }}
           >
-            Marketing
+            Project Area
           </Tab>
           <Tab
             style={{
@@ -70,7 +70,7 @@ const AdminServicesDetails = () => {
               marginTop: "2px", // Add padding for better appearance
             }}
           >
-            Award
+            Capabilities
           </Tab>
           <Tab
             style={{
@@ -106,13 +106,13 @@ const AdminServicesDetails = () => {
           </Tab>
         </TabList>
         <TabPanel className="pt-2">
-          <Banner></Banner>
+          <AdminFirstBanner></AdminFirstBanner>
         </TabPanel>
         <TabPanel className="pt-2">
-          <AdminMarketing></AdminMarketing>
+          <AdminProjectArea></AdminProjectArea>
         </TabPanel>
         <TabPanel className="pt-2">
-          <AdminAwards></AdminAwards>
+            <AdminCapabilities></AdminCapabilities>
         </TabPanel>
         <TabPanel className="pt-2">
           <AdminBrands></AdminBrands>
@@ -125,4 +125,4 @@ const AdminServicesDetails = () => {
   );
 };
 
-export default AdminServicesDetails;
+export default AdminAboutUs;

@@ -28,7 +28,7 @@ const FirstBanner = () => {
     <div className="bg-gradient-to-b from-[#FFE6E6] to-white">
       <div className="flex justify-between max-w-[1200px] mx-auto h-[720px] pt-10 items-center gap-5 ">
         {/* Left */}
-        <div className="text-black w-[535px]">
+        <div className="text-black w-[535px] mt-32">
           <p className="text-lg mb-4 font-semibold">
             {AboutUsBanner.left.subtitle}
           </p>
@@ -38,16 +38,16 @@ const FirstBanner = () => {
           <h1 className="text-[16px] mb-12">
             {AboutUsBanner.left.description}
           </h1>
-          <div className="flex">
+          <div className="flex justify-between">
             {AboutUsBanner.left.stats.map((stat, index) => (
-              <div key={index} className="items-center mr-10 text-black">
+              <div key={index} className="items-center text-black">
                 <img
                   src={stat.img}
                   alt={stat.text}
-                  className="bg-white p-4 rounded-full"
+                  className="bg-white  p-5 rounded-full w-20 h-20"
                 />
-                <div className="mt-4">
-                  <p className="text-4xl font-bold pb-4">{stat.value}</p>
+                <div>
+                  <p className="text-4xl font-bold py-4">{stat.value}</p>
                   <p className="text-lg">{stat.text}</p>
                 </div>
               </div>

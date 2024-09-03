@@ -23,6 +23,7 @@ import AdminHome from "../Admin/Pages/Home/AdminHome";
 import AdminCareers from "../Admin/Pages/Careers/AdminCareers";
 import AdminServices from "../Admin/Pages/Services/AdminServices";
 import AdminServicesDetails from "../Admin/Pages/ServicesDetails/AdminServicesDetails";
+import AdminAboutUs from "../Admin/Pages/AboutUs/AdminAboutUs";
 
 export const router = createBrowserRouter([
   {
@@ -122,6 +123,10 @@ export const router = createBrowserRouter([
       {
         path: "AdminServicesDetails",
         element: <AdminServicesDetails></AdminServicesDetails>,
+      },
+      {
+        path: "AdminAboutUs",
+        element: <AdminAboutUs></AdminAboutUs>
       },
     ],
   },
