@@ -50,7 +50,6 @@ const SuccessStories = () => {
     return <div>Error loading data.</div>;
   }
 
-
   return (
     <div className="bg-gradient-to-b from-[#FFE6E6] to-white py-12">
       <div className="flex max-w-[1200px] mx-auto" data-aos="fade-up">
@@ -81,26 +80,30 @@ const SuccessStories = () => {
 
           {/* Second Row */}
           <div className="relative">
-            {fetchedSuccessStories.slice(2).map((story) => (
-              <div key={story.id}>
+            {fetchedSuccessStories.length > 2 && (
+              <div key={fetchedSuccessStories[2].id}>
                 <img
-                  src={story.image}
-                  alt={story.title}
+                  src={fetchedSuccessStories[2].image}
+                  alt={fetchedSuccessStories[2].title}
                   className="w-[635px] h-[285px] rounded-xl"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-black flex justify-between items-center rounded-xl w-[540px] mx-8 my-5 py-4 px-5">
                   <div>
-                    <p className="text-2xl text-white pb-2">{story.title}</p>
-                    <p className="text-gray-300">{story.description}</p>
+                    <p className="text-2xl text-white pb-2">
+                      {fetchedSuccessStories[2].title}
+                    </p>
+                    <p className="text-gray-300">
+                      {fetchedSuccessStories[2].description}
+                    </p>
                   </div>
                   <img
-                    src={story.icon}
+                    src={fetchedSuccessStories[2].icon}
                     alt="icon"
                     className="bg-slate-900 p-2 rounded-full hover:bg-white"
                   />
                 </div>
               </div>
-            ))}
+            )}
           </div>
         </div>
 
@@ -108,7 +111,9 @@ const SuccessStories = () => {
         <div className="w-[530px] ml-24 text-black mt-16">
           <img src={fetchedTitleData.img} alt="Title" className="mb-16" />
           <p className="font-semibold">{fetchedTitleData.title}</p>
-          <h1 className="font-bold text-4xl pb-16">{fetchedTitleData.description}</h1>
+          <h1 className="font-bold text-4xl pb-16">
+            {fetchedTitleData.description}
+          </h1>
           <NavLink to={`/Careers`}>
             <button className="font-medium hover:text-red-500">
               VIEW MORE <span className="text-red-500">{">"}</span>

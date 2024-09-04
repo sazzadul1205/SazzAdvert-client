@@ -59,7 +59,7 @@ const Blogs = () => {
         </div>
         {/* All Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {blogData.map((blog) => (
+          {blogData.slice(0, 3).map((blog) => (
             <div
               key={blog._id}
               className="bg-[#faf4f4] shadow-xl transform transition-transform duration-300 hover:-translate-y-2 rounded-xl"

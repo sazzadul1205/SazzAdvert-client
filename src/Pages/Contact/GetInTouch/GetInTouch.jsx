@@ -4,6 +4,8 @@ import "aos/dist/aos.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../Components/Loader";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const GetInTouch = () => {
   useEffect(() => {
@@ -13,8 +15,14 @@ const GetInTouch = () => {
     });
   }, []);
 
-  // API fetch for Success Stories
+  // API fetch for GetInTouchContact
   const axiosPublic = useAxiosPublic();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const {
     data: GetInTouchContact,
     isLoading: GetInTouchContactLoading,
@@ -42,12 +50,35 @@ const GetInTouch = () => {
 
   // Handle loading and error states
   if (GetInTouchContactLoading || GetInTouchLoading) {
-    return <Loader></Loader>;
+    return <Loader />;
   }
 
   if (GetInTouchContactError || GetInTouchError) {
     return <div>Error loading data.</div>;
   }
+
+  const onSubmit = async (data) => {
+    console.log(data);
+
+    try {
+      const response = await axiosPublic.post(`/Comments`, data);
+
+      if (response.data.insertedId) {
+        Swal.fire(
+          "Comment Added!",
+          "The new comment has been added.",
+          "success"
+        );
+      }
+    } catch (error) {
+      console.error("Error Posting Comment:", error);
+      Swal.fire(
+        "Error",
+        "An error occurred while posting the comment.",
+        "error"
+      );
+    }
+  };
 
   return (
     <div className="bg-gradient-to-b from-[#FFE6E6] to-white py-14 text-black">
@@ -55,12 +86,11 @@ const GetInTouch = () => {
         {/* Titles */}
         <div className="w-[648px] text-center mx-auto pb-10">
           <p className="text-[17px] font-semibold">{GetInTouchData.title}</p>
-          <h1 className="font-bold text-3xl ">{GetInTouchData.description}</h1>
+          <h1 className="font-bold text-3xl">{GetInTouchData.description}</h1>
         </div>
 
         {/* InTouch content */}
         <div className="flex bg-white border border-black rounded-xl">
-          
           {/* Left side */}
           <div className="bg-black px-20 py-16 rounded-2xl">
             {GetInTouchContact.map((item, index) => (
@@ -73,7 +103,7 @@ const GetInTouch = () => {
                   <div className="bg-[#4c4c4c] rounded-full w-16 h-16 flex justify-center items-center">
                     <img src={item.icon} alt={item.title} />
                   </div>
-                  <div className="ml-5 w-[270px] ">
+                  <div className="ml-5 w-[270px]">
                     {item.details.map((detail, i) => (
                       <p key={i} className="pt-2">
                         {detail}
@@ -86,50 +116,83 @@ const GetInTouch = () => {
           </div>
 
           {/* Right side */}
-          <div className="px-14 py-16">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className=" px-10 py-12 rounded-2xl"
+          >
+            {/* Your Name */}
             <div className="pb-4">
-              <label className="font-semibold"> Your Name</label>
+              <label className="font-semibold">Your Name</label>
               <input
                 type="text"
                 placeholder="Enter Your Name"
+                {...register("name", { required: "Name is required" })}
                 className="input input-bordered w-[500px] rounded-full bg-[#f2f2f8] mt-2"
               />
+              {errors.name && (
+                <p className="text-red-500">{errors.name.message}</p>
+              )}
             </div>
+
+            {/* Your Email */}
             <div className="pb-4">
-              <label className="font-semibold"> Your Email</label>
+              <label className="font-semibold">Your Email</label>
               <input
-                type="text"
+                type="email"
                 placeholder="Enter your email address"
+                {...register("email", { required: "Email is required" })}
                 className="input input-bordered w-[500px] rounded-full bg-[#f2f2f8] mt-2"
               />
+              {errors.email && (
+                <p className="text-red-500">{errors.email.message}</p>
+              )}
             </div>
+
+            {/* Your Phone */}
             <div className="pb-4">
-              <label className="font-semibold"> Your Phone</label>
+              <label className="font-semibold">Your Phone</label>
               <input
-                type="text"
+                type="tel"
                 placeholder="Enter your phone number"
+                {...register("phone", { required: "Phone number is required" })}
                 className="input input-bordered w-[500px] rounded-full bg-[#f2f2f8] mt-2"
               />
+              {errors.phone && (
+                <p className="text-red-500">{errors.phone.message}</p>
+              )}
             </div>
+
+            {/* Your Subject */}
             <div className="pb-4">
-              <label className="font-semibold"> Your Subject</label>
+              <label className="font-semibold">Your Subject</label>
               <input
                 type="text"
                 placeholder="Enter your subject"
+                {...register("subject", { required: "Subject is required" })}
                 className="input input-bordered w-[500px] rounded-full bg-[#f2f2f8] mt-2"
               />
+              {errors.subject && (
+                <p className="text-red-500">{errors.subject.message}</p>
+              )}
             </div>
-            <label className="font-semibold"> Your Message</label>
 
-            <textarea
-              className="textarea textarea-bordered mt-4 bg-[#f2f2f8] w-[500px] h-[100px] rounded-XL"
-              placeholder="Bio"
-            ></textarea>
+            {/* Your Message */}
+            <div className="pb-4">
+              <label className="font-semibold">Your Message</label>
+              <textarea
+                {...register("message", { required: "Message is required" })}
+                className="textarea textarea-bordered mt-4 bg-[#f2f2f8] w-[500px] h-[100px] rounded-xl"
+                placeholder="Your message"
+              ></textarea>
+              {errors.message && (
+                <p className="text-red-500">{errors.message.message}</p>
+              )}
+            </div>
 
             <button className="btn text-white px-10 rounded-3xl hover:bg-[#ef4335] border-none mt-5">
               SUBMIT NOW {">"}
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
