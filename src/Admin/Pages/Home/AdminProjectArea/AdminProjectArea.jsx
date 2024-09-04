@@ -122,43 +122,35 @@ const AdminProjectArea = () => {
           <p>Edit</p>
         </button>
       </div>
-      
+
       {/* Project Content */}
       <div className="p-5 bg-gray-200 mt-2 rounded-xl">
         {/* Title */}
-        <div className="P-2">
-          <p className="text-center font-bold text-xl pb-5">
-            Project Area Image
-          </p>
-          <img
-            src={rightSectionImage}
-            alt="Project Area"
-            className="w-[500px] mx-auto"
-          />
-        </div>
+
+        <img
+          src={rightSectionImage}
+          alt="Project Area"
+          className="w-[500px] mx-auto rounded-xl pt-5"
+        />
+
         {/* Icons And More */}
-        <div>
-          <p className="font-bold text-2xl text-center pt-5">
-            Icon and content
-          </p>
-          <div className="p-10 flex justify-center">
-            {leftSection.map((item, index) => (
-              <div
-                key={index}
-                className="flex items-center space-x-4 shadow-xl bg-black p-5 rounded-xl ml-2"
-              >
-                <img
-                  src={item.imageUrl}
-                  alt={item.description}
-                  className="bg-slate-900 p-4 rounded-full"
-                />
-                <div className="text-white">
-                  <p className="text-4xl font-bold">{item.stat}</p>
-                  <p className="text-lg">{item.description}</p>
-                </div>
+        <div className="p-10 flex justify-center ">
+          {leftSection.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center w-[500px] space-x-4 shadow-xl bg-black p-5 rounded-xl ml-2"
+            >
+              <img
+                src={item.imageUrl}
+                alt={item.description}
+                className="bg-slate-900 p-4 rounded-full"
+              />
+              <div className="text-white">
+                <p className="text-4xl font-bold">{item.stat}</p>
+                <p className="text-lg">{item.description}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
 

@@ -16,7 +16,7 @@ const AdminServicesDetails = () => {
     }
     return color;
   };
-  
+
   return (
     <div className="bg-white py-4 text-black min-h-screen px-5">
       <h1 className="text-center font-bold text-2xl border-b pb-2">
@@ -105,19 +105,19 @@ const AdminServicesDetails = () => {
             Testimonials
           </Tab>
         </TabList>
-        <TabPanel className="pt-2">
+        <TabPanel>
           <Banner></Banner>
         </TabPanel>
-        <TabPanel className="pt-2">
+        <TabPanel>
           <AdminMarketing></AdminMarketing>
         </TabPanel>
-        <TabPanel className="pt-2">
+        <TabPanel>
           <AdminAwards></AdminAwards>
         </TabPanel>
-        <TabPanel className="pt-2">
+        <TabPanel>
           <AdminBrands></AdminBrands>
         </TabPanel>
-        <TabPanel className="pt-2">
+        <TabPanel>
           <AdminTestimonials></AdminTestimonials>
         </TabPanel>
       </Tabs>

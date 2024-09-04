@@ -1,11 +1,12 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import AdminGetInTouch from "./AdminGetInTouch/AdminGetInTouch";
 import AdminFirstBanner from "./AdminFirstBanner/AdminFirstBanner";
-import AdminSecondBanner from "./AdminSecondBanner/AdminSecondBanner";
-import AdminFAQ from "./AdminFAQ/AdminFAQ";
+import AdminOurProcess from "../Home/AdminOurProcess/AdminOurProcess";
+import AdminSuccessStories from "../Home/AdminSuccessStories/AdminSuccessStories";
+import AdminBrands from "../Home/AdminBrands/AdminBrands";
+import AdminBigTestimonials from "./AdminBigTestimonials/AdminBigTestimonials";
 
-const AdminCareers = () => {
+const AdminSuccessStoriesTab = () => {
   // Function to generate a random color
   const getRandomColor = () => {
     const letters = "0123456789ABCDEF";
@@ -19,7 +20,7 @@ const AdminCareers = () => {
   return (
     <div className="bg-white py-4 text-black min-h-screen px-5">
       <h1 className="text-center font-bold text-2xl border-b pb-2">
-        Careers Page
+        Success Stories Page
       </h1>
       <Tabs>
         <TabList>
@@ -37,7 +38,7 @@ const AdminCareers = () => {
               marginTop: "2px", // Add padding for better appearance
             }}
           >
-            Career First Banner
+            First Banner
           </Tab>
           <Tab
             style={{
@@ -53,7 +54,7 @@ const AdminCareers = () => {
               marginTop: "2px", // Add padding for better appearance
             }}
           >
-            Get In Touch
+            Our Process
           </Tab>
           <Tab
             style={{
@@ -69,7 +70,7 @@ const AdminCareers = () => {
               marginTop: "2px", // Add padding for better appearance
             }}
           >
-            Career Second Banner
+            Success stories
           </Tab>
           <Tab
             style={{
@@ -85,24 +86,43 @@ const AdminCareers = () => {
               marginTop: "2px", // Add padding for better appearance
             }}
           >
-            FAQ
+            Brands
+          </Tab>
+          <Tab
+            style={{
+              background: getRandomColor(),
+              borderBottom: "1px solid #ccc",
+              color: "white",
+              fontSize: "1.1rem",
+              fontWeight: 400, // Slightly bigger text
+              padding: "10px 15px",
+              borderTopLeftRadius: "0.5rem", // 8px
+              borderTopRightRadius: "0.5rem", // 8px
+              marginLeft: "2px",
+              marginTop: "2px", // Add padding for better appearance
+            }}
+          >
+            Testimonials
           </Tab>
         </TabList>
         <TabPanel>
           <AdminFirstBanner></AdminFirstBanner>
         </TabPanel>
         <TabPanel>
-          <AdminGetInTouch></AdminGetInTouch>
+          <AdminOurProcess></AdminOurProcess>
         </TabPanel>
         <TabPanel>
-          <AdminSecondBanner></AdminSecondBanner>
+          <AdminSuccessStories></AdminSuccessStories>
         </TabPanel>
         <TabPanel>
-          <AdminFAQ></AdminFAQ>
+          <AdminBrands></AdminBrands>
+        </TabPanel>
+        <TabPanel>
+          <AdminBigTestimonials></AdminBigTestimonials>
         </TabPanel>
       </Tabs>
     </div>
   );
 };
 
-export default AdminCareers;
+export default AdminSuccessStoriesTab;

@@ -105,19 +105,19 @@ const AdminServices = () => {
             Testimonials
           </Tab>
         </TabList>
-        <TabPanel className="pt-2">
+        <TabPanel>
           <AdminFirstBanner></AdminFirstBanner>
         </TabPanel>
-        <TabPanel className="pt-2">
+        <TabPanel>
           <AdminCapabilities></AdminCapabilities>
         </TabPanel>
-        <TabPanel className="pt-2">
+        <TabPanel>
           <AdminSecondBanner></AdminSecondBanner>
         </TabPanel>
-        <TabPanel className="pt-2">
+        <TabPanel>
           <AdminBrands></AdminBrands>
         </TabPanel>
-        <TabPanel className="pt-2">
+        <TabPanel>
           <AdminTestimonials></AdminTestimonials>
         </TabPanel>
       </Tabs>

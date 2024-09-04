@@ -197,7 +197,7 @@ const AdminHome = () => {
             Blogs
           </Tab>
         </TabList>
-        <TabPanel className="pt-2">
+        <TabPanel>
           <AdminHomeBanner></AdminHomeBanner>
         </TabPanel>
         <TabPanel>

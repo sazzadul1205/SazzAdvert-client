@@ -24,6 +24,7 @@ import AdminCareers from "../Admin/Pages/Careers/AdminCareers";
 import AdminServices from "../Admin/Pages/Services/AdminServices";
 import AdminServicesDetails from "../Admin/Pages/ServicesDetails/AdminServicesDetails";
 import AdminAboutUs from "../Admin/Pages/AboutUs/AdminAboutUs";
+import AdminSuccessStoriesTab from "../Admin/Pages/SucessStoriesTab/AdminSuccessStoriesTab";
 
 export const router = createBrowserRouter([
   {
@@ -127,6 +128,10 @@ export const router = createBrowserRouter([
       {
         path: "AdminAboutUs",
         element: <AdminAboutUs></AdminAboutUs>
+      },
+      {
+        path: "AdminSuccessStories",
+        element: <AdminSuccessStoriesTab></AdminSuccessStoriesTab>
       },
     ],
   },
