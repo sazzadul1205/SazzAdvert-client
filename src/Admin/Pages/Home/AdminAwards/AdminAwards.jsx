@@ -129,7 +129,7 @@ const AdminAwards = () => {
       <div className="bg-indigo-100 rounded-xl p-2 mt-2">
         <div>
           {/* Left side with the award image */}
-          <div>
+          <div className="p-5">
             <p className="font-bold text-xl">Award Plaque: </p>
             <div className="bg-[#FFEEEE] text-black py-5 w-[250px] mx-auto">
               {AwardsComponentSection && (

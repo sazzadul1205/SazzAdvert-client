@@ -27,6 +27,9 @@ import AdminAboutUs from "../Admin/Pages/AboutUs/AdminAboutUs";
 import AdminSuccessStoriesTab from "../Admin/Pages/SucessStoriesTab/AdminSuccessStoriesTab";
 import AdminBlogs from "../Admin/Pages/Blogs/AdminBlogsTab";
 import AdminContacts from "../Admin/Pages/Contacts/AdminContacts";
+import AdminOurTeam from "../Admin/Pages/OurTeam/AdminOurTeam";
+import AdminCareerDetails from "../Admin/Pages/CareerDetails/AdminCareerDetails";
+import AdminSuccessStoriesDetails from "../Admin/Pages/SuccessStoriesDetails/AdminSuccessStoriesDetails";
 
 export const router = createBrowserRouter([
   {
@@ -145,7 +148,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "AdminOurTeam",
-        element: <AdminContacts></AdminContacts>
+        element: <AdminOurTeam></AdminOurTeam>
+      },
+      {
+        path: "AdminCareerDetails",
+        element: <AdminCareerDetails></AdminCareerDetails>
+      },
+      {
+        path: "AdminSuccessStoryDetails",
+        element: <AdminSuccessStoriesDetails></AdminSuccessStoriesDetails>
       },
     ],
   },

@@ -16,6 +16,18 @@ const HiBootstrap = () => {
   const axiosPublic = useAxiosPublic();
 
   const {
+    data: BannerHiBootStrap,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["BannerHiBootStrap"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/Banners?page=HiBootStrap`);
+      return res.data[0];
+    },
+  });
+
+  const {
     data: HiBootStrap,
     isLoading: HiBootStrapLoading,
     error: HiBootStrapError,
@@ -27,8 +39,9 @@ const HiBootstrap = () => {
     },
   });
 
-  if (HiBootStrapLoading) return <Loader></Loader>;
-  if (HiBootStrapError) return <div>Error: {HiBootStrapError.message}</div>;
+  if (isLoading || HiBootStrapLoading) return <Loader></Loader>;
+  if (isError || HiBootStrapError)
+    return <div>Error: {HiBootStrapError.message}</div>;
 
   return (
     <div className="bg-gradient-to-b to-white from-[#FFE6E6]">
@@ -50,8 +63,8 @@ const HiBootstrap = () => {
           <div className="">
             <div>
               <img
-                src={"https://i.ibb.co/kHCb3f5/img1.jpg"}
-                alt={"https://i.ibb.co/kHCb3f5/img1.jpg"}
+                src={BannerHiBootStrap.imageUrl}
+                alt={BannerHiBootStrap.imageUrl}
                 className=" rounded-3xl w-[500px] h-[600px]"
               />
             </div>

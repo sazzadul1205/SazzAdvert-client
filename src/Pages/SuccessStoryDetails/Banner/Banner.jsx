@@ -28,7 +28,7 @@ const Banner = () => {
 
   return (
     <div className="bg-gradient-to-b to-white from-[#FFE6E6]">
-      <div className="flex justify-between max-w-[1200px] mx-auto h-[720px] pt-10 items-center gap-5 ">
+      <div className="flex justify-between max-w-[1200px] mx-auto pt-48 pb-20 items-center gap-5 ">
         <div className="text-black w-[535px]">
           <p className="text-lg mb-4 font-semibold">{BannerSuccess.title}</p>
           <h1 className="text-[34px] font-bold mb-6">

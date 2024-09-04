@@ -32,7 +32,7 @@ const Awards = () => {
   if (stepsError) return <div>Error: {stepsError.message}</div>;
 
   return (
-    <div className="bg-[#FFE6E6] py-14 text-black">
+    <div className="bg-[#FFE6E6] text-black">
       <div
         data-aos="fade-up"
         className="bg-[#faf4f4] max-w-[1200px] mx-auto flex flex-col lg:flex-row h-[390px] rounded-lg overflow-hidden"
