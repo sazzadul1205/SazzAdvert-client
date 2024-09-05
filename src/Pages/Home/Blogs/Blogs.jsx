@@ -68,7 +68,7 @@ const Blogs = () => {
                 <img
                   src="https://i.imgur.com/K7JSBpc.png"
                   alt="Posted by icon"
-                  className="mr-4"
+                  className="mr-4 w-8 h-8"
                 />
                 <div>
                   <p>Posted by</p>

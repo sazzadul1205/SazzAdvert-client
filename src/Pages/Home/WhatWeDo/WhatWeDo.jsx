@@ -42,7 +42,7 @@ const WhatWeDo = () => {
   }
 
   return (
-    <div className="bg-white text-black py-12">
+    <div className="bg-white text-black pb-12 pt-20">
       <div className="max-w-[1200px] mx-auto flex gap-10" data-aos="fade-up">
         {/* Left Section */}
         <div className="w-full lg:w-[40%]">

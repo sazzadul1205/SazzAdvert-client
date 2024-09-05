@@ -6,294 +6,101 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const position = window.pageYOffset;
-      setScrollPosition(position);
-    };
-
+    const handleScroll = () => setScrollPosition(window.pageYOffset);
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const nav = (
-    <>
-      <li>
-        {/* Home link's */}
-        <div className="dropdown dropdown-hover">
-          <p className={"hover:text-[#EF4335]"} to="/">
-            HOME
-          </p>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu bg-white font-semibold z-[1] w-72 p-2 shadow"
-          >
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:bg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/"
+  const navItems = [
+    {
+      label: "HOME",
+      link: "/",
+      subMenu: [],
+    },
+    {
+      label: "OUR SOLUTIONS",
+      link: "#",
+      subMenu: [
+        { label: "OUR SERVICES", link: "/Services" },
+        { label: "SERVICE DETAILS", link: "/ServicesDetails" },
+        { label: "OUR TEAM", link: "/OurTeam" },
+      ],
+    },
+    {
+      label: "WHO WE ARE",
+      link: "#",
+      subMenu: [
+        { label: "ABOUT US", link: "/AboutUs" },
+        { label: "CAREERS", link: "/Careers" },
+        { label: "CAREER DETAILS", link: "/CareerDetails" },
+      ],
+    },
+    {
+      label: "OUR WORK",
+      link: "#",
+      subMenu: [
+        { label: "SUCCESS STORIES", link: "/SuccessStories" },
+        { label: "SUCCESS STORY DETAILS", link: "/SuccessStoryDetails" },
+      ],
+    },
+    {
+      label: "PAGES",
+      link: "#",
+      subMenu: [
+        { label: "OUR BLOG", link: "/Blogs" },
+        { label: "BLOG DETAILS", link: "/BlogDetails" },
+        { label: "TAGS", link: "/Tags" },
+        { label: "CATEGORIES", link: "/Categories" },
+        { label: "AUTHOR", link: "/Author" },
+        { label: "PRIVACY POLICY", link: "/PrivacyPolicy" },
+        { label: "TERMS & CONDITION", link: "/TermsCondition" },
+      ],
+    },
+    { label: "Contacts", link: "/contacts", subMenu: [] },
+  ];
+
+  const renderNav = () =>
+    navItems.map(({ label, link, subMenu }) => (
+      <li key={label} >
+        <div className="dropdown dropdown-hover ">
+          {subMenu.length ? (
+            <>
+              <p className="hover:text-[#EF4335]">{label}</p>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow"
               >
-                PAID SEARCH AD AGENCY
-              </NavLink>
-            </li>
-            <li>
-              <a href="#">SOCIAL MEDIA AD AGENCY</a>
-            </li>
-            <li>
-              <a href="#">TRADITIONAL/OFFLINE AD AGENCY</a>
-            </li>
-          </ul>
+                {subMenu.map((item) => (
+                  <li key={item.link}>
+                    <NavLink
+                      to={item.link}
+                      className={({ isActive }) =>
+                        isActive
+                          ? "text-[#ef4335] bg-white "
+                          : "hover:text-[#ef4335] "
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <NavLink
+              to={link}
+              className={({ isActive }) =>
+                isActive ? "text-[#ef4335] " : "hover:text-[#ef4335]"
+              }
+            >
+              {label}
+            </NavLink>
+          )}
         </div>
       </li>
-      <li>
-        {/* Services link's */}
-        <div className="dropdown dropdown-hover">
-          <p className="hover:text-[#ef4335]">OUR SOLUTIONS</p>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow"
-          >
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:bg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/Services"
-              >
-                OUR SERVICES
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:bg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/ServicesDetails"
-              >
-                SERVICE DETAILS
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:bg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/OurTeam"
-              >
-                OUR TEAM
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li>
-        {/* About Us link's */}
-        <div className="dropdown dropdown-hover">
-          <p className={"hover:text-[#EF4335]"}>WHO WE ARE</p>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow"
-          >
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] bg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/AboutUs"
-              >
-                ABOUT US
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:bg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/Careers"
-              >
-                CAREERS
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:bg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/CareerDetails"
-              >
-                CAREER DETAILS{" "}
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li>
-        {/* Work Link's */}
-        <div className="dropdown dropdown-hover">
-          <p className={"hover:text-[#EF4335]"}>OUR WORK</p>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow"
-          >
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:bg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/SuccessStories"
-              >
-                SUCCESS STORIES
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:bg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/SuccessStoryDetails"
-              >
-                SUCCESS STORY DETAILS
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li>
-        {/* Pages link's */}
-        <div className="dropdown dropdown-hover">
-          <p className={"hover:text-[#EF4335]"}>PAGES</p>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu bg-white font-semibold z-[1] w-52 p-2 shadow"
-          >
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:Pbg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/Blogs"
-              >
-                OUR BLOG
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:Pbg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/BlogDetails"
-              >
-                BLOG DETAILS
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:Pbg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/Tags"
-              >
-                TAGS
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:Pbg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/Categories"
-              >
-                CATEGORIES
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:Pbg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/Author"
-              >
-                AUTHOR
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:Pbg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/PrivacyPolicy"
-              >
-                PRIVACY POLICY{" "}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#ef4335] hover:Pbg-white "
-                    : "hover:text-[#ef4335]  "
-                }
-                to="/TermsCondition"
-              >
-                TERMS & CONDITION
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </li>
-      {/* Contacts */}
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? "text-[#ef4335] text-md hover:bg-wh"
-              : "hover:text-[#ef4335] text-md"
-          }
-          to="/contacts"
-        >
-          Contacts
-        </NavLink>
-      </li>
-    </>
-  );
+    ));
 
   return (
     <div
@@ -306,17 +113,15 @@ const Navbar = () => {
           <div className="dropdown">
             <button
               aria-label="Toggle menu"
-              tabIndex={0}
-              role="button"
               className="btn btn-ghost lg:hidden"
               onClick={toggleMenu}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
-                fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                fill="none"
               >
                 <path
                   strokeLinecap="round"
@@ -331,7 +136,7 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white font-semibold w-52"
               >
-                {nav}
+                {renderNav()}
               </ul>
             )}
           </div>
@@ -350,14 +155,16 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="flex gap-5 px-1 space-x-5 font-semibold">{nav}</ul>
+          <ul className="flex gap-5 px-1 space-x-5 font-semibold text-sm">
+            {renderNav()}
+          </ul>
         </div>
         <div className="navbar-end">
-          <Link to="/Careers">
+          <NavLink to="/Careers">
             <button className="btn text-white px-10 rounded-3xl hover:bg-[#ef4335] border-none">
               Get Proposal {">"}
             </button>
-          </Link>
+          </NavLink>
         </div>
       </div>
     </div>

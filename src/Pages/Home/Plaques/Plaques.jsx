@@ -33,7 +33,7 @@ const Plaques = () => {
   return (
     <div className="bg-white pt-20 text-black p">
       <div
-        className="flex justify-between mx-auto max-w-[1200px] px-16 py-16 border-b rounded-2xl bg-[#FAF4F4]"
+        className="flex justify-between mx-auto max-w-[1200px] border-b pb-[75px]"
         data-aos="fade-up"
       >
         {/* Avatars */}
