@@ -30,6 +30,10 @@ import AdminContacts from "../Admin/Pages/Contacts/AdminContacts";
 import AdminOurTeam from "../Admin/Pages/OurTeam/AdminOurTeam";
 import AdminCareerDetails from "../Admin/Pages/CareerDetails/AdminCareerDetails";
 import AdminSuccessStoriesDetails from "../Admin/Pages/SuccessStoriesDetails/AdminSuccessStoriesDetails";
+import AdminBlogDetails from "../Admin/Pages/BlogDetails/AdminBlogDetails";
+import AdminTags from "../Admin/Pages/Tags/AdminTags";
+import AdminCategories from "../Admin/Pages/Categories/AdminCategories";
+import AdminAuthor from "../Admin/Pages/Author/AdminAuthor";
 
 export const router = createBrowserRouter([
   {
@@ -132,31 +136,47 @@ export const router = createBrowserRouter([
       },
       {
         path: "AdminAboutUs",
-        element: <AdminAboutUs></AdminAboutUs>
+        element: <AdminAboutUs></AdminAboutUs>,
       },
       {
         path: "AdminSuccessStories",
-        element: <AdminSuccessStoriesTab></AdminSuccessStoriesTab>
+        element: <AdminSuccessStoriesTab></AdminSuccessStoriesTab>,
       },
       {
         path: "AdminBlogs",
-        element: <AdminBlogs></AdminBlogs>
+        element: <AdminBlogs></AdminBlogs>,
       },
       {
         path: "AdminContacts",
-        element: <AdminContacts></AdminContacts>
+        element: <AdminContacts></AdminContacts>,
       },
       {
         path: "AdminOurTeam",
-        element: <AdminOurTeam></AdminOurTeam>
+        element: <AdminOurTeam></AdminOurTeam>,
       },
       {
         path: "AdminCareerDetails",
-        element: <AdminCareerDetails></AdminCareerDetails>
+        element: <AdminCareerDetails></AdminCareerDetails>,
       },
       {
         path: "AdminSuccessStoryDetails",
-        element: <AdminSuccessStoriesDetails></AdminSuccessStoriesDetails>
+        element: <AdminSuccessStoriesDetails></AdminSuccessStoriesDetails>,
+      },
+      {
+        path: "AdminBlogDetails",
+        element: <AdminBlogDetails></AdminBlogDetails>,
+      },
+      {
+        path: "AdminTags",
+        element: <AdminTags></AdminTags>,
+      },
+      {
+        path: "AdminCategories",
+        element: <AdminCategories></AdminCategories>,
+      },
+      {
+        path: "AdminAuthor",
+        element: <AdminAuthor></AdminAuthor>,
       },
     ],
   },

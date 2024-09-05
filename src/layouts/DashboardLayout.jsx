@@ -20,6 +20,7 @@ const DashboardLayout = () => {
     { to: "AdminBlogDetails", label: "Blog Details" },
     { to: "AdminTags", label: "Tags" },
     { to: "AdminCategories", label: "Categories" },
+    { to: "AdminAuthor", label: "Author" },
     { to: "AdminPrivacyPolicy", label: "PrivacyPolicy" },
     { to: "AdminTermsCondition", label: "TermsCondition" },
   ];

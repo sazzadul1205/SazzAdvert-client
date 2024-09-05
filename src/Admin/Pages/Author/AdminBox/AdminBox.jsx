@@ -6,18 +6,18 @@ import { useForm, useFieldArray } from "react-hook-form";
 import Swal from "sweetalert2";
 import Loader from "../../../../Components/Loader";
 
-const AdminBanner = () => {
+const AdminBox = () => {
   const axiosPublic = useAxiosPublic();
   const { register, handleSubmit, reset, control } = useForm();
 
   const {
-    data: BannerBlogsPage = {},
+    data: BannerAuthor2 = {},
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["BannerBlogsPage"],
+    queryKey: ["BannerAuthor2"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/Banners?page=BlogsPage`);
+      const res = await axiosPublic.get(`/Banners?page=Author2`);
       return res.data[0];
     },
   });
@@ -109,7 +109,7 @@ const AdminBanner = () => {
         <p className="font-bold text-2xl">Banner</p>
         <button
           className="px-10 py-1 flex items-center bg-yellow-500 hover:bg-yellow-400 rounded-lg text-white hover:text-black text-lg"
-          onClick={() => handleEditClick(BannerBlogsPage)}
+          onClick={() => handleEditClick(BannerAuthor2)}
         >
           <FaEdit className="mr-5" />
           <p>Edit</p>
@@ -121,22 +121,22 @@ const AdminBanner = () => {
         {/* Banner */}
         <div className="p-5">
           <div className="text-center">
-            {BannerBlogsPage.postedBy && (
+            {BannerAuthor2.postedBy && (
               <div className="flex w-[200px] mx-auto">
                 <img
-                  src={BannerBlogsPage.postedBy.logo}
+                  src={BannerAuthor2.postedBy.logo}
                   className="ml-5 w-8 h-8"
                   alt="Posted by logo"
                 />
                 <div className="ml-5">
                   <p>Posted by</p>
-                  <p className="font-bold">{BannerBlogsPage.postedBy.name}</p>
+                  <p className="font-bold">{BannerAuthor2.postedBy.name}</p>
                 </div>
               </div>
             )}
             <div className="pt-4 mt-5">
-              {BannerBlogsPage.buttons &&
-                BannerBlogsPage.buttons.map((buttonText, index) => (
+              {BannerAuthor2.buttons &&
+                BannerAuthor2.buttons.map((buttonText, index) => (
                   <button
                     key={index}
                     className="bg-[#FFEEEE] hover:bg-red-600 hover:text-white p-4 rounded-full mx-1"
@@ -146,17 +146,15 @@ const AdminBanner = () => {
                 ))}
             </div>
             <div className="mt-5">
-              <h2 className="text-3xl font-bold mb-5">
-                {BannerBlogsPage.title}
-              </h2>
+              <h2 className="text-3xl font-bold mb-5">{BannerAuthor2.title}</h2>
             </div>
           </div>
           <div className="mx-auto w-[500px]">
-            {BannerBlogsPage.bannerImage && (
+            {BannerAuthor2.bannerImage && (
               <img
-                src={BannerBlogsPage.bannerImage}
+                src={BannerAuthor2.bannerImage}
                 className="rounded-xl w-[500px]"
-                alt="Banner"
+                alt="Banner "
               />
             )}
           </div>
@@ -256,4 +254,4 @@ const AdminBanner = () => {
   );
 };
 
-export default AdminBanner;
+export default AdminBox;
