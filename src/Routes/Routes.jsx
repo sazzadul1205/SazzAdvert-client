@@ -34,6 +34,8 @@ import AdminBlogDetails from "../Admin/Pages/BlogDetails/AdminBlogDetails";
 import AdminTags from "../Admin/Pages/Tags/AdminTags";
 import AdminCategories from "../Admin/Pages/Categories/AdminCategories";
 import AdminAuthor from "../Admin/Pages/Author/AdminAuthor";
+import AdminPrivacyPolicy from "../Admin/Pages/PrivacyPolicy/AdminPrivacyPolicy";
+import AdminTermsCondition from "../Admin/Pages/TermsCondition/AdminTermsCondition";
 
 export const router = createBrowserRouter([
   {
@@ -177,6 +179,14 @@ export const router = createBrowserRouter([
       {
         path: "AdminAuthor",
         element: <AdminAuthor></AdminAuthor>,
+      },
+      {
+        path: "AdminPrivacyPolicy",
+        element: <AdminPrivacyPolicy></AdminPrivacyPolicy>,
+      },
+      {
+        path: "AdminTermsCondition",
+        element: <AdminTermsCondition></AdminTermsCondition>
       },
     ],
   },

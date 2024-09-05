@@ -11,6 +11,8 @@ import Swal from "sweetalert2";
 const AdminCareerDetails = () => {
   const axiosPublic = useAxiosPublic();
   const { register, handleSubmit, reset, control } = useForm();
+  const [selectedBanner, setSelectedBanner] = useState(null);
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "responsibilities",
@@ -23,7 +25,6 @@ const AdminCareerDetails = () => {
     control,
     name: "qualifications",
   });
-  const [selectedBanner, setSelectedBanner] = useState(null);
 
   // Fetch Job Details
   const {
