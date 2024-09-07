@@ -19,6 +19,8 @@ const HomeFirstBanner = () => {
     return <Loader></Loader>;
   }
 
+  console.log(BannerHome);
+  
   // Check if BannerHome is an array or object
   const banners = Array.isArray(BannerHome) ? BannerHome : [BannerHome];
 
