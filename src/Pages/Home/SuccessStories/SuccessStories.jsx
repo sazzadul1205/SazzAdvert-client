@@ -6,6 +6,7 @@ import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../Components/Loader";
 import PropTypes from "prop-types";
+import { FaChevronRight } from "react-icons/fa";
 
 const SuccessStories = () => {
   useEffect(() => {
@@ -126,8 +127,8 @@ const SuccessStories = () => {
             {fetchedTitleData.description}
           </h1>
           <NavLink to={`/Careers`}>
-            <button className="font-medium hover:text-red-500">
-              VIEW MORE <span className="text-red-500">{">"}</span>
+            <button className="font-medium hover:text-red-500 flex items-center">
+              VIEW MORE <FaChevronRight className="ml-2 text-red-500 text-xl"/>
             </button>
           </NavLink>
         </div>

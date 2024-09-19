@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import PropTypes from "prop-types"; // Import PropTypes for prop validation
 import AOS from "aos";
 import "aos/dist/aos.css";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../../../Components/Loader";
+import { FaChevronRight } from "react-icons/fa";
 
-const OurProcess = () => {
+const OurProcess = ({ OurProcessStepsData, OurProcessTitleData }) => {
   useEffect(() => {
     AOS.init({
       duration: 2000, // Adjust the animation duration (in ms)
@@ -14,44 +13,12 @@ const OurProcess = () => {
     });
   }, []);
 
-  // API fetch
-  const axiosPublic = useAxiosPublic();
-
-  const {
-    data: OurProcessSteps,
-    isLoading: stepsLoading,
-    error: stepsError,
-  } = useQuery({
-    queryKey: ["OurProcessSteps"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/OurProcess`);
-      return res.data;
-    },
-  });
-
-  // API fetch for Title Data
-  const {
-    data: OurProcessTitleData,
-    isLoading: titleDataLoading,
-    error: titleDataError,
-  } = useQuery({
-    queryKey: ["OurProcessTitleData"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/TitleDatas?page=OurProcess`);
-      return res.data;
-    },
-  });
-
-  // Handle loading and error states
-  if (stepsLoading || titleDataLoading) {
-    return <Loader></Loader>;
-  }
-
-  if (stepsError || titleDataError) {
-    return <div>Error loading data</div>;
-  }
-
-  const { title, description, img } = OurProcessTitleData[0]; // Destructure the first item in TitleData
+  // Safely destructure title and description from OurProcessTitleData
+  const { title, description, img } = OurProcessTitleData[0] || {
+    title: "Default Title",
+    description: "Default Description",
+    img: "defaultImage.jpg",
+  };
 
   return (
     <div className="bg-white text-black pb-10">
@@ -66,9 +33,9 @@ const OurProcess = () => {
         <div className="flex justify-between mt-10 gap-10">
           {/* Left Side */}
           <div className="space-y-10">
-            {OurProcessSteps.map((step) => (
+            {OurProcessStepsData.map((step) => (
               <div
-                key={step.num} 
+                key={step.num}
                 className="flex items-start hover:text-red-500 text-gray-200"
               >
                 <p className="text-[75px] mr-4 mt-2 font-bold pt-12">
@@ -88,8 +55,8 @@ const OurProcess = () => {
           <div className="relative">
             <img src={img} alt="Process" className="w-[700px] h-[405px]" />
             <Link to="/Careers">
-              <button className="absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-black text-white px-10 py-4 rounded-3xl hover:bg-[#d93c31] border-none">
-                Get Proposal {">"}
+              <button className="absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-black text-white px-10 py-4 rounded-3xl hover:bg-[#d93c31] flex items-center">
+                Get Proposal <FaChevronRight className="ml-2"/>
               </button>
             </Link>
           </div>
@@ -97,6 +64,24 @@ const OurProcess = () => {
       </div>
     </div>
   );
+};
+
+// Adding PropTypes for prop validation
+OurProcess.propTypes = {
+  OurProcessStepsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      num: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  OurProcessTitleData: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      img: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default OurProcess;

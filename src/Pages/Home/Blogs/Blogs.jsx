@@ -1,65 +1,26 @@
+import PropTypes from "prop-types";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
 
-const Blogs = () => {
+const Blogs = ({ BlogData, BlogsTitleData }) => {
   useEffect(() => {
     AOS.init({
-      duration: 2000, // Adjust the animation duration (in ms)
-      once: false, // Whether the animation should happen only once
+      duration: 2000,
+      once: false,
     });
   }, []);
-
-  // API fetch for Blogs Data
-  const axiosPublic = useAxiosPublic();
-  const {
-    data: blogData = [], // Default to an empty array to avoid errors before data is fetched
-    isLoading: blogsLoading,
-    error: blogsError,
-  } = useQuery({
-    queryKey: ["blogData"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/Blogs`);
-      return res.data;
-    },
-  });
-
-  // API fetch for Title Data
-  const {
-    data: BlogsTitleData = [], // Default to an empty array to avoid errors before data is fetched
-    isLoading: titleDataLoading,
-    error: titleDataError,
-  } = useQuery({
-    queryKey: ["BlogsTitleData"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/TitleDatas?page=Blogs`);
-      return res.data;
-    },
-  });
-
-  // Extract the first item from the BlogsTitleData array
-  const titleData = BlogsTitleData[0] || {};
-
-  if (blogsLoading || titleDataLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (blogsError || titleDataError) {
-    return <div>Error loading data</div>;
-  }
 
   return (
     <div className="bg-white text-black pb-24">
       <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="w-[645px] mx-auto text-center pb-10">
-          <p className="font-semibold text-lg">{titleData.title}</p>
-          <h1 className="font-bold text-4xl">{titleData.description}</h1>
+          <p className="font-semibold text-lg">{BlogsTitleData.title}</p>
+          <h1 className="font-bold text-4xl">{BlogsTitleData.description}</h1>
         </div>
         {/* All Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {blogData.slice(0, 3).map((blog) => (
+          {BlogData.slice(0, 3).map((blog) => (
             <div
               key={blog._id}
               className="bg-[#faf4f4] shadow-xl transform transition-transform duration-300 hover:-translate-y-2 rounded-xl"
@@ -101,6 +62,23 @@ const Blogs = () => {
       </div>
     </div>
   );
+};
+
+// Add PropTypes validation
+Blogs.propTypes = {
+  BlogData: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      postedBy: PropTypes.string.isRequired,
+      imageUrl: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ).isRequired,
+  BlogsTitleData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Blogs;

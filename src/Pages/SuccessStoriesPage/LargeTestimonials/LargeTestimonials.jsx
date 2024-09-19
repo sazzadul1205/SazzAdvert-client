@@ -1,15 +1,16 @@
+import PropTypes from "prop-types";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../../../Components/Loader";
 
-const Testimonials = () => {
+const LargeTestimonials = ({
+  LargeTestimonialsData,
+  LargeTestimonialsTitleData,
+}) => {
   useEffect(() => {
     AOS.init({
       duration: 2000,
@@ -17,66 +18,30 @@ const Testimonials = () => {
     });
   }, []);
 
-  // API fetch
-  const axiosPublic = useAxiosPublic();
-
-  const {
-    data: BigTestimonials,
-    isLoading: BigTestimonialsLoading,
-    error: BigTestimonialsError,
-  } = useQuery({
-    queryKey: ["BigTestimonials"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/BigTestimonials`);
-      return res.data;
-    },
-  });
-
-  // API fetch for Title Data
-  const {
-    data: TestimonialsTitleData,
-    isLoading: titleDataLoading,
-    error: titleDataError,
-  } = useQuery({
-    queryKey: ["TestimonialsTitleData"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/TitleDatas?page=Testimonials`);
-      return res.data[0];
-    },
-  });
-
-  if (BigTestimonialsLoading || titleDataLoading) {
-    return <Loader />;
-  }
-
-  if (BigTestimonialsError || titleDataError) {
-    return <div>Error loading data</div>;
-  }
-
   return (
     <div className="bg-white pt-24 pb-24 text-black">
       <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="text-center w-[600px] mx-auto">
-          <p className="font-semibold">{TestimonialsTitleData.title}</p>
+          <p className="font-semibold">{LargeTestimonialsTitleData.title}</p>
           <h1 className="font-bold text-4xl">
-            {TestimonialsTitleData.description}
+            {LargeTestimonialsTitleData.description}
           </h1>
         </div>
 
         <div className="mt-10">
           <Swiper navigation={true} modules={[Navigation]}>
-            {BigTestimonials.map((testimonial, index) => (
-              <SwiperSlide key={index} className="px-10">
+            {LargeTestimonialsData.map((testimonial) => (
+              <SwiperSlide key={testimonial._id} className="px-10">
                 <div className="flex items-center">
                   <div className="relative">
                     <img
                       src={testimonial.image}
-                      alt={testimonial.name}
+                      alt={`Image of ${testimonial.name}`}
                       className="mr-12"
                     />
                     <img
                       src={"https://i.ibb.co/7zjPQ0m/Icon.png"}
-                      alt="Icon"
+                      alt="Decorative icon"
                       className="absolute top-5 right-14 p-2"
                     />
                   </div>
@@ -99,4 +64,21 @@ const Testimonials = () => {
   );
 };
 
-export default Testimonials;
+// PropTypes for LargeTestimonials component
+LargeTestimonials.propTypes = {
+  LargeTestimonialsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      position: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  LargeTestimonialsTitleData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default LargeTestimonials;

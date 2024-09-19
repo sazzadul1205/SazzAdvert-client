@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../../../Components/Loader";
+import PropTypes from "prop-types";
 
-const OurTeamContent = () => {
+const OurTeamContent = ({ OurTeamContentData, OurTeamContentTitleData }) => {
   useEffect(() => {
     AOS.init({
       duration: 2000,
@@ -13,52 +11,17 @@ const OurTeamContent = () => {
     });
   }, []);
 
-  // API fetch
-  const axiosPublic = useAxiosPublic();
-
-  const {
-    data: OurTeam,
-    isLoading: OurTeamLoading,
-    error: OurTeamError,
-  } = useQuery({
-    queryKey: ["OurTeam"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/OurTeam`);
-      return res.data;
-    },
-  });
-
-  // API fetch for Title Data
-  const {
-    data: OurTeamTitleData,
-    isLoading: titleDataLoading,
-    error: titleDataError,
-  } = useQuery({
-    queryKey: ["OurTeamTitleData"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/TitleDatas?page=OurTeam`);
-      return res.data[0];
-    },
-  });
-
-  // Handle loading and error states
-  if (OurTeamLoading || titleDataLoading) {
-    return <Loader></Loader>;
-  }
-
-  if (OurTeamError || titleDataError) {
-    return <div>Error loading data</div>;
-  }
-
   return (
     <div className="bg-[#FFE6E6] pb-20">
       <div className="max-w-[1200px] mx-auto text-black">
         <div className="w-[600px] mx-auto text-center py-16">
-          <p className="font-semibold text-lg">{OurTeamTitleData.title}</p>
-          <h1 className="font-bold">{OurTeamTitleData.description}</h1>
+          <p className="font-semibold text-lg">
+            {OurTeamContentTitleData.title}
+          </p>
+          <h1 className="font-bold">{OurTeamContentTitleData.description}</h1>
         </div>
         <div className="grid grid-cols-3 gap-28 pb-16 border-b border-gray-300">
-          {OurTeam.map((member, index) => (
+          {OurTeamContentData.map((member, index) => (
             <div
               key={index}
               className="relative w-[500px] h-[350px] mb-20"
@@ -97,6 +60,27 @@ const OurTeamContent = () => {
       </div>
     </div>
   );
+};
+
+// Define prop types
+OurTeamContent.propTypes = {
+  OurTeamContentData: PropTypes.arrayOf(
+    PropTypes.shape({
+      img: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      position: PropTypes.string.isRequired,
+      icons: PropTypes.arrayOf(
+        PropTypes.shape({
+          link: PropTypes.string.isRequired,
+          image: PropTypes.string.isRequired,
+        })
+      ).isRequired,
+    })
+  ).isRequired,
+  OurTeamContentTitleData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default OurTeamContent;

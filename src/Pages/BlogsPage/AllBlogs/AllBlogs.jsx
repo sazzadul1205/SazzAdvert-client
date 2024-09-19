@@ -19,11 +19,11 @@ const AllBlogs = () => {
   // API fetch for Blogs Data
   const axiosPublic = useAxiosPublic();
   const {
-    data: blogsData = [],
-    isLoading: blogsLoading,
-    error: blogsError,
+    data: BlogsData,
+    isLoading: BlogsDataIsLoading,
+    error: BlogsDataError,
   } = useQuery({
-    queryKey: ["Blogs", currentPage],
+    queryKey: ["BlogsData", currentPage],
     queryFn: async () => {
       const res = await axiosPublic.get(
         `/Blogs?page=${currentPage}&size=${blogsPerPage}`
@@ -32,47 +32,57 @@ const AllBlogs = () => {
     },
   });
 
-  const { data: totalBlogsCount = [], isLoading: isLoadingProductsCount } =
-    useQuery({
-      queryKey: ["BlogsCount"],
-      queryFn: async () => {
-        const res = await axiosPublic.get(`/BlogsCount`);
-        return res.data || 0;
-      },
-    });
+  const {
+    data: BlogsDataCount,
+    isLoading: BlogsDataCountIsLoading,
+    error: BlogsDataCountError,
+  } = useQuery({
+    queryKey: ["BlogsDataCount"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/BlogsCount`);
+      return res.data;
+    },
+  });
 
-  // Calculate the number of pages and ensure it's at least 1
-  const numberOfPages = Math.ceil(totalBlogsCount.count / blogsPerPage);
+  // Error handling
+  if (BlogsDataError || BlogsDataCountError) {
+    return (
+      <div>
+        Error loading data:{" "}
+        {BlogsDataError?.message || BlogsDataCountError?.message}
+      </div>
+    );
+  }
+
+  // Loading state
+  if (BlogsDataIsLoading || BlogsDataCountIsLoading) {
+    return <Loader />;
+  }
+
+  // Ensure BlogsDataCount is defined and has the 'count' property
+  const numberOfPages = BlogsDataCount
+    ? Math.ceil(BlogsDataCount.count / blogsPerPage)
+    : 0;
+
   const pages = Array.from(
     { length: Math.max(0, numberOfPages) },
     (_, index) => index
   );
-  console.log(numberOfPages);
-
-  if (blogsLoading || isLoadingProductsCount) {
-    return <Loader></Loader>;
-  }
-
-  if (blogsError) {
-    return <div>Error loading data</div>;
-  }
-  console.log(blogsData);
-  console.log(totalBlogsCount);
 
   return (
-    <div className="bg-[#FFE6E6] pt-10 text-black">
+    <div className="bg-gradient-to-b from-[#FFE6E6] to-white pt-10 text-black">
       <div className="max-w-[1200px] mx-auto pb-5">
         {/* All Cards */}
         <div className="grid grid-cols-3 gap-5" data-aos="fade-up">
-          {blogsData.map((blog) => (
+          {BlogsData.map((blog) => (
             <div
               key={blog.id}
-              className="card bg-[#faf4f4] w-96 py-3 shadow-xl transform transition-transform duration-300 hover:-translate-y-4"
+              className="card bg-[#faf4f4] w-96 py-3 shadow-lg transform transition-transform duration-300 hover:-translate-y-4 hover:shadow-2xl"
             >
               <div className="flex px-12 pt-10">
                 <img
                   src={"https://i.imgur.com/K7JSBpc.png"}
-                  alt={"https://i.imgur.com/K7JSBpc.png"}
+                  alt={"Logo"}
                   className="mr-4 w-8 h-8"
                 />
                 <div>

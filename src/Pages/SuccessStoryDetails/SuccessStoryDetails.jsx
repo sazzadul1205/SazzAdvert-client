@@ -1,5 +1,5 @@
 import Plaques from "../Home/Plaques/Plaques";
-import Testimonials from "../SuccessStoriesPage/Testimonials/Testimonials";
+import Testimonials from "../SuccessStoriesPage/LargeTestimonials/LargeTestimonials";
 import Awards from "./Awards/Awards";
 import Banner from "./Banner/Banner";
 import HiBootstrap from "./HiBootstrap/HiBootstrap";

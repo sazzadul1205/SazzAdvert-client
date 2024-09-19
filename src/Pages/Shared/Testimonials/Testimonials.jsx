@@ -1,7 +1,7 @@
-
-import Test1 from '../../../assets/Home/Testimonials/TestimonialContent1.png'
-import Test2 from '../../../assets/Home/Testimonials/TestimonialContent2.png'
-import Test3 from '../../../assets/Home/Testimonials/TestimonialContent3.png'
+import PropTypes from "prop-types";
+import Test1 from "../../../assets/Home/Testimonials/TestimonialContent1.png";
+import Test2 from "../../../assets/Home/Testimonials/TestimonialContent2.png";
+import Test3 from "../../../assets/Home/Testimonials/TestimonialContent3.png";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,11 +16,8 @@ import { Navigation } from "swiper/modules";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../../../Components/Loader";
 
-const Testimonials = () => {
+const Testimonials = ({ TestimonialsData, TestimonialsTitleData }) => {
   useEffect(() => {
     AOS.init({
       duration: 2000,
@@ -28,50 +25,14 @@ const Testimonials = () => {
     });
   }, []);
 
-  // API fetch
-  const axiosPublic = useAxiosPublic();
-
-  const {
-    data: TestimonialsSlides,
-    isLoading: stepsLoading,
-    error: stepsError,
-  } = useQuery({
-    queryKey: ["TestimonialsSlides"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/TestimonialSlides`);
-      return res.data;
-    },
-  });
-
-  // API fetch for Title Data
-  const {
-    data: TestimonialsTitleData,
-    isLoading: titleDataLoading,
-    error: titleDataError,
-  } = useQuery({
-    queryKey: ["TestimonialsTitleData"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/TitleDatas?page=Testimonials`);
-      return res.data[0];
-    },
-  });
-
-  if (stepsLoading || titleDataLoading) {
-    return <Loader></Loader>;
-  }
-
-  if (stepsError || titleDataError) {
-    return <div>Error loading data</div>;
-  }
-
   return (
     <div className="bg-white pt-24 text-black pb-24">
       <div className="max-w-[1200px] mx-auto" data-aos="fade-up">
         <div className="flex">
           <div className="w-[700px] mr-10">
-            <p className="font-semibold">{TestimonialsTitleData.title}</p>
+            <p className="font-semibold">{TestimonialsTitleData?.title}</p>
             <h1 className="font-bold text-4xl">
-              {TestimonialsTitleData.description}
+              {TestimonialsTitleData?.description}
             </h1>
             {/* Sliders */}
             <div className="mt-10">
@@ -80,7 +41,7 @@ const Testimonials = () => {
                 modules={[Navigation]}
                 className="max-w-[800px]"
               >
-                {TestimonialsSlides.map((testimonial) => (
+                {TestimonialsData?.map((testimonial) => (
                   <SwiperSlide key={testimonial.id} className="px-20">
                     <p className="bg-[#faf4f4] p-2 w-52 text-lg font-semibold rounded-full text-center pt-3 h-[55px] mb-5">
                       {testimonial.category}
@@ -118,7 +79,7 @@ const Testimonials = () => {
                 </div>
                 <div>
                   <img src={Test2} alt="Review 2" />
-                  <div> 7584+ Reviews</div>
+                  <div>7584+ Reviews</div>
                 </div>
               </div>
               <div className="flex gap-14 pt-12">
@@ -155,7 +116,7 @@ const Testimonials = () => {
                       className="mask mask-star-2 bg-orange-400"
                     />
                   </div>
-                  <div> 7584+ Reviews</div>
+                  <div>7584+ Reviews</div>
                 </div>
               </div>
             </div>
@@ -164,6 +125,24 @@ const Testimonials = () => {
       </div>
     </div>
   );
+};
+
+// Add PropTypes validation
+Testimonials.propTypes = {
+  TestimonialsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      category: PropTypes.string.isRequired,
+      testimonial: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      position: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  TestimonialsTitleData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Testimonials;

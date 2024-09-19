@@ -1,54 +1,17 @@
+import PropTypes from "prop-types";
 import { Link, NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../../../Components/Loader";
+import { FaChevronRight } from "react-icons/fa";
 
-const Capabilities = () => {
+const Capabilities = ({ CapabilitiesCards, CapabilitiesTitleData }) => {
   useEffect(() => {
     AOS.init({
       duration: 2000, // Adjust the animation duration (in ms)
       once: false, // Whether the animation should happen only once
     });
   }, []);
-
-  // API fetch for Capabilities Cards
-  const axiosPublic = useAxiosPublic();
-  const {
-    data: CapabilitiesCards,
-    isLoading: cardsLoading,
-    error: cardsError,
-  } = useQuery({
-    queryKey: ["CapabilitiesCards"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/Capabilities`);
-      return res.data;
-    },
-  });
-
-  // API fetch for Title Data
-  const {
-    data: CapabilitiesTitleData,
-    isLoading: titleDataLoading,
-    error: titleDataError,
-  } = useQuery({
-    queryKey: ["CapabilitiesTitleData"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/TitleDatas?page=Capabilities`);
-      return res.data;
-    },
-  });
-
-  // Loading and Error Handling
-  if (cardsLoading || titleDataLoading) {
-    return <Loader></Loader>;
-  }
-
-  if (cardsError || titleDataError) {
-    return <p>Error loading data.</p>;
-  }
 
   return (
     <div className="bg-gradient-to-b from-[#FFE6E6] to-white text-black font-bold py-20">
@@ -65,17 +28,17 @@ const Capabilities = () => {
               </h1>
             </div>
             <img
-              src={"https://i.imgur.com/5amFT95.png"}
-              alt={"https://i.imgur.com/5amFT95.png"}
+              src="https://i.imgur.com/5amFT95.png"
+              alt="Capabilities illustration"
               className="w-[246px] h-16 ml-2"
             />
           </div>
 
           {/* Right Section */}
           <div>
-            <Link to={"/Careers"}>
-              <button className="bg-black text-white px-10 py-4 rounded-3xl hover:bg-[#d93c31] border-none">
-                Get Proposal {">"}
+            <Link to="/Careers">
+              <button className="bg-black text-white px-10 py-4 rounded-3xl hover:bg-[#d93c31] flex items-center ">
+                Get Proposal <FaChevronRight className="ml-2"/>
               </button>
             </Link>
           </div>
@@ -86,16 +49,16 @@ const Capabilities = () => {
           {CapabilitiesCards.slice(0, 4).map((card) => (
             <div
               key={card.id}
-              className="h-[400px] w-[300px] bg-white rounded-xl px-5 py-10 transform transition-transform duration-300 hover:-translate-y-2"
+              className="h-[400px] w-[300px] bg-white rounded-xl px-5 py-10 transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg"
             >
               <div className="bg-gray-200 rounded-full w-16 h-16 flex justify-center items-center mb-5">
                 <img src={card.image} alt={card.title} />
               </div>
               <h1 className="text-xl mb-4">{card.title}</h1>
               <p className="text-base font-normal mb-9">{card.description}</p>
-              <NavLink to={"/ServicesDetails"}>
-                <button className="font-medium hover:text-red-500">
-                  READ MORE <span className="text-red-500">{">"}</span>
+              <NavLink to="/ServicesDetails">
+                <button className="font-medium hover:text-red-500 flex items-center">
+                  READ MORE <FaChevronRight className="text-red-500 ml-2"/>
                 </button>
               </NavLink>
             </div>
@@ -104,6 +67,24 @@ const Capabilities = () => {
       </div>
     </div>
   );
+};
+
+// Add PropTypes validation
+Capabilities.propTypes = {
+  CapabilitiesCards: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  CapabilitiesTitleData: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Capabilities;

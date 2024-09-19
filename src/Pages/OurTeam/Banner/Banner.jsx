@@ -1,43 +1,40 @@
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../../../Components/Loader";
+import PropTypes from "prop-types";
 
-const Banner = () => {
-  const axiosPublic = useAxiosPublic();
-  const { data: BannerOurExperts, isLoading } = useQuery({
-    queryKey: ["BannerOurExperts"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/Banners?page=OurExperts2`);
-      return res.data[0];
-    },
-  });
-
-  if (isLoading) {
-    return <Loader></Loader>;
-  }
-
+const Banner = ({ OurTeamPageBanner }) => {
   return (
     <div className="bg-[#FFE6E6] py-14 text-black">
-      <div className="flex justify-between max-w-[1200px] mx-auto h-[720px] pt-10 items-center gap-5 ">
+      <div className="flex justify-between max-w-[1200px] mx-auto h-[720px] pt-10 items-center gap-5">
         <div className="text-black w-[535px]">
-          <p className="text-lg mb-4 font-semibold">{BannerOurExperts.title}</p>
+          <p className="text-lg mb-4 font-semibold">
+            {OurTeamPageBanner.title}
+          </p>
           <h1 className="text-[34px] font-bold mb-6">
-            {BannerOurExperts.description}
+            {OurTeamPageBanner.description}
           </h1>
           <h1 className="text-[16px] mb-12 leading-relaxed">
-            {BannerOurExperts.content}
+            {OurTeamPageBanner.content}
           </h1>
         </div>
-        <div className=" w-[612px] h-[545px]">
+        <div className="w-[612px] h-[545px]">
           <img
-            src={BannerOurExperts.imageUrl}
-            alt={BannerOurExperts.imageUrl}
-            className=" w-full h-full rounded z-10"
+            src={OurTeamPageBanner.imageUrl}
+            alt={OurTeamPageBanner.description || "Team Banner Image"}
+            className="w-full h-full rounded z-10"
           />
         </div>
       </div>
     </div>
   );
+};
+
+// Optional: PropTypes validation
+Banner.propTypes = {
+  OurTeamPageBanner: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Banner;

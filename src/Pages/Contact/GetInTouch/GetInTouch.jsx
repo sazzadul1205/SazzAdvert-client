@@ -2,60 +2,25 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../../../Components/Loader";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import PropTypes from "prop-types";
+import { FaChevronRight } from "react-icons/fa";
 
-const GetInTouch = () => {
+const GetInTouch = ({ GetInTouchData, GetInTouchTitleData }) => {
   useEffect(() => {
     AOS.init({
-      duration: 2000, // Adjust the animation duration (in ms)
-      once: false, // Whether the animation should happen only once
+      duration: 2000,
+      once: false,
     });
   }, []);
 
-  // API fetch for GetInTouchContact
   const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const {
-    data: GetInTouchContact,
-    isLoading: GetInTouchContactLoading,
-    error: GetInTouchContactError,
-  } = useQuery({
-    queryKey: ["GetInTouchContact"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/GetInTouchContact`);
-      return res.data;
-    },
-  });
-
-  // API fetch for Title Data
-  const {
-    data: GetInTouchData,
-    isLoading: GetInTouchLoading,
-    error: GetInTouchError,
-  } = useQuery({
-    queryKey: ["GetInTouchTitleData"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/TitleDatas?page=GetInTouch`);
-      return res.data[0];
-    },
-  });
-
-  // Handle loading and error states
-  if (GetInTouchContactLoading || GetInTouchLoading) {
-    return <Loader />;
-  }
-
-  if (GetInTouchContactError || GetInTouchError) {
-    return <div>Error loading data.</div>;
-  }
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -85,15 +50,19 @@ const GetInTouch = () => {
       <div className="max-w-[1200px] mx-auto">
         {/* Titles */}
         <div className="w-[648px] text-center mx-auto pb-10">
-          <p className="text-[17px] font-semibold">{GetInTouchData.title}</p>
-          <h1 className="font-bold text-3xl">{GetInTouchData.description}</h1>
+          <p className="text-[17px] font-semibold">
+            {GetInTouchTitleData?.title}
+          </p>
+          <h1 className="font-bold text-3xl">
+            {GetInTouchTitleData?.description}
+          </h1>
         </div>
 
         {/* InTouch content */}
         <div className="flex bg-white border border-black rounded-xl">
           {/* Left side */}
           <div className="bg-black px-20 py-16 rounded-2xl">
-            {GetInTouchContact.map((item, index) => (
+            {GetInTouchData?.map((item, index) => (
               <div
                 key={index}
                 className="border border-gray-700 text-white p-8 rounded-2xl mb-5"
@@ -115,12 +84,12 @@ const GetInTouch = () => {
             ))}
           </div>
 
-          {/* Right side */}
+          {/* Right side - Form */}
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className=" px-10 py-12 rounded-2xl"
+            className="px-10 py-12 rounded-2xl"
           >
-            {/* Your Name */}
+            {/* Name */}
             <div className="pb-4">
               <label className="font-semibold">Your Name</label>
               <input
@@ -134,7 +103,7 @@ const GetInTouch = () => {
               )}
             </div>
 
-            {/* Your Email */}
+            {/* Email */}
             <div className="pb-4">
               <label className="font-semibold">Your Email</label>
               <input
@@ -148,7 +117,7 @@ const GetInTouch = () => {
               )}
             </div>
 
-            {/* Your Phone */}
+            {/* Phone */}
             <div className="pb-4">
               <label className="font-semibold">Your Phone</label>
               <input
@@ -162,7 +131,7 @@ const GetInTouch = () => {
               )}
             </div>
 
-            {/* Your Subject */}
+            {/* Subject */}
             <div className="pb-4">
               <label className="font-semibold">Your Subject</label>
               <input
@@ -176,7 +145,7 @@ const GetInTouch = () => {
               )}
             </div>
 
-            {/* Your Message */}
+            {/* Message */}
             <div className="pb-4">
               <label className="font-semibold">Your Message</label>
               <textarea
@@ -190,13 +159,28 @@ const GetInTouch = () => {
             </div>
 
             <button className="btn text-white px-10 rounded-3xl hover:bg-[#ef4335] border-none mt-5">
-              SUBMIT NOW {">"}
+              SUBMIT NOW <FaChevronRight />
             </button>
           </form>
         </div>
       </div>
     </div>
   );
+};
+
+// Add PropTypes
+GetInTouch.propTypes = {
+  GetInTouchData: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      icon: PropTypes.string.isRequired,
+      details: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ).isRequired,
+  GetInTouchTitleData: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+  }).isRequired,
 };
 
 export default GetInTouch;

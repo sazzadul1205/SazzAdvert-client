@@ -23,7 +23,7 @@ const Audit = () => {
     <div className="bg-white pt-5 text-black pb-24">
       <div
         className="max-w-[1200px] mx-auto bg-[#F2F2F8] py-28 px-24 rounded-xl"
-        data-aos="fade-up"
+        data-aos="fade-up"z
       >
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-8 md:space-y-0">
           {/* Left Section */}

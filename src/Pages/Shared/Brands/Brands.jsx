@@ -1,36 +1,16 @@
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import PropTypes from "prop-types"; 
 import { NavLink } from "react-router-dom";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../../../Components/Loader";
 
-const Brands = () => {
+const Brands = ({ BrandsData }) => {
   useEffect(() => {
     AOS.init({
       duration: 2000,
-      once: false,
+      once: false, 
     });
   }, []);
-
-  // API Fetch
-  const axiosPublic = useAxiosPublic();
-  const {
-    data: Brands,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["Brands"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/Brands`);
-      return res.data;
-    },
-  });
-
-  // Handle loading and error states
-  if (isLoading) return <Loader />;
-  if (error) return <div>Error loading brands data.</div>;
 
   return (
     <div className="bg-white pt-5">
@@ -40,7 +20,7 @@ const Brands = () => {
         </h1>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 pb-24 border-b gap-6">
-          {Brands.slice(0, 6).map((brand) => (
+          {BrandsData?.slice(0, 6).map((brand) => (
             <NavLink
               key={brand._id}
               to={brand.link}
@@ -57,6 +37,18 @@ const Brands = () => {
       </div>
     </div>
   );
+};
+
+// Add PropTypes for validation
+Brands.propTypes = {
+  BrandsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      alt: PropTypes.string.isRequired,
+    })
+  ),
 };
 
 export default Brands;

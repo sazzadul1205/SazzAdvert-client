@@ -1,55 +1,36 @@
 import { useEffect } from "react";
+import PropTypes from "prop-types"; // Import PropTypes for validation
 import AOS from "aos";
 import "aos/dist/aos.css";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import { useQuery } from "@tanstack/react-query";
-import Loader from "../../../Components/Loader";
 
-const Awards = () => {
+const Awards = ({ AwardData, backgroundColor }) => {
   useEffect(() => {
     AOS.init({
-      duration: 2000, // Adjust the animation duration (in ms)
-      once: false, // Whether the animation should happen only once
+      duration: 2000,
+      once: false,
     });
   }, []);
-
-  // API fetch
-  const axiosPublic = useAxiosPublic();
-
-  const {
-    data: AwardHome,
-    isLoading: stepsLoading,
-    error: stepsError,
-  } = useQuery({
-    queryKey: ["AwardsHome"],
-    queryFn: async () => {
-      const res = await axiosPublic.get(`/AwardsComponent?Number=1`);
-      return res.data[0]; 
-    },
-  });
-
-  if (stepsLoading) return <Loader></Loader>;
-  if (stepsError) return <div>Error: {stepsError.message}</div>;
 
   return (
     <div className="bg-gradient-to-b from-white to-[#FFE6E6] py-12">
       <div
         data-aos="fade-up"
-        className="bg-[#faf4f4] max-w-[1200px] mx-auto flex flex-col lg:flex-row h-[390px] rounded-lg overflow-hidden"
+        style={{ backgroundColor: backgroundColor }} 
+        className="max-w-[1200px] mx-auto flex flex-col lg:flex-row h-[390px] rounded-lg overflow-hidden hover:shadow-2xl"
       >
         <div className="grid grid-cols-4 p-10">
           {/* Left side with the award image */}
           <div className="bg-[#FFEEEE] mx-auto items-center w-[280px] text-black">
             <img
-              src={AwardHome.left.awardImg}
-              alt={AwardHome.left.awardAlt}
+              src={AwardData?.left?.awardImg}
+              alt={AwardData?.left?.awardAlt}
               className="w-[170px] h-[170px] mx-auto mt-10"
             />
-            <h1 className="text-lg text-center">{AwardHome.left.title}</h1>
+            <h1 className="text-lg text-center">{AwardData?.left?.title}</h1>
           </div>
 
           {/* Right side with the awards data */}
-          {AwardHome.right.map((award, index) => (
+          {AwardData?.right?.map((award, index) => (
             <div key={index} className="ml-10 mt-10 text-black">
               <img
                 src={award.icon}
@@ -67,6 +48,26 @@ const Awards = () => {
       </div>
     </div>
   );
+};
+
+// Add PropTypes for validation
+Awards.propTypes = {
+  AwardData: PropTypes.shape({
+    left: PropTypes.shape({
+      awardImg: PropTypes.string,
+      awardAlt: PropTypes.string,
+      title: PropTypes.string,
+    }),
+    right: PropTypes.arrayOf(
+      PropTypes.shape({
+        icon: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+      })
+    ),
+  }),
+  backgroundColor: PropTypes.string,
 };
 
 export default Awards;
